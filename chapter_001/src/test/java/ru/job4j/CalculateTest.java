@@ -7,6 +7,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class CalculateTest {
+
     @Test
     public void whenAddOnePlusOneThenTwo() {
         Calculate calc = new Calculate();
