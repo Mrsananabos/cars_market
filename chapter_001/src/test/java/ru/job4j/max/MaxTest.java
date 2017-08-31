@@ -5,9 +5,18 @@ import static org.junit.Assert.assertThat;
 
 public class MaxTest {
     @Test
-    public void whenFirstLessSecond() {
+    public void MaximumOfTwo() {
         Max maxim = new Max();
-        int result = maxim.max(3, 4, 1);
-        assertThat(result, is(4));
+        int result = maxim.max(81, 45);
+        assertThat(result, is(81));
     }
+
+    @Test
+    public void MaximumOfThree() {
+        Max maxim = new Max();
+        int result = maxim.maxof3(81, 459, 38);
+        assertThat(result, is(459));
+    }
+
+
 }
