@@ -10,4 +10,5 @@ public class Teacher extends Profession {
         return (super.career+" "+super.name+"обучает "+ student.name);
 
     }
+
 }

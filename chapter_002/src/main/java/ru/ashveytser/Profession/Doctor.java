@@ -8,6 +8,5 @@ public class Doctor extends Profession {
     }
     public  String Diagnose(Pacient pacient) {
         return (super.career+" "+super.name+"лечит "+ pacient.name);
-
     }
 }

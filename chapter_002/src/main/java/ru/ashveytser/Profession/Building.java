@@ -6,4 +6,5 @@ public class Building {
     public Building(String name) {
         this.name = name;
     }
+
 }

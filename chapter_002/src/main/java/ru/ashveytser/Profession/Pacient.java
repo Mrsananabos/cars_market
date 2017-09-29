@@ -5,5 +5,6 @@ public class Pacient {
 
     public Pacient(String name) {
         this.name = name;
+
     }
 }

@@ -11,7 +11,6 @@ public class Profession{
             this.age = age;
         }
 
-
     public String getName() {
         return this.name;
     }

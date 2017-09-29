@@ -8,6 +8,5 @@ public class Engineer extends Profession {
     }
     public  String Diagnose(Building building) {
         return (super.career+" "+super.name+"проектирует "+ building.name);
-
     }
 }
