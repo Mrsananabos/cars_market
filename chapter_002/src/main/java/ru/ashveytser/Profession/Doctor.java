@@ -7,6 +7,6 @@ public class Doctor extends Profession {
         this.experience=experiance;
     }
     public  String Diagnose(Pacient pacient) {
-        return (super.career+" "+super.name+"лечит "+ pacient.name);
+        return (super.career+" "+super.name+"лечит "+ pacient.getName());
     }
 }

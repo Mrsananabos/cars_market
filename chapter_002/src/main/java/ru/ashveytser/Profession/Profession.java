@@ -5,7 +5,7 @@ public class Profession{
     public String career;
     public int age;
 
-    public Profession(String name, String career, int age){
+    public Profession (String name, String career, int age){
             this.name = name;
             this.career = career;
             this.age = age;

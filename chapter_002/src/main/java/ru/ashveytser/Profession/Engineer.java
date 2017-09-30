@@ -7,6 +7,6 @@ public class Engineer extends Profession {
         this.CompletedProjects=CompletedProjects;
     }
     public  String Diagnose(Building building) {
-        return (super.career+" "+super.name+"проектирует "+ building.name);
+        return (super.career+" "+super.name+"проектирует "+ building.getName());
     }
 }

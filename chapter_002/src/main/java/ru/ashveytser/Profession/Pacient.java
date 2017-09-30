@@ -1,10 +1,12 @@
 package ru.ashveytser.Profession;
 
 public class Pacient {
-    public String name;
+    private String name;
 
     public Pacient(String name) {
         this.name = name;
-
+    }
+    public String getName(){
+        return this.name;
     }
 }

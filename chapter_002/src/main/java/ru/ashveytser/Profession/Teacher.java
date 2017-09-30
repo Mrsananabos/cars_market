@@ -7,7 +7,7 @@ public class Teacher extends Profession {
         this.rank=rank;
     }
     public  String Diagnose(Student student) {
-        return (super.career+" "+super.name+"обучает "+ student.name);
+        return (super.career+" "+super.name+"обучает "+ student.getName());
 
     }
 
