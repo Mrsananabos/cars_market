@@ -88,7 +88,6 @@ public class StartUI {
     }
 
 
-
   public static void main(String[] args) {
     Input input = new ConsoleInput();
     new StartUI(input).init();

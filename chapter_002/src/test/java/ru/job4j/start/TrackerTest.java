@@ -37,10 +37,10 @@ public class TrackerTest {
         tracker.add(previous2);
         Item previous3 = new Item("test4", "testDescription", 123L, "Comments");
         tracker.add(previous3);
-        tracker.delete(previous1.getId());
-        tracker.delete(previous3.getId());
+        tracker.delete(previous.getId());
+        //tracker.delete(previous3.getId());
         Item[] result = tracker.getAll();
-        Item[] expect = {previous, previous2, null, null};
+        Item[] expect = {previous1, previous2, previous3, null};
         assertThat(result, is(expect));
     }
 

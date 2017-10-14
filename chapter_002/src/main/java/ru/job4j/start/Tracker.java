@@ -12,6 +12,7 @@ public class Tracker{
 
     public Item add(Item item) {
         item.setId(this.generateId());
+        System.out.println("id = "+item.getId());
         this.items[position++]=item;
         return item;
 
@@ -85,7 +86,6 @@ public class Tracker{
         }
         return result;
         }
-
 
 
     }

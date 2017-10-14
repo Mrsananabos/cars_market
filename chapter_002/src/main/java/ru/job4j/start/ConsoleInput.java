@@ -1,5 +1,4 @@
 package ru.job4j.start;
-
 import java.util.*;
 
 public class ConsoleInput implements Input {
