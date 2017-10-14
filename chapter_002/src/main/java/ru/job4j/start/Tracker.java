@@ -12,7 +12,6 @@ public class Tracker{
 
     public Item add(Item item) {
         item.setId(this.generateId());
-        System.out.println("id = "+item.getId());
         this.items[position++]=item;
         return item;
 
@@ -34,7 +33,7 @@ public class Tracker{
 
         for (int index = 0; index != position; index++) {
 
-            if ((items[index].getId().equals(id))) {
+            if (items[index] != null && items[index].getId().equals(id)) {
                 for (int index1 = index; index1 < (position - 1); index1++) {
                     items[index1] = items[(index1 + 1)];
                 }

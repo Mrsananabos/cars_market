@@ -35,19 +35,19 @@ public class TrackerTest {
         tracker.add(previous1);
         Item previous2 = new Item("test3", "testDescription", 123L, "Comments");
         tracker.add(previous2);
-        //Item previous3 = new Item("test4", "testDescription", 123L, "Comments");
-       // tracker.add(previous3);
+        Item previous3 = new Item("test4", "testDescription", 123L, "Comments");
+        tracker.add(previous3);
         tracker.delete(previous1.getId());
-      //  tracker.delete(previous3.getId());
+        tracker.delete(previous3.getId());
         Item[] result = tracker.getAll();
-        Item[] expect = {previous, previous2, null};
+        Item[] expect = {previous, previous2, null, null};
         assertThat(result, is(expect));
     }
 
 
 
     @Test
-    public void WhenCreateThreeSameItemsNameThenReturnThisItes() {
+    public void WhenCreateThreeSameItemsNameThenReturnThisItems() {
         Tracker tracker = new Tracker();
         Item previous = new Item("test1", "testDescription", 123L, "Comments");
         tracker.add(previous);
