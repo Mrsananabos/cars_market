@@ -1,10 +1,10 @@
-package ru.job4j.Strategy;
+package ru.job4j.start;
 
 import ru.job4j.start.Input;
 import ru.job4j.start.Item;
 import ru.job4j.start.Tracker;
 
-class EditItem implements UserAction {
+class EditItem implements UserAction { //Действие "обновить заявку" с ключом ввода "2"
     public int key() {
         return 2;
     }
@@ -24,20 +24,20 @@ class EditItem implements UserAction {
 
     public String info() {
         return String.format("%s. %s", this.key(), "Edit the new Item.");
-    }
+    } // сообщает пользователю о данном действии
 }
 
 public class MenuTracker{
 
     private Input input;
     private Tracker tracker;
-    private UserAction[] actions=new UserAction[6];
+    private UserAction[] actions=new UserAction[6];//массив действий
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input=input;
         this.tracker=tracker;
     }
-public void fillActions(){
+public void fillActions(){                             //метод заполняет массив действий
 this.actions[0]= this.new AddItem();
 this.actions[1] = new MenuTracker.ShowItem();
 this.actions[2]=new EditItem();
@@ -50,7 +50,7 @@ public void select (int key) {
     this.actions[key].execute(this.input, tracker);
 }
 
-public void show() {
+public void show() {       //Сообщает пользователю о всех возможных действиях
     for (UserAction action :this.actions) {
         if (action != null) {
             System.out.println(action.info());
@@ -58,13 +58,13 @@ public void show() {
     }
 }
 
-private class AddItem implements UserAction{
+private class AddItem implements UserAction{  //Действие "добавить заявку" с ключом ввода "0"
     public int key() {
         return 0;
     }
 
     @Override
-    public void execute(Input input, Tracker tracker) {
+    public void execute(Input input, Tracker tracker) {  //реализация самого действия
         String name = input.ask("Please, enter the task's name : ");
         String Description = input.ask("Please, enter the task's Description : ");
         String  Created = input.ask("Please, enter the task's Created : ");
@@ -76,16 +76,16 @@ private class AddItem implements UserAction{
     @Override
     public String info() {
         return String.format("%s. %s", this.key(), "Add the new Item.");
-    }
+    } //Сообщает пользователю о данном действии
 }
 
-    private static class ShowItem implements UserAction{
+    private static class ShowItem implements UserAction{ //Действие "показать зявки" с ключом ввода "1"
         public int key() {
             return 1;
         }
 
 
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker) { //реализация самого действия
             for (Item item : tracker.getAll()) {
                 if (item != null) {
                     System.out.println(item.getName());
@@ -96,10 +96,10 @@ private class AddItem implements UserAction{
 
         public String info() {
             return String.format("%s. %s", this.key(), "Show all items");
-        }
+        } // Сообщает пользователю о даном действии
     }
 
-    private class DeleteItem implements UserAction{
+    private class DeleteItem implements UserAction{ //Действие "удаление заявки" с ключом ввода "3"
         public int key() {
             return 3;
         }
@@ -116,7 +116,7 @@ private class AddItem implements UserAction{
         }
     }
 
-    private class FindbyID implements UserAction {
+    private class FindbyID implements UserAction {//Действие "найти заявку по ID" с ключом ввода "4"
         public int key() {
             return 4;
         }
@@ -139,7 +139,7 @@ private class AddItem implements UserAction{
         }
     }
 
-        private class FindbyName implements UserAction {
+        private class FindbyName implements UserAction { //Действие "найти заявку по имени" с ключом ввода "5"
             public int key() {
                 return 5;
             }
