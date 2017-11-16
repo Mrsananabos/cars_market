@@ -17,14 +17,13 @@ public class StartUI {
     menu.fillActions();
     do {                        // цикл, по которому спрашиваем у пользовтеля, выходить из программы или нет
       menu.show();
-      int key = Integer.valueOf(input.ask("Select: "));
-      menu.select(key);
+      menu.select(input.ask("select: ", menu.fillRanges()));
     } while (!"y".equals(this.input.ask("Exit? y")));
   }
 
 
   public static void main(String[] args) {
-    Input input = new ConsoleInput();
+    Input input = new ValidateInput();
     new StartUI(input).init();
 
   }

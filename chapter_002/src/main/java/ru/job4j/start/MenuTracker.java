@@ -37,6 +37,16 @@ public class MenuTracker{
         this.input=input;
         this.tracker=tracker;
     }
+
+
+    public int[] ranges = new int[actions.length];
+    public int[] fillRanges() {
+        for (int i = 0; i<ranges.length; i++){
+            ranges[i]=i;
+        }
+        return ranges;
+    }
+
 public void fillActions(){                             //метод заполняет массив действий
 this.actions[0]= this.new AddItem();
 this.actions[1] = new MenuTracker.ShowItem();
