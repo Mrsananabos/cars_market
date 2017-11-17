@@ -4,7 +4,10 @@ import ru.job4j.start.Input;
 import ru.job4j.start.Item;
 import ru.job4j.start.Tracker;
 
-class EditItem implements UserAction { //Действие "обновить заявку" с ключом ввода "2"
+class EditItem extends BaseAction { //Действие "обновить заявку" с ключом ввода "2"
+    EditItem(String name, int key){
+        super("Edit Item", 2);}
+
     public int key() {
         return 2;
     }
@@ -18,14 +21,14 @@ class EditItem implements UserAction { //Действие "обновить за
         Item NewItem = new Item(newName, newDescription, newCreated, newComment);
         NewItem.setId(id);
         tracker.update(NewItem);
-
     }
 
-
     public String info() {
-        return String.format("%s. %s", this.key(), "Edit the new Item.");
+        return inform();
     } // сообщает пользователю о данном действии
 }
+
+
 
 public class MenuTracker{
 
@@ -48,27 +51,33 @@ public class MenuTracker{
     }
 
 public void fillActions(){                             //метод заполняет массив действий
-this.actions[0]= this.new AddItem();
-this.actions[1] = new MenuTracker.ShowItem();
-this.actions[2]=new EditItem();
-this.actions[3]= this.new DeleteItem();
-this.actions[4]=this.new FindbyID();
-this.actions[5]=this.new FindbyName();
+this.actions[0]= this.new AddItem("Add Item", 0);
+this.actions[1] = new MenuTracker.ShowItem("Show Items", 1);
+this.actions[2]=new EditItem("Edit Item", 2);
+this.actions[3]= this.new DeleteItem("Delete Item", 3);
+this.actions[4]=this.new FindbyID("Find by ID", 4);
+this.actions[5]=this.new FindbyName("Find by Name", 5);
 }
 
 public void select (int key) {
     this.actions[key].execute(this.input, tracker);
 }
 
+
 public void show() {       //Сообщает пользователю о всех возможных действиях
     for (UserAction action :this.actions) {
         if (action != null) {
-            System.out.println(action.info());
+            System.out.println(action.inform());
         }
     }
 }
 
-private class AddItem implements UserAction{  //Действие "добавить заявку" с ключом ввода "0"
+
+
+private class AddItem extends BaseAction { //Действие "добавить заявку" с ключом ввода "0"
+    AddItem(String name, int key){
+    super("Add Item", 0);}
+
     public int key() {
         return 0;
     }
@@ -83,13 +92,14 @@ private class AddItem implements UserAction{  //Действие "добавит
 
     }
 
-    @Override
     public String info() {
-        return String.format("%s. %s", this.key(), "Add the new Item.");
+        return inform();
     } //Сообщает пользователю о данном действии
 }
 
-    private static class ShowItem implements UserAction{ //Действие "показать зявки" с ключом ввода "1"
+    private static class ShowItem extends BaseAction{ //Действие "показать зявки" с ключом ввода "1"
+        ShowItem(String name, int key){
+            super("Show Item", 1);}
         public int key() {
             return 1;
         }
@@ -105,11 +115,13 @@ private class AddItem implements UserAction{  //Действие "добавит
 
 
         public String info() {
-            return String.format("%s. %s", this.key(), "Show all items");
+            return inform();
         } // Сообщает пользователю о даном действии
     }
 
-    private class DeleteItem implements UserAction{ //Действие "удаление заявки" с ключом ввода "3"
+    private class DeleteItem extends BaseAction{ //Действие "удаление заявки" с ключом ввода "3"
+        DeleteItem(String name, int key){
+            super("Delete Item", 3);}
         public int key() {
             return 3;
         }
@@ -122,11 +134,13 @@ private class AddItem implements UserAction{  //Действие "добавит
 
 
         public String info() {
-            return String.format("%s. %s", this.key(), "Delete the new Item");
+            return inform();
         }
     }
 
-    private class FindbyID implements UserAction {//Действие "найти заявку по ID" с ключом ввода "4"
+    private class FindbyID extends BaseAction {//Действие "найти заявку по ID" с ключом ввода "4"
+        FindbyID(String name, int key){
+            super("Find by ID", 4);}
         public int key() {
             return 4;
         }
@@ -145,11 +159,13 @@ private class AddItem implements UserAction{  //Действие "добавит
 
 
         public String info() {
-            return String.format("%s. %s", this.key(), "Find the item by ID");
+            return inform();
         }
     }
 
-        private class FindbyName implements UserAction { //Действие "найти заявку по имени" с ключом ввода "5"
+        private class FindbyName extends BaseAction { //Действие "найти заявку по имени" с ключом ввода "5"
+            FindbyName(String name, int key){
+                super("Find by name", 5);}
             public int key() {
                 return 5;
             }
@@ -164,7 +180,7 @@ private class AddItem implements UserAction{  //Действие "добавит
             }
 
             public String info() {
-                return String.format("%s. %s", this.key(), "Find the item by Name");
+                return inform();
             }
         }
 
