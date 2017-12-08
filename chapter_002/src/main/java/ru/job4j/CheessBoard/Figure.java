@@ -10,7 +10,9 @@ public abstract class Figure {
         this.y = y;
     }
 
-    abstract int[][] way(int[][] dist);
+    abstract boolean way(Cell source, Cell dest, Figure[][] figures);
+
+    abstract Figure clone(Cell dest);
 
 
 
