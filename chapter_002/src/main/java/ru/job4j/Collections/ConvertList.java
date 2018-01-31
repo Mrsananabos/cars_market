@@ -46,27 +46,4 @@ class ConvertList{
 
 
 
-
-    public static void main(String[] args) {
-        ConvertList c = new ConvertList();
-        List<Integer> list1 = new ArrayList<Integer>();
-        list1.add(1);
-        list1.add(2);
-        list1.add(3);
-        list1.add(4);
-        list1.add(5);
-        list1.add(6);
-        list1.add(7);
-        list1.add(8);
-        list1.add(9);
-        list1.add(10);
-        for (int[] i : c.toArray(list1, 4)) {
-            for (int j : i){
-                System.out.print(j+" ");
-            }
-            System.out.println(" ");
-        }
-
-    }
-
         }
