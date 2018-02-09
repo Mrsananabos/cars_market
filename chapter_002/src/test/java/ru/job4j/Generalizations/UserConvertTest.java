@@ -20,5 +20,6 @@ public class UserConvertTest{
         expectMap.put(1113, list.get(2));
         expectMap.put(1114, list.get(3));
         assertThat(resultMap, is(expectMap));
+
     }
 }
