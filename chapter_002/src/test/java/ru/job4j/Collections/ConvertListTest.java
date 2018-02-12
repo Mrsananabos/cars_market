@@ -40,6 +40,16 @@ public class ConvertListTest{
 
 
     @Test
+    public void WhenUnmodifiedListEnterAfterArrayComes() {
+        ConvertList convert = new ConvertList();
+        List<Integer> list = Arrays.asList(1,2,3,4,5,6,7);
+        int[][] resultArray = convert.toArray(list, 3);
+        int[][] expectArray = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 0, 0}};
+        assertThat(resultArray, is(expectArray));
+    }
+
+
+    @Test
     public void WhenListOfArraysEnterAfterAloneArrayComes() {
         ConvertList convert = new ConvertList();
         List<int[]> list = new ArrayList<>();
