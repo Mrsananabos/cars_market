@@ -23,6 +23,7 @@ public class SortUser {
     }
 
 
+
     public List<User> sortByAllFields (List<User> list) {
         Collections.sort(list, new Comparator<User>() {
                     @Override

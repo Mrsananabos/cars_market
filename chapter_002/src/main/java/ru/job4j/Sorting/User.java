@@ -34,6 +34,7 @@ public class User implements Comparable<User> {
         return "User{" + "name: " + name + ", age: " + age + "}";
     }
 
+
    @Override
     public boolean equals(java.lang.Object obj){
        if (obj == this)
