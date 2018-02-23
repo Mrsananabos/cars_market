@@ -8,6 +8,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class SortUserTest {
+
     @Test
     public void AgeSortingFromSmallToLarge() {
         SortUser sort = new SortUser();
@@ -43,8 +44,5 @@ public class SortUserTest {
         expect.addAll(Arrays.asList(new User(13, "Bob"), new User(45, "Bob"), new User (10, "Eva"), new User(90,"Ilya")));
         assertThat(rsl, is(expect));
     }
-
-
-
 
 }
