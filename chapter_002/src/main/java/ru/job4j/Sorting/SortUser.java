@@ -11,16 +11,28 @@ public class SortUser {
     }
 
 
+    public List<User> sortNameLength (List<User> list) {
+        list.sort( new Comparator<User>() {
+                       @Override
+                       public int compare(User o1, User o2) {
+                           return Integer.compare(o1.name.length(), o2.name.length());
+                       }
+                   }
+        );
+        return list;
+    }
 
 
+    public List<User> sortByAllFields (List<User> list) {
+        Collections.sort(list, new Comparator<User>() {
+                    @Override
+                    public int compare(User o1, User o2) {
+                        int rsl = o1.name.compareTo(o2.name);
+                        return rsl != 0 ? rsl : Integer.compare(o1.age, o2.age);
 
-
-    public static void main(String[] args) {
-        List<User> list = new ArrayList<User>();
-        list.addAll(Arrays.asList(new User(230, "Ily"), new User(45,"Anna"), new User(32, "Zena"), new User(18, "Bob"), (new User(20, "Anna"))));
-        SortUser s = new SortUser();
-        System.out.println( s.sort(list));
-
+                }}
+        );
+        return list;
     }
 
 
