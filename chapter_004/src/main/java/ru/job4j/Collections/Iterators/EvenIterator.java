@@ -41,7 +41,6 @@ public class EvenIterator implements Iterator {
             throw new NoSuchElementException("нет значений");
 
         }
-
     }
 
 
