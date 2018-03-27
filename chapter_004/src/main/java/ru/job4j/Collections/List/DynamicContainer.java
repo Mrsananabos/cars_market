@@ -14,7 +14,7 @@ public class DynamicContainer<E> implements Iterable {
 
     private Object[] container;
     private int size;
-    private int modCoun = 0;
+    private int[] modCoun = new int[]{0};
     private int expectedCount = 0;
     public int index = 0;
 
@@ -35,7 +35,7 @@ public class DynamicContainer<E> implements Iterable {
         System.arraycopy(this.container, 0, newContainer, 0, this.size);
         this.size = this.size * 2;
         this.container = newContainer;
-        this.modCoun++;
+        this.modCoun[0]++;
     }
 
 
@@ -57,33 +57,8 @@ public class DynamicContainer<E> implements Iterable {
 
     @Override
     public Iterator<E> iterator() {
-        this.expectedCount = this.modCoun;
-        return new Iterator<E>() {
+        return new IteratorOfDynContainer(this.container, this.modCoun);}
 
-            private int ind = 0;
-
-            public void checkForModif() throws ConcurrentModificationException{
-                if (expectedCount != modCoun) throw new ConcurrentModificationException("Контейнер модифицирован");
-            }
-
-            @Override
-            public boolean hasNext() throws ConcurrentModificationException {
-                checkForModif();
-                if ((ind < size) && (container[ind] != null)) {
-                    return true;
-                }
-                return false;
-            }
-
-
-            @Override
-            public E next() throws NoSuchElementException {
-                if (hasNext()) {
-                    return (E) container[ind++];
-                } else throw new NoSuchElementException("нет значений");
-            }
-        };
-    }
 
 
 

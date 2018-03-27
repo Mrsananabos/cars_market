@@ -29,6 +29,7 @@ public class DynamicContainerTest {
     }
 
 
+
     @Test (expected = NoSuchElementException.class)
     public void shouldThrowNoSuchElementException() {
         DynamicContainer<Integer> container = new DynamicContainer<>(3);
