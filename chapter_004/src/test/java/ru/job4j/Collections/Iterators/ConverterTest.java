@@ -23,6 +23,7 @@ public class ConverterTest {
         it = IteratorOfIterators.convert(its);
     }
 
+
     @Test
     public void hasNextNextSequentialInvocation () {
         assertThat(it.hasNext(), is(true));
