@@ -1,13 +1,13 @@
 package ru.job4j.Collections.Generic;
 
-public class UserStore extends AbstractStore implements Store {
+public class UserStore<U extends User> extends AbstractStore implements Store {
 
-    public SimpleArray<User> array = new SimpleArray<>(100);
+    public SimpleArray<U> array = new SimpleArray<>(100);
 
 
     @Override
     public void add(Base model) {
-        array.add((User) model);
+        array.add((U) model);
     }
 
 
@@ -15,7 +15,7 @@ public class UserStore extends AbstractStore implements Store {
     public boolean replace(String id, Base model) {
         int ind = searchIndexById(id);
         if (ind >= 0) {
-            array.set(ind, (User) model);
+            array.set(ind, (U) model);
             return true;
         }
         return false;
@@ -57,7 +57,7 @@ public class UserStore extends AbstractStore implements Store {
 
     ;
 
-    public User getObject(int index) {
+    public U getObject(int index) {
         return array.get(index);
     }
 

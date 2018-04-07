@@ -1,13 +1,13 @@
 package ru.job4j.Collections.Generic;
 
-public class RoleStore extends AbstractStore implements Store{
+public class RoleStore<R extends Role> extends AbstractStore implements Store{
 
-    public SimpleArray<Role> array = new SimpleArray<>(100);
+    public SimpleArray<R> array = new SimpleArray<>(100);
 
 
     @Override
     public void add(Base model) {
-        array.add((Role) model);
+        array.add((R) model);
     }
 
 
@@ -15,7 +15,7 @@ public class RoleStore extends AbstractStore implements Store{
     public boolean replace(String id, Base model) {
         int ind = searchIndexById(id);
         if (ind >= 0) {
-            array.set(ind, (Role) model);
+            array.set(ind, (R) model);
             return true;
         }
         return false;
@@ -43,15 +43,6 @@ public class RoleStore extends AbstractStore implements Store{
         return null;
     }
 
-    public Role findByIndex(String id) {
-        int ind = searchIndexById(id);
-        if (ind >= 0) {
-            return array.get(ind);
-        }
-
-        return null;
-    }
-
 
     public int searchIndexById(String id) {
         int rsl = -1;
@@ -65,7 +56,7 @@ public class RoleStore extends AbstractStore implements Store{
     }
 
 
-    public Role getObject(int index) {
+    public R getObject(int index) {
         return array.get(index);
     }
 
