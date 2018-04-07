@@ -6,17 +6,19 @@ import java.util.NoSuchElementException;
 
 public class IteratorOfLinkedContainer<T> implements Iterator {
 
-    public Node[] container;
-    public int length;
-    public int index=0;
+
+    public Node cursor;
+    public Node head;
+    public Node cursor1;
+    int number = 0;
     private int modCount;
     public int[] expectedCount;
 
-    public IteratorOfLinkedContainer(Node[] cont, int[] expectedCount){
-        this.container = cont;
+    public IteratorOfLinkedContainer(Node head, int[] expectedCount){
+        this.head=head;
+        this.cursor = head;
         this.modCount = expectedCount[0];
         this.expectedCount = expectedCount;
-        this.length=cont.length;
     }
 
     public void checkForModif() throws ConcurrentModificationException {
@@ -25,23 +27,20 @@ public class IteratorOfLinkedContainer<T> implements Iterator {
 
 
 
-
-
-
     @Override
     public boolean hasNext() throws ConcurrentModificationException {
         checkForModif();
-        if ((index < length) && (container[index].getData() != null)) {
-            return true;
-        }
-        return false;
+        this.cursor1 = this.cursor;
+        return cursor != null && (this.number <= 0 || cursor != this.head);
     }
 
 
     @Override
     public T next() throws NoSuchElementException {
         if (hasNext()) {
-            return (T) container[index++].getData();
+            cursor = cursor.next;
+            this.number++;
+            return (T) cursor1.data;
         } else throw new NoSuchElementException("нет значений");
     }
 }

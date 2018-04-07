@@ -15,28 +15,30 @@ public class LinkedContainerTest {
 
 
     @Test
-    public void whenCreateFiveNodesThenContainerWillEnlarge() {
+    public void whenCreateFiveNodesThenReturnThirdNodeData() {
         int size = 4;
-        LinkedContainer<Integer> container = new LinkedContainer<>(size);
+        LinkedContainer<Integer> container = new LinkedContainer<Integer>();
         container.add(1);
         container.add(2);
         container.add(3);
         container.add(4);
         container.add(5);
-        Integer rsl = container.getSize();
-        Integer expect = 8;
+        Integer rsl = container.getData(2);
+        Integer expect = 3;
         assertThat(rsl, is(expect));
+
     }
 
 
 
     @Test (expected = NoSuchElementException.class)
     public void shouldThrowNoSuchElementException() {
-        LinkedContainer<Integer> container = new LinkedContainer<>(3);
+        LinkedContainer<Integer> container = new LinkedContainer<Integer>();
 
         container.add(1);
         container.add(2);
         container.add(3);
+        container.add(4);
 
         Iterator it = container.iterator();
         assertThat(it.hasNext(), Matchers.is(true));
@@ -45,13 +47,15 @@ public class LinkedContainerTest {
         assertEquals(it.next(), 2);
         assertThat(it.hasNext(), Matchers.is(true));
         assertEquals(it.next(), 3);
+        assertThat(it.hasNext(), Matchers.is(true));
+        assertEquals(it.next(), 4);
         assertThat(it.hasNext(), Matchers.is(false));
         it.next();
     }
 
     @Test (expected = ConcurrentModificationException.class)
     public void shouldThrowConcurrentModificationException() {
-        LinkedContainer<Integer> container = new LinkedContainer<>(3);
+        LinkedContainer<Integer> container = new LinkedContainer<Integer>();
         container.add(1);
         container.add(2);
         container.add(3);
