@@ -15,18 +15,41 @@ public class LinkedContainerTest {
 
 
     @Test
-    public void whenCreateFiveNodesThenReturnThirdNodeData() {
-        int size = 4;
+    public void whenCreateSevenNodesThenReturnThirdHeadTailNodes() {
         LinkedContainer<Integer> container = new LinkedContainer<Integer>();
         container.add(1);
         container.add(2);
         container.add(3);
         container.add(4);
         container.add(5);
-        Integer rsl = container.getData(2);
-        Integer expect = 3;
-        assertThat(rsl, is(expect));
+        container.add(6);
+        container.add(7);
+        Integer rsl1 = container.getData(2);
+        Integer expect1 = 3;
+        assertThat(rsl1, is(expect1));
+        Integer rsl2 = container.getHead();
+        Integer expect2 = 1;
+        assertThat(rsl2, is(expect2));
+        Integer rsl3 = container.getTail();
+        Integer expect3 = 7;
+        assertThat(rsl3, is(expect3));
+    }
 
+    @Test
+    public void whenCreateFiveNodesThenDeleteThirdHeadTail() {
+        LinkedContainer<Integer> container = new LinkedContainer<Integer>();
+        container.add(1);
+        container.add(2);
+        container.add(3);
+        container.add(4);
+        container.add(5);
+        container.deleteByIndex(2);
+        container.deleteHead();
+        container.deleteTail();
+        Integer rsl1 = container.getHead();
+        assertThat(rsl1, is(2));
+        Integer rsl2 = container.getTail();
+        assertThat(rsl2, is(4));
     }
 
 
