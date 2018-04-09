@@ -30,6 +30,7 @@ public class SimpleQueueTest {
         assertThat(rs4, is(50));
     }
 
+
     @Test (expected = NoSuchElementException.class)
     public void shouldThrowNoSuchElementException() {
         SimpleQueue<Integer> stack = new SimpleQueue<>();
