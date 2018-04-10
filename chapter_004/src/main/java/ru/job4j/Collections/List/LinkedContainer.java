@@ -16,6 +16,7 @@ public class LinkedContainer<T> implements Iterable<T>{
         if(head == null){
             this.head = a;
             this.tail=a;
+            this.head.next = this.tail;
         } else {
             this.tail.next = a;
             a.next = this.head;
