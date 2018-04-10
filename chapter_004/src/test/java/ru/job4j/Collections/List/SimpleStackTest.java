@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class SimpleStackTest {
 
     @Test
-    public void whenCrea(){
+    public void whenCreateFiveNodesThenAllPoll(){
         SimpleStack<Integer> stack = new SimpleStack<>();
         stack.push(10);
         stack.push(20);

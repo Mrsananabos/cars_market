@@ -5,21 +5,12 @@ import java.util.NoSuchElementException;
 
 
 public class SimpleStack<T> extends LinkedContainer {
-    Node returnedNode;
-
 
     public void push(T value) {
-        super.add(value);
+        super.addToBeginning(value);
     }
 
-
-
     public T poll() throws NoSuchElementException {
-        if (super.tail == null) {
-            throw new NoSuchElementException("Stack пуст");
-        }
-        this.returnedNode=super.tail;
-        super.deleteTail();
-        return (T) returnedNode.data;
+        return (T) super.poll();
     }
 }

@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class SimpleQueueTest {
 
     @Test
-    public void whenCrea(){
+    public void whenCreateFiveNodeThenAllPoll(){
         SimpleQueue<Integer> stack = new SimpleQueue<>();
         stack.push(10);
         stack.push(20);
