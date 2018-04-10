@@ -7,7 +7,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class IteratorOfDynContainer implements Iterator {
+public class IteratorOfDynContainer<T> implements Iterator {
 
 
     public Object[] container;
@@ -45,7 +45,7 @@ public class IteratorOfDynContainer implements Iterator {
     @Override
     public Object next() throws NoSuchElementException {
             if (hasNext()) {
-                return container[index++];
+                return  container[index++];
             } else throw new NoSuchElementException("нет значений");
         }
 

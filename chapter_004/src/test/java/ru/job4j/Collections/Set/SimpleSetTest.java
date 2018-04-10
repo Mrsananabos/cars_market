@@ -11,7 +11,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 public class SimpleSetTest {
-
     @Test
     public void whenAddSameValuesOfObjects() {
         SimpleSet<Integer> s = new SimpleSet<>(10);

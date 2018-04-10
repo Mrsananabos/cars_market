@@ -1,5 +1,4 @@
 package ru.job4j.Collections.Set;
-
 import ru.job4j.Collections.List.DynamicContainer;
 
 public class SimpleSet<T> extends DynamicContainer<T>{

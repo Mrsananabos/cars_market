@@ -12,11 +12,10 @@ import java.util.NoSuchElementException;
 public class DynamicContainer<E> implements Iterable {
 
 
-    private Object[] container;
+    protected Object[] container;
     private int size;
-    private int[] modCoun = new int[]{0};
-    private int expectedCount = 0;
-    public int index = 0;
+    protected int[] modCoun = new int[]{0};
+    protected int index = 0;
 
 
     public DynamicContainer(int size) {
