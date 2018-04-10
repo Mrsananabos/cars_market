@@ -10,5 +10,24 @@ public class Node<T> {
         this.data=value;
     }
 
+    boolean hasCycle(Node first){
+        if (first == null) {
+            return false;
+        }
+        Node slowCursor = first;
+        Node fastCursor = first.next;
+        while (fastCursor != null) {
+            if (fastCursor.equals(slowCursor)) {
+                return true;
+            } else if (fastCursor.next == null) {
+                return false;
+            } else {
+                slowCursor = slowCursor.next;
+                fastCursor = fastCursor.next.next;
+            }
+        }
+        return false;
+    }
+
 
 }
