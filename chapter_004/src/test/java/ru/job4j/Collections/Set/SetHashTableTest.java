@@ -25,6 +25,7 @@ public class SetHashTableTest {
         assertThat(rsl2, Matchers.is(true));
     }
 
+
     @Test
     public void whenHashTableAddCellThenEnlarge() {
         SetHashTable<String> table = new SetHashTable<String>(3);

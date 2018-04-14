@@ -33,6 +33,7 @@ public class SetHashTable<T> {
        return (rsl>=0);
     }
 
+
    public boolean remove (T value){
         int ind = searchValue(value);
        if (ind == -1) {return false;}
