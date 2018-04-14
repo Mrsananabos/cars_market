@@ -7,7 +7,6 @@ public class SimpleSet<T> extends DynamicContainer<T>{
             super(size);
         }
 
-
         public void add(T value) {
             boolean rsl = false;
             for (int i = 0; i<super.index;i++){
