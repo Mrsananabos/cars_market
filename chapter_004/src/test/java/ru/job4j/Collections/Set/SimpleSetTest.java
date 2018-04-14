@@ -28,6 +28,18 @@ public class SimpleSetTest {
         assertThat(rsl3, is(3));
     }
 
+    @Test
+    public void whenAddValuesThenSimpleSetEnlarge() {
+        SimpleSet<Integer> s = new SimpleSet<>(4);
+        s.add(1);
+        s.add(2);
+        s.add(3);
+        s.add(4);
+        s.add(5);
+        int rsl = s.getSize();
+        assertThat(rsl, is(8));
+    }
+
     @Test (expected = ConcurrentModificationException.class)
     public void shouldThrowConcurrentModificationException() {
         SimpleSet<Integer> s = new SimpleSet<>(3);
