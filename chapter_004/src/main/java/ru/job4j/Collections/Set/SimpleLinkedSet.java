@@ -8,15 +8,22 @@ import java.util.Iterator;
 public class SimpleLinkedSet<T> extends LinkedContainer<T> {
 
     public void add(T value){
+        boolean rsl = false;
         if (super.head != null){
             Node cursor = super.head;
             do {
-                if (cursor.data.equals(value)) {return;}
-                else {
+                if (cursor.data.equals(value)) {
+                    rsl = true;
+                    break;
+                }
+                    else {
                     cursor=cursor.next;
                 }
             } while (cursor!=super.head);
-        }
-        super.add(value);
+        } 
+        if (!rsl){
+        super.add(value);}
     }
+
+
 }

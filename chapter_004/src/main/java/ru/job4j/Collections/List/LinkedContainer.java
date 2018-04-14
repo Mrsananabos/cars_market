@@ -27,6 +27,7 @@ public class LinkedContainer<T> implements Iterable<T>{
         this.modCoun[0]++;
     }
 
+
     public void addToBeginning(T value) {
         Node<T> a = new Node<>(value);
         if (head == null) {
