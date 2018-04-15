@@ -16,6 +16,8 @@ public class User {
         this.birthday.set(yearBirthday, mounthBirthday, dayBirthday);
     }
 
+
+
     public String getName() {
         return name;
     }
@@ -26,6 +28,14 @@ public class User {
 
     public Calendar getBirthday() {
         return birthday;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 37 * result + children;
+        result = 37 * result + (birthday != null ? birthday.hashCode() : 0);
+        return result;
     }
 
     public static void main(String[] args) {
