@@ -37,16 +37,18 @@ public class User {
 
 
     @Override
-    public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 37 * result + children;
-        result = 37 * result + dayOfBirth;
-        result = 37 * result + mounthOfBirth;
-        result = 37 * result + yearOfBirth;
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (children != user.children) return false;
+        if (dayOfBirth != user.dayOfBirth) return false;
+        if (mounthOfBirth != user.mounthOfBirth) return false;
+        if (yearOfBirth != user.yearOfBirth) return false;
+        return name != null ? name.equals(user.name) : user.name == null;
     }
-
-
 
     public static void main(String[] args) {
         Map<User, Object> map = new HashMap<>();
