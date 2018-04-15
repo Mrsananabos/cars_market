@@ -37,6 +37,16 @@ public class User {
 
 
     @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 37 * result + children;
+        result = 37 * result + dayOfBirth;
+        result = 37 * result + mounthOfBirth;
+        result = 37 * result + yearOfBirth;
+        return result;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
