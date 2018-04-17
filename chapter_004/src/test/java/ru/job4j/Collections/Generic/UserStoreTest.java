@@ -50,6 +50,7 @@ public class UserStoreTest {
     }
 
 
+
     @Test
     public void whenCreateFourRolsThenDeleteTwoOfThem() {
         RoleStore roleSt = new RoleStore();

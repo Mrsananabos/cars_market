@@ -6,6 +6,7 @@ public class Role extends Base {
         super(id);
     }
 
+
     @Override
     public String toString() {
         return "Role{" + "id: " + getId() + "}";

@@ -1,6 +1,7 @@
 package ru.job4j.Collections.Generic;
 
     public abstract class Base {
+
         private final String id;
 
         protected Base(final String id) {

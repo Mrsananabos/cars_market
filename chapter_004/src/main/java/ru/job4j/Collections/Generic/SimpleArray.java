@@ -4,12 +4,18 @@ import java.util.Iterator;
 
 public class SimpleArray<T> implements Iterable<T> {
 
-    public Object[] objects;
-    public int index = 0;
+
+    protected Object[] objects;
+    protected int index = 0;
+    private int size;
 
     public SimpleArray(int size) {
         this.objects = new Object[size];
+        this.size=size;
     }
+
+
+    public int getSize(){return size;}
 
 
     public void add(T value) {
