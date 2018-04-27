@@ -1,4 +1,4 @@
-package ru.job4j.Collections.Set;
+package ru.job4j.collections.set;
 
 public class CellForHashTable<T> {
 
@@ -10,7 +10,7 @@ public class CellForHashTable<T> {
         this.data = data;
     }
 
-    public T getData(){
+    public T getData() {
         return this.data;
     }
 
