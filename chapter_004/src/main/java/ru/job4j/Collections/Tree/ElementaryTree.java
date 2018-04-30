@@ -43,6 +43,24 @@ public class ElementaryTree<E extends Comparable<E>> implements SimpleTree<E> {
         return rsl;
     }
 
+    public boolean isBinary() {
+        Queue<Node<E>> data = new LinkedList<Node<E>>();
+        data.offer(this.root);
+        while (!data.isEmpty()) {
+            Node<E> el = data.poll();
+            List<Node<E>> child = el.leaves();
+            int numberChild = child.size();
+            if (numberChild > 2) {
+                return false;
+            }
+            for (Node<E> children : child) {
+                data.offer(children);
+            }
+        }
+        return true;
+    }
+
+
     @Override
     public Iterator<E> iterator() {
         return new IteratorOfElementaryTree<E>(this.root);

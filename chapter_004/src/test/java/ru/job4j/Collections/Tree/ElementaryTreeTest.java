@@ -57,7 +57,38 @@ public class ElementaryTreeTest {
         assertThat(it.next(), Matchers.is(6));
         it.next();
 
-
     }
+
+    @Test
+    public void whenTreeisBinary() {
+        ElementaryTree<Integer> tree = new ElementaryTree<Integer>(1);
+        tree.add(1, 3);
+        tree.add(1, 4);
+        tree.add(4, 5);
+        tree.add(3, 8);
+        tree.add(3, 89);
+        tree.add(89, 899);
+        tree.add(5, 6);
+        tree.add(89, 6);
+        tree.add(5, 879);
+        assertThat(tree.isBinary(), Matchers.is(true));
+    }
+
+    @Test
+    public void whenTreeisNotBinary() {
+        ElementaryTree<Integer> tree = new ElementaryTree<Integer>(1);
+        tree.add(1, 3);
+        tree.add(1, 4);
+        tree.add(4, 5);
+        tree.add(3, 8);
+        tree.add(3, 89);
+        tree.add(89, 899);
+        tree.add(5, 6);
+        tree.add(89, 6);
+        tree.add(5, 879);
+        tree.add(5, 456);
+        assertThat(tree.isBinary(), Matchers.is(false));
+    }
+
 
 }
