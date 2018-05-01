@@ -9,7 +9,6 @@ public class SimpleHashMap<K, V> implements Iterable {
     private int size = 10;
     private int position = 0;
     public float capacity = 0;
-    private int sizeSize = 2;
     public int[] modCoun = new int[]{0};
 
     public SimpleHashMap() {
@@ -23,10 +22,10 @@ public class SimpleHashMap<K, V> implements Iterable {
         }
         boolean rsl = false;
         int hash = key.hashCode();
-        int currentInd = findIndex(hash);
+        int currentInd = hash % this.hashTable.length;
         if (hashTable[currentInd] == null) {
             hashTable[currentInd] = new Cell<>(key, value);
-            position++;
+            this.position++;
             rsl = true;
         } else {
             if ((hashTable[currentInd].key.equals(key))) {
@@ -38,32 +37,25 @@ public class SimpleHashMap<K, V> implements Iterable {
         return rsl;
     }
 
-    public int findIndex(int hash) {
-        int sizeHash = String.valueOf(Math.abs(hash)).length();
-        if (hash <= this.size) {
-            return hash;
-        } else {
-            int newInd = (int) (hash / (Math.pow(10, sizeHash - this.sizeSize)));
-            if (newInd > this.size) {
-                newInd = newInd / 10;
-            }
-            return newInd;
-
-        }
-    }
 
     public void enlargeContainer() {
         Cell<K, V>[] newHashTable = new Cell[this.size * 2];
-        System.arraycopy(this.hashTable, 0, newHashTable, 0, this.size);
         this.size = this.size * 2;
+        for (Cell<K, V> cell : this.hashTable) {
+            if (cell != null) {
+                int hash = cell.key.hashCode();
+                int currentInd = hash % this.size;
+                newHashTable[currentInd] = cell;
+            }
+        }
         this.hashTable = newHashTable;
-        this.sizeSize = String.valueOf(Math.abs(this.size)).length();
         this.modCoun[0]++;
     }
 
     public V get(K key) {
         V result = null;
-        int ind = findIndex(key.hashCode());
+        int hash = key.hashCode();
+        int ind = hash % this.hashTable.length;
         if (ind <= this.size) {
             result = this.hashTable[ind].data;
         }
@@ -72,7 +64,8 @@ public class SimpleHashMap<K, V> implements Iterable {
 
     boolean delete(K key) {
         boolean result = false;
-        int index = findIndex(key.hashCode());
+        int hash = key.hashCode();
+        int index = hash % this.hashTable.length;
         if (this.hashTable[index] != null && this.hashTable[index].key.equals(key)) {
             this.hashTable[index] = null;
             this.position--;

@@ -11,6 +11,7 @@ public class SimpleHashMapIterator<K, V> implements Iterator {
     private int[] expectedCount;
     int position = 0;
 
+
     public SimpleHashMapIterator(Cell<K, V>[] hashTable, int[] expectedCount) {
         this.hashTable = hashTable;
         this.size = hashTable.length;
