@@ -14,6 +14,7 @@ public class NewNode<E extends Comparable<E>> {
         this.value = value;
     }
 
+
     public E getValue() {
         return this.value;
     }

@@ -47,6 +47,7 @@ public class IteratorOfBinarySearchTree<E extends Comparable<E>> implements Iter
         return rsl;
     }
 
+
     @Override
     public E next() throws NoSuchElementException {
         if (hasNext()) {

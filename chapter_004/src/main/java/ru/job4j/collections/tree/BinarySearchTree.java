@@ -8,46 +8,31 @@ import java.util.Queue;
 public class BinarySearchTree<E extends Comparable<E>> implements Iterable {
 
     public NewNode<E> root;
-    private NewNode<E> parent;
-    private NewNode<E> child;
-    private boolean recursion = false;
 
 
     public void add(E value) {
+        NewNode<E> parent = this.root;
+        NewNode<E> child;
         boolean inCycle = true;
-        this.parent = this.recursion ? this.parent : this.root;
         if (this.root == null) {
             this.root = new NewNode<>(value);
             inCycle = false;
         }
         while (inCycle) {
-            int result = value.compareTo(this.parent.getValue());
-            if (result > 0) {
-                this.child = this.parent.getRight();
+            int result = value.compareTo(parent.getValue());
+            child = result > 0 ? parent.getRight() : parent.getLeft();
+            if (child == null) {
+             if (result > 0) {
+                 parent.setRight(new NewNode<>(value));
+                 inCycle = false;
+             } else {
+                 parent.setLeft(new NewNode<>(value));
+                 inCycle = false;
+             }
             } else {
-                if (result < 0) {
-                    this.child = this.parent.getLeft();
-                }
+                parent = child;
             }
-            if (this.child != null) {
-                this.parent = this.child;
-                this.recursion = true;
-                this.add(value);
-            } else {
-                if (result == 1) {
-                    this.parent.setRight(new NewNode<>(value));
-                    inCycle = false;
-                    this.recursion = false;
-                } else {
-                    this.parent.setLeft(new NewNode<>(value));
-                    inCycle = false;
-                    this.recursion = false;
-                }
-            }
-
         }
-
-
     }
 
 
@@ -56,15 +41,5 @@ public class BinarySearchTree<E extends Comparable<E>> implements Iterable {
         return new IteratorOfBinarySearchTree<>(this.root);
     }
 
-    public static void main(String[] args) {
-        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
-        tree.add(10);
-        tree.add(16);
-        tree.add(20);
-
-        System.out.println(tree.root.getValue());
-        System.out.println(tree.root.getRight().getValue());
-        System.out.println(tree.root.getLeft().getValue());
-    }
 
 }
