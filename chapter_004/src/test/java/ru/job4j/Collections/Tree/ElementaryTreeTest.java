@@ -36,6 +36,17 @@ public class ElementaryTreeTest {
         );
     }
 
+    @Test
+    public void whenTreeDontAddDuplicates() {
+        ElementaryTree<Integer> tree = new ElementaryTree<>(1);
+        boolean rsl = tree.add(1, 10);
+        assertThat(rsl, Matchers.is(true));
+        boolean rsl1 = tree.add(1, 20);
+        assertThat(rsl1, Matchers.is(true));
+        boolean rsl2 = tree.add(10, 20);
+        assertThat(rsl2, Matchers.is(false));
+    }
+
     @Test(expected = NoSuchElementException.class)
     public void shouldThrowNoSuchElementException() {
         ElementaryTree<Integer> tree = new ElementaryTree<Integer>(1);
@@ -58,6 +69,7 @@ public class ElementaryTreeTest {
         it.next();
 
     }
+
 
     @Test
     public void whenTreeisBinary() {

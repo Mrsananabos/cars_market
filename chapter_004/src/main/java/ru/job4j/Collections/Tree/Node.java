@@ -1,14 +1,12 @@
 package ru.job4j.collections.tree;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 public class Node<E extends Comparable<E>> {
     private final List<Node<E>> children = new ArrayList<>();
-    private final E value;
 
+    private final E value;
 
     public Node(final E value) {
         this.value = value;

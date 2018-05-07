@@ -14,6 +14,7 @@ public class IteratorOfElementaryTree<E extends Comparable<E>> implements Iterat
         this.itOfCurrent = this.current.iterator();
     }
 
+
     private boolean findNext() {
         List<Node<E>> data = new ArrayList<>();
         Iterator newItOfCurrent = this.current.iterator();

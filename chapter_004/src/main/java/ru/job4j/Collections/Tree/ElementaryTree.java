@@ -16,7 +16,8 @@ public class ElementaryTree<E extends Comparable<E>> implements SimpleTree<E> {
     @Override
     public boolean add(E parent, E child) {
         Optional<Node<E>> rsl = findBy(parent);
-        if (rsl.isPresent()) {
+        Optional<Node<E>> rsl1 = findBy(child);
+        if (rsl.isPresent() & !rsl1.isPresent()) {
             Node<E> current = rsl.get();
             current.addChild(new Node<>(child));
             return true;
@@ -26,13 +27,13 @@ public class ElementaryTree<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     @Override
-    public Optional<Node<E>> findBy(E value) {
+    public Optional<Node<E>> findBy(E parent) {
         Optional<Node<E>> rsl = Optional.empty();
         Queue<Node<E>> data = new LinkedList<Node<E>>();
         data.offer(this.root);
         while (!data.isEmpty()) {
             Node<E> el = data.poll();
-            if (el.eqValue(value)) {
+            if (el.eqValue(parent)) {
                 rsl = Optional.of(el);
                 break;
             }
