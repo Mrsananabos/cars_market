@@ -2,6 +2,11 @@ package ru.job4j.collections.control;
 
 import java.util.*;
 
+import static ru.job4j.collections.control.Item.Action.ASK;
+import static ru.job4j.collections.control.Item.Action.BID;
+import static ru.job4j.collections.control.Item.Type.ADD;
+import static ru.job4j.collections.control.Item.Type.DELETED;
+
 public class ExchangeCups {
 
     private List<Item> purchase = new ArrayList();
@@ -9,18 +14,18 @@ public class ExchangeCups {
     private static final Random RN = new Random();
 
     public void accept(Item item) {
-        if (item.type.equals("add")) {
+        if (item.selectedType == ADD) {
             this.addItem(item);
         } else {
-            if (item.type.equals("delete")) {
+            if (item.selectedType == DELETED) {
                 for (Item it : purchase) {
-                    if (it.id == item.id & it.book.equals(item.book)) {
+                    if (it.getId() == item.getId() & it.book.equals(item.book)) {
                         purchase.remove(it);
                         break;
                     }
                 }
                 for (Item it : sale) {
-                    if (it.id == item.id & it.book.equals(item.book)) {
+                    if (it.getId() == item.getId() & it.book.equals(item.book)) {
 
                         sale.remove(it);
                         break;
@@ -31,22 +36,22 @@ public class ExchangeCups {
     }
 
     private void addItem(Item item) {
-        if (item.action.equals("ask")) {
+        if (item.selectedActiion == ASK) {
             walkOnOppositeItemsForAsk(item);
             if (item.volume != 0) {
                 this.purchase.add(item);
                 item.setId(Math.abs(RN.nextInt()));
-                System.out.println("ID заявки: " + item.id);
+                System.out.println("ID заявки: " + item.getId());
                 sortPriceLevel(this.purchase);
             }
 
         } else {
-            if (item.action.equals("bid")) {
+            if (item.selectedActiion == BID) {
                 walkOnOppositeItemsForBid(item);
                 if (item.volume != 0) {
                     this.sale.add(item);
                     item.setId(Math.abs(RN.nextInt()));
-                    System.out.println("ID заявки: " + item.id);
+                    System.out.println("ID заявки: " + item.getId());
                     sortPriceLevel(this.sale);
                 }
             }

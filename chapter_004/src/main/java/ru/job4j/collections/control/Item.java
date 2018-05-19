@@ -2,33 +2,42 @@ package ru.job4j.collections.control;
 
 import java.util.Random;
 
+import static ru.job4j.collections.control.Item.Type.ADD;
+
 public class Item {
-    public int id;
+    private int id;
     protected String book;
-    protected String type;
-    protected String action;
+    protected enum Type { ADD, DELETED };
+    protected Type selectedType;
+    protected enum Action { ASK, BID };
+    protected Action selectedActiion;
     protected int price;
     protected int volume;
 
 
-    public Item(String book, String type, String action, int price, int volume) {
+    public Item(String book, Type type, Action action, int price, int volume) {
         this.book = book;
-        this.type = type;
-        this.action = action;
+        this.selectedType = type;
+        this.selectedActiion = action;
         this.price = price;
         this.volume = volume;
     }
 
-    public Item(int id, String book, String type) {
+    public Item(int id, String book, Type type) {
         this.id = id;
         this.book = book;
-        this.type = type;
+        this.selectedType = type;
     }
 
     protected void setId(int id) {
-
         this.id = id;
     }
+
+    protected int getId() {
+        return this.id;
+    }
+
+
 
 }
 
