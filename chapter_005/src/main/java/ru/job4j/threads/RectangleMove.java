@@ -13,6 +13,7 @@ public class RectangleMove implements Runnable {
 
     @Override
     public void run() {
+
         while (true) {
             this.rect.setX(this.rect.getX() + mainDirectionsX);
             this.rect.setY(this.rect.getY() + mainDirectionsY);
