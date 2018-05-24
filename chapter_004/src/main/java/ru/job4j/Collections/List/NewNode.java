@@ -1,4 +1,4 @@
-package ru.job4j.Collections.List;
+package ru.job4j.collections.list;
 
 public class NewNode<T> {
 

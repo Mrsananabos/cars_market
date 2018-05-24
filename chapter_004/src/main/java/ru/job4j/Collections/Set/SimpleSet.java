@@ -1,22 +1,25 @@
-package ru.job4j.Collections.Set;
-import ru.job4j.Collections.List.DynamicContainer;
+package ru.job4j.collections.set;
 
-public class SimpleSet<T> extends DynamicContainer<T>{
+import ru.job4j.collections.list.DynamicContainer;
 
-        public SimpleSet(int size) {
-            super(size);
-        }
+public class SimpleSet<T> extends DynamicContainer<T> {
 
-        public void add(T value) {
-            boolean rsl = false;
-            for (int i = 0; i<super.index;i++){
-                if (value.equals(super.container[i])) {
-                    rsl = true;
-                }
-            }
-           if (!rsl) {super.add(value);}
-        }
-
+    public SimpleSet(int size) {
+        super(size);
     }
+
+    public void add(T value) {
+        boolean rsl = false;
+        for (int i = 0; i < super.index; i++) {
+            if (value.equals(super.container[i])) {
+                rsl = true;
+            }
+        }
+        if (!rsl) {
+            super.add(value);
+        }
+    }
+
+}
 
 

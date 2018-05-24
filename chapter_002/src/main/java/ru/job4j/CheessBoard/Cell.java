@@ -1,4 +1,4 @@
-package ru.job4j.CheessBoard;
+package ru.job4j.cheessboard;
 
 
 public class Cell {
@@ -6,8 +6,8 @@ public class Cell {
     int y;
 
     public Cell(int x, int y) {
-        this.x=x;
-        this.y=y;
+        this.x = x;
+        this.y = y;
     }
 
     public int getX() {

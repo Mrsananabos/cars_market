@@ -1,4 +1,4 @@
-package ru.job4j.CheessBoard;
+package ru.job4j.cheessboard;
 
 public class King extends Figure {
     public King(int x, int y) {
@@ -7,9 +7,8 @@ public class King extends Figure {
 
 
     public boolean way(Cell source, Cell dest, Figure[][] figures) {
-        if ((Math.abs(dest.getX()-source.getX())>1 && Math.abs(dest.getY()-source.getY())>1) || (Math.abs(dest.getX()-source.getX())>1 || Math.abs(dest.getY()-source.getY())>1) )
-        {
-            throw new ImpossibleMoveException("ime");
+        if ((Math.abs(dest.getX() - source.getX()) > 1 && Math.abs(dest.getY() - source.getY()) > 1) || (Math.abs(dest.getX() - source.getX()) > 1 || Math.abs(dest.getY() - source.getY()) > 1)) {
+            throw new ImposibleMoveException("ime");
         }
         if (figures[dest.getX()][dest.getY()] != null) {
             throw new OccupiedWayException("owe");

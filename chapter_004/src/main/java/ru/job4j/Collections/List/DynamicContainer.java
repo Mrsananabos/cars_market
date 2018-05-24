@@ -1,7 +1,7 @@
-package ru.job4j.Collections.List;
+package ru.job4j.collections.list;
 
-import ru.job4j.Collections.Generic.SimpleArray;
-import ru.job4j.Collections.Generic.SimpleArrayIterator;
+import ru.job4j.collections.generic.SimpleArray;
+import ru.job4j.collections.generic.SimpleArrayIterator;
 
 import javax.xml.soap.Node;
 import java.util.Arrays;
@@ -50,16 +50,11 @@ public class DynamicContainer<E> implements Iterable {
         return (E) this.container[index];
     }
 
-    ;
-
-
 
     @Override
     public Iterator<E> iterator() {
-        return new IteratorOfDynContainer(this.container, this.modCoun);}
-
-
-
+        return new IteratorOfDynContainer(this.container, this.modCoun);
+    }
 
 
 }

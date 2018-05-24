@@ -1,14 +1,14 @@
-package ru.job4j.Collections.Generic;
+package ru.job4j.collections.generic;
 
-    public abstract class Base {
+public abstract class Base {
 
-        private final String id;
+    private final String id;
 
-        protected Base(final String id) {
-            this.id = id;
-        }
-
-        public String getId() {
-            return id;
-        }
+    protected Base(final String id) {
+        this.id = id;
     }
+
+    public String getId() {
+        return id;
+    }
+}

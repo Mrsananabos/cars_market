@@ -1,8 +1,8 @@
-package ru.job4j.CheessBoard;
+package ru.job4j.cheessboard;
 
-class ImpossibleMoveException extends RuntimeException{
+class ImposibleMoveException extends RuntimeException {
 
-    public ImpossibleMoveException(String ime){
+    public ImposibleMoveException(String ime) {
 
         super(ime);
     }

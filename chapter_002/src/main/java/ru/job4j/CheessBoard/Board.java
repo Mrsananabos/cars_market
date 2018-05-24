@@ -1,5 +1,6 @@
-package ru.job4j.CheessBoard;
-import ru.job4j.CheessBoard.ImpossibleMoveException;
+package ru.job4j.cheessboard;
+
+
 public class Board {
 
 
@@ -10,18 +11,15 @@ public class Board {
         figures[x][y] = figure;
     }
 
-    public void BorderCheck(Cell cell) throws ArrayIndexOutOfBoardException {
-        if (cell.getX()>=figures.length || cell.getY()>=figures[figures.length-1].length) {
+    public void borderCheck(Cell cell) throws ArrayIndexOutOfBoardException {
+        if (cell.getX() >= figures.length || cell.getY() >= figures[figures.length - 1].length) {
             throw new ArrayIndexOutOfBoardException("iob");
         }
 
     }
 
 
-
-
-
-    boolean move(Cell source, Cell dest, Figure figure) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException, ArrayIndexOutOfBoardException {
+    boolean move(Cell source, Cell dest, Figure figure) throws ImposibleMoveException, OccupiedWayException, FigureNotFoundException, ArrayIndexOutOfBoardException {
         if (figures[source.getX()][source.getY()] == null) {
             throw new FigureNotFoundException("ffe");
         }

@@ -1,14 +1,14 @@
-package ru.job4j.Bank;
+package ru.job4j.bank;
 
 import java.util.*;
 
 public class Menu {
 
-   private Map<User, ArrayList<Account>> bankBase = new HashMap<>();
+    private Map<User, ArrayList<Account>> bankBase = new HashMap<>();
 
-   public Menu(Map<User, ArrayList<Account>> bankBase){
-       this.bankBase = bankBase;
-   }
+    public Menu(Map<User, ArrayList<Account>> bankBase) {
+        this.bankBase = bankBase;
+    }
 
     private User searchOfUser(String passport) {
         Set<User> keys = new LinkedHashSet<User>();
@@ -38,11 +38,9 @@ public class Menu {
     }
 
 
-
     public void deleteUser(User user) { //удаление пользователя.
         this.bankBase.remove(user);
     }
-
 
 
     public void addAccountToUser(String passport, Account account) { //добавить счёт пользователю.
@@ -55,23 +53,21 @@ public class Menu {
     }
 
 
-
     public List<Account> getUserAccounts(String passport) {
         return this.bankBase.get(searchOfUser(passport));
     }
 
 
-
-
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, int amount) {
         User srcUser = searchOfUser(srcPassport);
         User destUser = searchOfUser(destPassport);
-        Account srcAccount =  searchOfAccount(srcUser, srcRequisite);
+        Account srcAccount = searchOfAccount(srcUser, srcRequisite);
         Account destAccount = searchOfAccount(destUser, dstRequisite);
 
-        if (srcAccount != null && destAccount != null && srcAccount.getValue()>=amount && amount>0){
-            srcAccount.setValue(srcAccount.getValue()-amount);
-            destAccount.setValue(destAccount.getValue()+amount);System.out.println(srcAccount + " " + destAccount);
+        if (srcAccount != null && destAccount != null && srcAccount.getValue() >= amount && amount > 0) {
+            srcAccount.setValue(srcAccount.getValue() - amount);
+            destAccount.setValue(destAccount.getValue() + amount);
+            System.out.println(srcAccount + " " + destAccount);
             return true;
         } else {
             return false;

@@ -1,5 +1,6 @@
-package ru.job4j.Collections.List;
-import ru.job4j.Collections.List.NewNode;
+package ru.job4j.collections.list;
+
+import ru.job4j.collections.list.NewNode;
 
 import java.util.NoSuchElementException;
 

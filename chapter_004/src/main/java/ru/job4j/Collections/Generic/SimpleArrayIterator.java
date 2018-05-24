@@ -1,4 +1,4 @@
-package ru.job4j.Collections.Generic;
+package ru.job4j.collections.generic;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -17,12 +17,13 @@ public class SimpleArrayIterator<T> implements Iterator<T> {
     @Override
     public boolean hasNext() {
         boolean rsl = false;
-        if (position<length) {
-            if (objects[position] != (null)) {rsl = true;}
-        };
+        if (position < length) {
+            if (objects[position] != (null)) {
+                rsl = true;
+            }
+        }
         return rsl;
     }
-
 
 
     @Override

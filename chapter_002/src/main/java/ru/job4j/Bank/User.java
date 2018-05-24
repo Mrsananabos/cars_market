@@ -1,22 +1,24 @@
-package ru.job4j.Bank;
+package ru.job4j.bank;
 
 
-public class User implements Comparable<User>{
+public class User implements Comparable<User> {
 
-   private String name;
-   private String passport;
+    private String name;
+    private String passport;
 
-   public User(String name, String passport)  {
-       this.name = name;
-       this.passport = passport;
-   }
+    public User(String name, String passport) {
+        this.name = name;
+        this.passport = passport;
+    }
 
-   public String getName() { return this.name;}
+    public String getName() {
+        return this.name;
+    }
 
 
-   public String getPassport() {
-       return this.passport;
-   }
+    public String getPassport() {
+        return this.passport;
+    }
 
     @Override
     public String toString() {
@@ -27,8 +29,6 @@ public class User implements Comparable<User>{
     public int hashCode() {
         return this.passport.hashCode();
     }
-
-
 
 
     @Override

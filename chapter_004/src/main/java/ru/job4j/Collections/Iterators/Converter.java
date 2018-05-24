@@ -1,4 +1,4 @@
-package ru.job4j.Collections.Iterators;
+package ru.job4j.collections.iterators;
 
 import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
@@ -18,7 +18,9 @@ public class Converter {
             private Iterator<Integer> findNext() {
                 while (it.hasNext()) {
                     current = it.next();
-                    if (current.hasNext()) return current;
+                    if (current.hasNext()) {
+                        return current;
+                    }
                 }
                 return null;
             }
@@ -28,7 +30,9 @@ public class Converter {
             public boolean hasNext() {
                 if (current.hasNext()) {
                     return true;
-                } else { current = findNext(); }
+                } else {
+                    current = findNext();
+                }
                 return (current != null && current.hasNext());
             }
 

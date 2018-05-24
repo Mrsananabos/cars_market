@@ -1,4 +1,4 @@
-package ru.job4j.Collections.List;
+package ru.job4j.collections.list;
 
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class SimpleQueueTest {
 
     @Test
-    public void whenCreateFiveNodeThenAllPoll(){
+    public void whenCreateFiveNodeThenAllPoll() {
         SimpleQueue<Integer> stack = new SimpleQueue<>();
         stack.push(10);
         stack.push(20);
@@ -31,7 +31,7 @@ public class SimpleQueueTest {
     }
 
 
-    @Test (expected = NoSuchElementException.class)
+    @Test(expected = NoSuchElementException.class)
     public void shouldThrowNoSuchElementException() {
         SimpleQueue<Integer> stack = new SimpleQueue<>();
         stack.push(30);

@@ -9,14 +9,14 @@ public class FactorialTest {
     @Test
     public void whenCalculateFactorialForFiveThenOneHundreedTwenty() {
         Factorial factor = new Factorial();
-        int result=factor.calc(5);
+        int result = factor.calc(5);
         assertThat(result, is(120));
     }
 
     @Test
     public void whenCalculateFactorialForZeroThenOne() {
         Factorial factor = new Factorial();
-        int result=factor.calc(0);
+        int result = factor.calc(0);
         assertThat(result, is(1));
     }
 

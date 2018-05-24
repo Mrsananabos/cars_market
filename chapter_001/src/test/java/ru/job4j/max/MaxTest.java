@@ -5,16 +5,16 @@ import static org.junit.Assert.assertThat;
 
 public class MaxTest {
     @Test
-    public void MaximumOfTwo() {
+    public void maximumOfTwo() {
         Max maxim = new Max();
         int result = maxim.max(81, 45);
         assertThat(result, is(81));
     }
 
     @Test
-    public void MaximumOfThree() {
+    public void maximumOfThree() {
         Max maxim = new Max();
-        int result = maxim.maxof3(81, 459, 38);
+        int result = maxim.maxOf3(81, 459, 38);
         assertThat(result, is(459));
     }
 

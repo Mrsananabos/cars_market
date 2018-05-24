@@ -1,4 +1,4 @@
-package ru.job4j.Collections.List;
+package ru.job4j.collections.list;
 
 public class Node<T> {
 
@@ -6,11 +6,11 @@ public class Node<T> {
     public Node next;
     public Node previous;
 
-    public Node(T value){
-        this.data=value;
+    public Node(T value) {
+        this.data = value;
     }
 
-    boolean hasCycle(Node first){
+    boolean hasCycle(Node first) {
         if (first == null) {
             return false;
         }

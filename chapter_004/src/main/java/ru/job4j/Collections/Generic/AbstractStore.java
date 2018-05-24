@@ -1,10 +1,10 @@
-package ru.job4j.Collections.Generic;
+package ru.job4j.collections.generic;
 
 import static javafx.scene.input.KeyCode.T;
 
-public abstract class AbstractStore<T extends Base> implements Store{
+public abstract class AbstractStore<T extends Base> implements Store {
 
-    public SimpleArray<T> array = new SimpleArray<>(100);
+    private SimpleArray<T> array = new SimpleArray<>(100);
 
     @Override
     public void add(Base model) {
@@ -60,12 +60,6 @@ public abstract class AbstractStore<T extends Base> implements Store{
     public T getObject(int index) {
         return array.get(index);
     }
-
-
-
-
-
-
 
 
 }

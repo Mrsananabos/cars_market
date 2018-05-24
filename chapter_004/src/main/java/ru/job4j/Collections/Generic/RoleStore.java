@@ -1,6 +1,6 @@
-package ru.job4j.Collections.Generic;
+package ru.job4j.collections.generic;
 
-public class RoleStore extends AbstractStore<Role> implements Store{
+public class RoleStore extends AbstractStore<Role> implements Store {
 
 
 }

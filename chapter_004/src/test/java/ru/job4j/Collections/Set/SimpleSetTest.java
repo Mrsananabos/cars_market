@@ -1,4 +1,4 @@
-package ru.job4j.Collections.Set;
+package ru.job4j.collections.set;
 
 
 import org.hamcrest.Matchers;

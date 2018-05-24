@@ -10,7 +10,7 @@ public class ArrayDuplicateTest {
     @Test
     public void whenRemoveDuplicatesThenArrayWithoutDuplicate() {
         ArrayDuplicate duplicate = new ArrayDuplicate();
-        String[] result = duplicate.remove(new String[] {"1", "3", "7", "3", "1", "1", "3", "6", "6", "7"});
+        String[] result = duplicate.remove(new String[]{"1", "3", "7", "3", "1", "1", "3", "6", "6", "7"});
         String[] expect = {"3", "6", "1", "7"};
         assertThat(result, arrayContainingInAnyOrder(expect));
     }

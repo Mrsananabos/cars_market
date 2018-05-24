@@ -1,4 +1,4 @@
-package ru.job4j.Collections.Generic;
+package ru.job4j.collections.generic;
 
 import org.junit.Test;
 

@@ -1,11 +1,11 @@
-package ru.job4j.Bank;
+package ru.job4j.bank;
 
-public class Account{
+public class Account {
 
     private int value;
     private String requisies;
 
-    public Account(int value, String requisies){
+    public Account(int value, String requisies) {
         this.value = value;
         this.requisies = requisies;
     }
@@ -15,7 +15,7 @@ public class Account{
     }
 
     String getRequisies() {
-        return  this.requisies;
+        return this.requisies;
     }
 
     public void setValue(int newValue) {

@@ -1,4 +1,4 @@
-package ru.job4j.Collections.Set;
+package ru.job4j.collections.set;
 
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -13,8 +13,8 @@ import static org.junit.Assert.*;
 public class SimpleLinkedSetTest {
 
     @Test
-    public void whenAddSameValuesOfObjects(){
-    SimpleLinkedSet<Integer> s = new SimpleLinkedSet<>();
+    public void whenAddSameValuesOfObjects() {
+        SimpleLinkedSet<Integer> s = new SimpleLinkedSet<>();
         s.add(1);
         s.add(2);
         s.add(2);
@@ -27,7 +27,7 @@ public class SimpleLinkedSetTest {
         assertThat(rsl2, is(2));
         Integer rsl3 = (Integer) it.next();
         assertThat(rsl3, is(3));
-}
+    }
 
     @Test(expected = ConcurrentModificationException.class)
     public void shouldThrowConcurrentModificationException() {

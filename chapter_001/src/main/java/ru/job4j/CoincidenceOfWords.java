@@ -1,29 +1,29 @@
 package ru.job4j;
 
-import com.sun.prism.shader.Solid_TextureYV12_AlphaTest_Loader;
-
-import java.util.Arrays;
 
 public class CoincidenceOfWords {
+
     boolean contains(String origin, String sub) {
-        char[] ArrayOrigin = origin.toCharArray();
-        char[] ArraySub = sub.toCharArray();
-        int length = ArraySub.length;
+        char[] arrayOrigin = origin.toCharArray();
+        char[] arraySub = sub.toCharArray();
+        int length = arraySub.length;
         int in = 0;
-        for (int out = 0; out < ArrayOrigin.length; out++) {
-            if (ArraySub[in] == ArrayOrigin[out]) {
+        for (int out = 0; out < arrayOrigin.length; out++) {
+            if (arraySub[in] == arrayOrigin[out]) {
                 int m = out + 1;
                 int i = in + 1;
                 length--;
                 for (; length > 0; m++, i++) {
-                    if (ArraySub[i] == ArrayOrigin[m]) {
+                    if (arraySub[i] == arrayOrigin[m]) {
                         length--;
                     } else {
-                        length = ArraySub.length;
+                        length = arraySub.length;
                         break;
                     }
                 }
-                if (length == 0) break;
+                if (length == 0) {
+                    break;
+                }
             }
         }
         return length == 0;

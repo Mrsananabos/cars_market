@@ -1,4 +1,4 @@
-package ru.job4j.Collections.List;
+package ru.job4j.collections.list;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -14,17 +14,18 @@ public class IteratorOfLinkedContainer<T> implements Iterator {
     private int modCount;
     public int[] expectedCount;
 
-    public IteratorOfLinkedContainer(Node head, int[] expectedCount){
-        this.head=head;
+    public IteratorOfLinkedContainer(Node head, int[] expectedCount) {
+        this.head = head;
         this.cursor = head;
         this.modCount = expectedCount[0];
         this.expectedCount = expectedCount;
     }
 
     public void checkForModif() throws ConcurrentModificationException {
-        if (this.expectedCount[0] != this.modCount) throw new ConcurrentModificationException("Контейнер модифицирован");
+        if (this.expectedCount[0] != this.modCount) {
+            throw new ConcurrentModificationException("Контейнер модифицирован");
+        }
     }
-
 
 
     @Override
@@ -41,6 +42,8 @@ public class IteratorOfLinkedContainer<T> implements Iterator {
             cursor = cursor.next;
             this.number++;
             return (T) cursor1.data;
-        } else throw new NoSuchElementException("нет значений");
+        } else {
+            throw new NoSuchElementException("нет значений");
+        }
     }
 }

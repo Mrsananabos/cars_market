@@ -1,4 +1,4 @@
-package ru.job4j.CheessBoard;
+package ru.job4j.cheessboard;
 
 public class Queen extends Figure {
     public Queen(int x, int y) {
@@ -7,8 +7,8 @@ public class Queen extends Figure {
 
 
     public boolean way(Cell source, Cell dest, Figure[][] figures) {
-        if ((Math.abs((dest.getX() - source.getX())) != Math.abs((dest.getY() - source.getY()))) && (source.getX() != dest.getX() && source.getY()!= dest.getY())) {
-            throw new ImpossibleMoveException("ime");
+        if ((Math.abs((dest.getX() - source.getX())) != Math.abs((dest.getY() - source.getY()))) && (source.getX() != dest.getX() && source.getY() != dest.getY())) {
+            throw new ImposibleMoveException("ime");
         }
 
         if (Math.abs((dest.getX() - source.getX())) == Math.abs((dest.getY() - source.getY()))) {
@@ -36,47 +36,41 @@ public class Queen extends Figure {
             }
 
 
-
         } else {
             if (dest.getY() > source.getY()) {
-            for (int i = 1; i <= Math.abs(dest.getY() - source.getY()); i++) {
-                if (figures[source.getX()][source.getY() + i] != null) {
-                    throw new OccupiedWayException("owe");
-                }
-            }
-        } else {
-            if (dest.getY() < source.getY()) {
                 for (int i = 1; i <= Math.abs(dest.getY() - source.getY()); i++) {
-                    if (figures[source.getX()][source.getY() - i] != null) {
+                    if (figures[source.getX()][source.getY() + i] != null) {
                         throw new OccupiedWayException("owe");
                     }
                 }
             } else {
-                if (dest.getX() > source.getX()) {
-                    for (int i = 1; i <= Math.abs(dest.getX() - source.getX()); i++) {
-                        if (figures[source.getX() + i][source.getY()] != null) {
+                if (dest.getY() < source.getY()) {
+                    for (int i = 1; i <= Math.abs(dest.getY() - source.getY()); i++) {
+                        if (figures[source.getX()][source.getY() - i] != null) {
                             throw new OccupiedWayException("owe");
                         }
                     }
                 } else {
-                    for (int i = 1; i <= Math.abs(dest.getX() - source.getX()); i++) {
-                        if (figures[source.getX() - i][source.getY()] != null) {
-                            throw new OccupiedWayException("owe");
+                    if (dest.getX() > source.getX()) {
+                        for (int i = 1; i <= Math.abs(dest.getX() - source.getX()); i++) {
+                            if (figures[source.getX() + i][source.getY()] != null) {
+                                throw new OccupiedWayException("owe");
+                            }
+                        }
+                    } else {
+                        for (int i = 1; i <= Math.abs(dest.getX() - source.getX()); i++) {
+                            if (figures[source.getX() - i][source.getY()] != null) {
+                                throw new OccupiedWayException("owe");
+                            }
                         }
                     }
                 }
             }
-        }
 
         }
 
         return true;
     }
-
-
-
-
-
 
 
     Figure clone(Cell dest) {

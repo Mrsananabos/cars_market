@@ -1,6 +1,6 @@
-package ru.job4j.Collections.List;
+package ru.job4j.collections.list;
 
-import ru.job4j.Collections.Generic.SimpleArray;
+import ru.job4j.collections.generic.SimpleArray;
 
 import javax.swing.text.html.HTMLDocument;
 import java.util.ConcurrentModificationException;
@@ -12,24 +12,22 @@ public class IteratorOfDynContainer<T> implements Iterator {
 
     public Object[] container;
     public int length;
-    public int index=0;
+    public int index = 0;
     private int modCount;
     public int[] expectedCount;
 
-    public IteratorOfDynContainer(Object[] cont, int[] expectedCount){
+    public IteratorOfDynContainer(Object[] cont, int[] expectedCount) {
         this.container = cont;
         this.modCount = expectedCount[0];
         this.expectedCount = expectedCount;
-        this.length=cont.length;
+        this.length = cont.length;
     }
 
-    public void checkForModif() throws ConcurrentModificationException{
-        if (expectedCount[0] != this.modCount) throw new ConcurrentModificationException("Контейнер модифицирован");
+    public void checkForModif() throws ConcurrentModificationException {
+        if (expectedCount[0] != this.modCount) {
+            throw new ConcurrentModificationException("Контейнер модифицирован");
+        }
     }
-
-
-
-
 
 
     @Override
@@ -44,9 +42,11 @@ public class IteratorOfDynContainer<T> implements Iterator {
 
     @Override
     public Object next() throws NoSuchElementException {
-            if (hasNext()) {
-                return  container[index++];
-            } else throw new NoSuchElementException("нет значений");
+        if (hasNext()) {
+            return container[index++];
+        } else {
+            throw new NoSuchElementException("нет значений");
         }
+    }
 
 }

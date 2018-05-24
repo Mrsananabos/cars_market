@@ -1,8 +1,8 @@
-package ru.job4j.CheessBoard;
+package ru.job4j.cheessboard;
 
-class ArrayIndexOutOfBoardException extends RuntimeException{
+class ArrayIndexOutOfBoardException extends RuntimeException {
 
-    public ArrayIndexOutOfBoardException(String iob){
+    public ArrayIndexOutOfBoardException(String iob) {
         super(iob);
     }
 }

@@ -1,4 +1,4 @@
-package ru.job4j.CheessBoard;
+package ru.job4j.cheessboard;
 
 public class Rook extends Figure {
     public Rook(int x, int y) {
@@ -7,11 +7,10 @@ public class Rook extends Figure {
 
 
     public boolean way(Cell source, Cell dest, Figure[][] figures) {
-        if (((source.getX() != dest.getX()) && (source.getY()!= dest.getY()))) {
-            throw new ImpossibleMoveException("ime");
+        if (((source.getX() != dest.getX()) && (source.getY() != dest.getY()))) {
+            throw new ImposibleMoveException("ime");
 
         }
-
 
 
         if (dest.getY() > source.getY()) {

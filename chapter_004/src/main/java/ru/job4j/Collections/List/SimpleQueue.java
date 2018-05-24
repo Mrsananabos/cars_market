@@ -1,11 +1,11 @@
-package ru.job4j.Collections.List;
+package ru.job4j.collections.list;
 
 import java.util.NoSuchElementException;
 
-public class SimpleQueue<T> extends LinkedContainer{
+public class SimpleQueue<T> extends LinkedContainer {
 
 
-    public void push(T value){
+    public void push(T value) {
         super.add(value);
     }
 

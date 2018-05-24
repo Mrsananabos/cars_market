@@ -1,4 +1,4 @@
-package ru.job4j.Collections.Iterators;
+package ru.job4j.collections.iterators;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,12 +14,12 @@ public class MatrixTest {
     private MatrixIterator it;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         it = new MatrixIterator(new int[][]{{1, 2, 3}, {4, 5, 6}});
     }
 
     @Test
-    public void hasNextNextSequentialInvocation () {
+    public void hasNextNextSequentialInvocation() {
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(1));
         assertThat(it.hasNext(), is(true));
@@ -36,7 +36,7 @@ public class MatrixTest {
     }
 
     @Test
-    public void testsThatNextMethodDoesntDependsOnPriorHasNextInvocation () {
+    public void testsThatNextMethodDoesntDependsOnPriorHasNextInvocation() {
         assertThat(it.next(), is(1));
         assertThat(it.next(), is(2));
         assertThat(it.next(), is(3));
@@ -47,7 +47,7 @@ public class MatrixTest {
 
 
     @Test
-    public void sequentialHasNextInvocationDoesntAffectRetrievalOrder () {
+    public void sequentialHasNextInvocationDoesntAffectRetrievalOrder() {
         assertThat(it.hasNext(), is(true));
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(1));
@@ -59,8 +59,8 @@ public class MatrixTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void shouldThrowNoSuchElementException () {
-        it = new MatrixIterator(new int[][]{});
-        it.next();
+        public void shouldThrowNoSuchElementException() {
+            it = new MatrixIterator(new int[][]{});
+            it.next();
     }
 }

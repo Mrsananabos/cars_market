@@ -1,8 +1,8 @@
-package ru.job4j.CheessBoard;
+package ru.job4j.cheessboard;
 
-class FigureNotFoundException extends RuntimeException{
+class FigureNotFoundException extends RuntimeException {
 
-    public FigureNotFoundException(String ffe){
+    public FigureNotFoundException(String ffe) {
 
         super(ffe);
     }

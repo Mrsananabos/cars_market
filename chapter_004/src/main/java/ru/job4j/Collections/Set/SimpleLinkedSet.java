@@ -1,28 +1,28 @@
-package ru.job4j.Collections.Set;
+package ru.job4j.collections.set;
 
-import ru.job4j.Collections.List.LinkedContainer;
-import ru.job4j.Collections.List.Node;
+import ru.job4j.collections.list.LinkedContainer;
+import ru.job4j.collections.list.Node;
 
 import java.util.Iterator;
 
 public class SimpleLinkedSet<T> extends LinkedContainer<T> {
 
-    public void add(T value){
+    public void add(T value) {
         boolean rsl = false;
-        if (super.head != null){
+        if (super.head != null) {
             Node cursor = super.head;
             do {
                 if (cursor.data.equals(value)) {
                     rsl = true;
                     break;
+                } else {
+                    cursor = cursor.next;
                 }
-                    else {
-                    cursor=cursor.next;
-                }
-            } while (cursor!=super.head);
-        } 
-        if (!rsl){
-        super.add(value);}
+            } while (cursor != super.head);
+        }
+        if (!rsl) {
+            super.add(value);
+        }
     }
 
 

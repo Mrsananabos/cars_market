@@ -1,4 +1,4 @@
-package ru.job4j.Sorting;
+package ru.job4j.sorting;
 
 import java.util.Comparator;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 public class Departments {
 
 
-    public List<String> sortAscending (List<String> list) {
+    public List<String> sortAscending(List<String> list) {
 
         list.sort(new Comparator<String>() {
             @Override
@@ -15,13 +15,13 @@ public class Departments {
                 char[] s1 = o1.toCharArray();
                 char[] s2 = o2.toCharArray();
                 int length = s1.length <= s2.length ? s1.length : s2.length;
-                for (int i =0; i<length; i++){
-                    if (s1[i] != s2[i]){
+                for (int i = 0; i < length; i++) {
+                    if (s1[i] != s2[i]) {
                         rsl = s1[i] > s2[i] ? 1 : -1;
                         break;
                     } else {
-                        if (length == i+1){
-                            rsl = s1.length>s2.length ? 1 : -1;
+                        if (length == i + 1) {
+                            rsl = s1.length > s2.length ? 1 : -1;
                         }
                     }
                 }
@@ -32,7 +32,7 @@ public class Departments {
     }
 
 
-    public List<String> sortInDecreasing (List<String> list) {
+    public List<String> sortInDecreasing(List<String> list) {
 
         list.sort(new Comparator<String>() {
             @Override
@@ -41,13 +41,13 @@ public class Departments {
                 char[] s1 = o1.toCharArray();
                 char[] s2 = o2.toCharArray();
                 int length = s1.length <= s2.length ? s1.length : s2.length;
-                for (int i =0; i<length; i++){
-                    if (s1[i] != s2[i]){
+                for (int i = 0; i < length; i++) {
+                    if (s1[i] != s2[i]) {
                         rsl = s1[i] < s2[i] ? 1 : -1;
                         break;
                     } else {
-                        if (length == i+1){
-                            rsl = s1.length>s2.length ? 1 : -1;
+                        if (length == i + 1) {
+                            rsl = s1.length > s2.length ? 1 : -1;
                         }
                     }
                 }

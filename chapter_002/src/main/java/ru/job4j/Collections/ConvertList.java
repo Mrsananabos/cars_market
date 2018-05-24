@@ -1,4 +1,4 @@
-package ru.job4j.Collections;
+package ru.job4j.collections;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
