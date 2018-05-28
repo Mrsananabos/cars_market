@@ -9,17 +9,26 @@ import java.util.List;
 @ThreadSafe
 public class UserStorage extends Thread {
 
-    public List<User> store = new ArrayList<>();
+    private List<User> store = new ArrayList<>();
+
+    private User find(int id) {
+        for (User currentUser : this.store) {
+            if (currentUser.getId() == id) {
+                return currentUser;
+            }
+        }
+        return null;
+    }
 
 
-    public boolean add(User user) {
-        store.add(user);
+    public synchronized boolean add(User user) {
+        this.store.add(user);
         return true;
     }
 
-    public boolean update(User user) {
+    public synchronized boolean update(User user) {
         for (User cuttentUser : store) {
-            if (cuttentUser.getId() == user.id) {
+            if (cuttentUser.getId() == user.getId()) {
                 store.remove(cuttentUser);
                 return true;
             }
@@ -27,8 +36,22 @@ public class UserStorage extends Thread {
         return false;
     }
 
-    public boolean delete(User user) {
-        return store.remove(user);
+    public synchronized boolean delete(User user) {
+        User currentUser = find(user.getId());
+        return currentUser != null && store.remove(user);
+    }
+
+    public boolean transfer(int fromId, int toId, int amount) throws InsufficientResourcesException {
+        User fromUser = find(fromId);
+        User toUser = find(toId);
+        try {
+            fromUser.withdraw(amount);
+            toUser.deposit(amount);
+        } catch (InsufficientResourcesException e) {
+            System.out.println("InsufficientResourcesException");
+            return false;
+        }
+        return true;
     }
 }
 
