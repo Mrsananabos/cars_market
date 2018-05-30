@@ -20,6 +20,7 @@ public class CountTest {
         }
     }
 
+
     @Test
     public void whenExecute2ThreadThen2() throws InterruptedException {
 

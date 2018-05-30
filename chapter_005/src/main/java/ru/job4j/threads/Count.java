@@ -5,16 +5,16 @@ import net.jcip.annotations.ThreadSafe;
 
 @ThreadSafe
 public class Count {
+    @GuardedBy("this")
     private int value;
 
-    @GuardedBy("this")
     public void increment() {
         synchronized (this) {
             this.value++;
         }
     }
 
-    public int get() {
+    public synchronized int get() {
         return this.value;
     }
 }
