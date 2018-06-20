@@ -9,8 +9,8 @@ import static ru.job4j.collections.control.Item.Type.DELETED;
 
 public class ExchangeCups {
 
-    private List<Item> purchase = new ArrayList();
-    private List<Item> sale = new ArrayList();
+    private Map<Integer, Item> purchase = new HashMap<Integer, Item>();
+    private Map<Integer, Item> sale = new HashMap<Integer, Item>();
     private static final Random RN = new Random();
 
     public void accept(Item item) {
@@ -18,16 +18,16 @@ public class ExchangeCups {
             this.addItem(item);
         } else {
             if (item.selectedType == DELETED) {
-                for (Item it : purchase) {
+                for (Item it : purchase.values()) {
                     if (it.getId() == item.getId() & it.book.equals(item.book)) {
-                        purchase.remove(it);
+                        purchase.remove(item.getId(), item);
                         break;
                     }
                 }
-                for (Item it : sale) {
+                for (Item it : sale.values()) {
                     if (it.getId() == item.getId() & it.book.equals(item.book)) {
-
-                        sale.remove(it);
+                        boolean a;
+                        sale.remove(item.getId());
                         break;
                     }
                 }
@@ -38,21 +38,22 @@ public class ExchangeCups {
     private void addItem(Item item) {
         if (item.selectedActiion == ASK) {
             walkOnOppositeItemsForAsk(item);
-            if (item.volume != 0) {
-                this.purchase.add(item);
-                item.setId(Math.abs(RN.nextInt()));
-                System.out.println("ID заявки: " + item.getId());
-                sortPriceLevel(this.purchase);
+            if (item.volume > 0) {
+                int currentId = Math.abs(RN.nextInt());
+                item.setId(currentId);
+                this.purchase.put(currentId, item);
+                System.out.println("ASK ID заявки: " + item.getId());
+
             }
 
         } else {
             if (item.selectedActiion == BID) {
                 walkOnOppositeItemsForBid(item);
                 if (item.volume != 0) {
-                    this.sale.add(item);
-                    item.setId(Math.abs(RN.nextInt()));
-                    System.out.println("ID заявки: " + item.getId());
-                    sortPriceLevel(this.sale);
+                    int currentId = Math.abs(RN.nextInt());
+                    this.sale.put(currentId, item);
+                    item.setId(currentId);
+                    System.out.println("BID ID заявки: " + item.getId());
                 }
             }
         }
@@ -60,8 +61,7 @@ public class ExchangeCups {
 
     private void walkOnOppositeItemsForAsk(Item item) {
         Item itemForRemove = null;
-        for (int i = this.sale.size() - 1; i >= 0; i--) {
-            Item currItem = this.sale.get(i);
+        for (Item currItem : this.sale.values()) {
             if (currItem.book.equals(item.book) & currItem.price <= item.price) {
                 int difference = currItem.volume - item.volume;
                 if (difference < 0) {
@@ -81,14 +81,14 @@ public class ExchangeCups {
             }
         }
         if (itemForRemove != null) {
-            this.sale.remove(itemForRemove);
+            this.sale.remove(itemForRemove.getId(), itemForRemove);
         }
 
     }
 
     private void walkOnOppositeItemsForBid(Item item) {
         Item itemForRemove = null;
-        for (Item currItem : purchase) {
+        for (Item currItem : purchase.values()) {
             if (item.book.equals(currItem.book) & currItem.price >= item.price) {
                 int difference = currItem.volume - item.volume;
                 if (difference < 0) {
@@ -108,7 +108,7 @@ public class ExchangeCups {
             }
         }
         if (itemForRemove != null) {
-            this.purchase.remove(itemForRemove);
+            this.purchase.remove(itemForRemove.getId(), itemForRemove);
         }
     }
 
@@ -128,7 +128,7 @@ public class ExchangeCups {
 
     public void printByBook(String book) {
         List<Item> newPurchase = new ArrayList<>();
-        for (Item item : this.purchase) {
+        for (Item item : this.purchase.values()) {
             if (item.book.equals(book)) {
                 newPurchase.add(item);
             }
@@ -136,7 +136,7 @@ public class ExchangeCups {
         System.out.println("Покупка  Цена");
         printBySortPrice(newPurchase);
         List<Item> newSale = new ArrayList<>();
-        for (Item item : this.sale) {
+        for (Item item : this.sale.values()) {
             if (item.book.equals(book)) {
                 newSale.add(item);
             }

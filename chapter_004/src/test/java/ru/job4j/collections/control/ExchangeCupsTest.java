@@ -12,6 +12,7 @@ public class ExchangeCupsTest {
 
     @Test
     public void showResult() {
+
         ExchangeCups cup = new ExchangeCups();
         Item it1 = new Item("Rusal", ADD, ASK, 14, 7);
         Item it2 = new Item("Rusal", ADD, ASK, 12, 5);
