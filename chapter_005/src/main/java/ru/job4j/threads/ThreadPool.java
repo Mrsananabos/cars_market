@@ -3,11 +3,12 @@ package ru.job4j.threads;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class ThreadPool {
     private final List<Thread> threads = new LinkedList<>();
-    private final Queue<Runnable> tasks = new LinkedBlockingQueue<>();
+    private final BlockingQueue<Runnable> tasks = new LinkedBlockingQueue<>();
     private int size = Runtime.getRuntime().availableProcessors();
 
     public ThreadPool() {
@@ -17,24 +18,26 @@ public class ThreadPool {
                 public void run() {
                     Runnable r;
                     while (true) {
-                        synchronized (tasks) {
-                            while (tasks.isEmpty()) {
-                                try {
-                                    System.out.println("Thread is waiting job");
-                                    tasks.wait();
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                            r = tasks.remove();
+                        try {
+                            r = tasks.take();
+                            r.run();
+
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-                        r.run();
                     }
 
                 }
 
             }));
+
+            try {
+                threads.get(i).join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
 
@@ -46,15 +49,17 @@ public class ThreadPool {
     }
 
     public void addWork(Runnable job) {
-        synchronized (tasks) {
-            tasks.offer(job);
-            System.out.println("Job is added");
-            tasks.notify();
+        try {
+            tasks.put(job);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Job is added");
         }
 
     }
 
 
-}
+
 
 

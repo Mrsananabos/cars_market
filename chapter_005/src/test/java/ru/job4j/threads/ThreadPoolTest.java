@@ -28,11 +28,18 @@ public class ThreadPoolTest {
                 System.out.println("Working3 is done");
             }
         };
+        Runnable r4 = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Working4 is done");
+            }
+        };
 
         pool.start();
         pool.addWork(r1);
         pool.addWork(r2);
         pool.addWork(r3);
+        pool.addWork(r4);
 
 
     }
