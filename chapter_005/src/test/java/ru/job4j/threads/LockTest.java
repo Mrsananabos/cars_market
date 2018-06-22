@@ -38,8 +38,8 @@ public class LockTest {
         thr3.start();
         try {
             thr1.join();
-            thr2.join();
-            thr3.join();
+             thr2.join();
+             thr3.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
