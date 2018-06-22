@@ -17,25 +17,18 @@ public class ThreadPool {
                 @Override
                 public void run() {
                     Runnable r;
-                    while (true) {
+                    while (!Thread.currentThread().isInterrupted()) {
                         try {
                             r = tasks.take();
                             r.run();
-
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            System.out.println("Thread is interrupted!");
                         }
                     }
-
                 }
 
             }));
 
-            try {
-                threads.get(i).join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
 
     }
@@ -55,9 +48,9 @@ public class ThreadPool {
             e.printStackTrace();
         }
         System.out.println("Job is added");
-        }
-
     }
+
+}
 
 
 
