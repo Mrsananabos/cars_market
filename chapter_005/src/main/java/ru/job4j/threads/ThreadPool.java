@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ThreadPool {
     private final List<Thread> threads = new LinkedList<>();
@@ -16,13 +17,16 @@ public class ThreadPool {
             this.threads.add(i, new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Runnable r;
-                    while (!Thread.currentThread().isInterrupted()) {
+                    while (true) {
+                        Runnable work = null;
                         try {
-                            r = tasks.take();
-                            r.run();
+                            work = tasks.take();
                         } catch (InterruptedException e) {
-                            System.out.println("Thread is interrupted!");
+                            e.printStackTrace();
+                        }
+                        work.run();
+                        if (Thread.currentThread().isInterrupted()) {
+                            break;
                         }
                     }
                 }
@@ -32,6 +36,7 @@ public class ThreadPool {
         }
 
     }
+
 
 
     public void start() {
@@ -49,6 +54,7 @@ public class ThreadPool {
         }
         System.out.println("Job is added");
     }
+
 
 }
 

@@ -37,7 +37,9 @@ public class ThreadPoolTest {
 
         pool.start();
         pool.addWork(r1);
+
         pool.addWork(r2);
+
         pool.addWork(r3);
         pool.addWork(r4);
 
