@@ -3,7 +3,6 @@ package ru.job4j.bomberman;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Cell {
-
     private int x;
     private int y;
     private ReentrantLock lock = new ReentrantLock();

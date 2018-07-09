@@ -8,52 +8,20 @@ public class BoardTest {
 
     @Test
     public void emulationOfTwoHeroes() {
-        Board board = new Board(10, 10);
-
-
-        Thread hero1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Cell sorce = board.getBoard()[0][0];
-                Cell dest = board.generateCell();
-                sorce.getLock().lock();
-                while (true) {
-                    if (board.move(sorce, dest)) {
-                        sorce = dest;
-                        dest = board.generateCell();
-                    } else {
-                        dest = board.generateCell();
-                    }
-
-                }
-            }
-        });
-
-
-        Thread hero2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Cell sorce1 = board.getBoard()[1][1];
-                Cell dest1 = board.generateCell();
-                sorce1.getLock().lock();
-                while (true) {
-                    if (board.move(sorce1, dest1)) {
-                        sorce1 = dest1;
-                        dest1 = board.generateCell();
-                    } else {
-                        dest1 = board.generateCell();
-                    }
-
-                }
-            }
-        });
-
-        hero1.setName("Hero 1 ");
-        hero2.setName("Hero 2 ");
-        hero1.start();
-        hero2.start();
-
-
+        Board board = new Board(5, 5);
+        Player work1 = new Player(board, board.getBoard()[0][0]);
+        Player work2 = new Player(board, board.getBoard()[1][1]);
+        Thread player1 = new Thread(work1);
+        Thread player2 = new Thread(work2);
+        player1.setName("Player 1 ");
+        player2.setName("Player 2 ");
+        player1.start();
+        player2.start();
+        try {
+            player1.join();
+            player2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
-
 }
