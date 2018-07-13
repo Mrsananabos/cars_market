@@ -12,12 +12,12 @@ public class ThreadPool {
     private final BlockingQueue<Runnable> tasks = new LinkedBlockingQueue<>();
     private int size = Runtime.getRuntime().availableProcessors();
 
-    public ThreadPool() {
+    public void start() {
         for (int i = 0; i < this.size; i++) {
-            this.threads.add(i, new Thread(new Runnable() {
+            Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-
+                    Thread me = Thread.currentThread();
                     while (true) {
                         Runnable work = null;
                         try {
@@ -26,34 +26,31 @@ public class ThreadPool {
                             e.printStackTrace();
                         }
                         work.run();
-                        if (Thread.currentThread().isInterrupted()) {
+                        if (me.isInterrupted()) {
+                            System.out.println("Поток прерван");
                             break;
                         }
                     }
                 }
+            });
+            this.threads.add(thread);
+            thread.start();
 
-            }));
-
-        }
-
-    }
-
-
-
-    public void start() {
-        for (int i = 0; i < size; i++) {
-            System.out.println("Thread is starting");
-            threads.get(i).start();
         }
     }
 
-    public void addWork(Runnable job) {
+
+    public void addWork(Runnable work) {
         try {
-            tasks.put(job);
+            tasks.put(work);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("Job is added");
+    }
+
+    public void stop() {
+        Runnable stopper = () -> Thread.currentThread().interrupt();
+            this.addWork(stopper);
     }
 
 
