@@ -27,21 +27,21 @@ WHERE type_id = (
   WHERE type.name = 'Молоко'
 );
 --6. Написать запрос получение всех продуктов с типом "СЫР" и "МОЛОКО"
- SELECT * FROM product
-  WHERE type_id = (
+SELECT * FROM product
+  WHERE type_id IN (
   SELECT type.id
   FROM type
-  WHERE type.name = 'Сыр') OR type_id = (
-  SELECT type.id
-  FROM type
-  WHERE type.name = 'Молоко');
+  WHERE type.name = 'Сыр' OR type.name ='Молоко');
+ 
+  
   
 --7. Написать запрос, который выводит тип продуктов, которых осталось меньше 10 штук. 
-SELECT * FROM Type
-	WHERE Type.id IN (SELECT Product.type_id FROM Product WHERE Product.quantity < 10);
-
+SELECT type_id
+FROM product
+WHERE product.quantity < 10
+GROUP BY type_id;
+ 
 
 --8. Вывести все продукты и их тип.
 SELECT product.name, type.name FROM product, type
 WHERE product.type_id = type.id
- 
