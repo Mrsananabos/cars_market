@@ -36,10 +36,11 @@ SELECT * FROM product
   
   
 --7. Ќаписать запрос, который выводит тип продуктов, которых осталось меньше 10 штук. 
-SELECT type_id
+SELECT type.name
 FROM product
-WHERE product.quantity < 10
-GROUP BY type_id;
+INNER JOIN type ON product.type_id = type.id
+GROUP BY type.name
+HAVING count(product.id) < 10;
  
 
 --8. ¬ывести все продукты и их тип.
