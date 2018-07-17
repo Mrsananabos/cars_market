@@ -27,14 +27,5 @@ public class Cell {
         return lock;
     }
 
-    public static void main(String[] args) {
-        ReentrantLock lockk = new ReentrantLock();
-        lockk.lock();
-        lockk.lock();
-        lockk.lock();
-        lockk.unlock();
-        lockk.unlock();
-        lockk.unlock();
-    }
 
 }
