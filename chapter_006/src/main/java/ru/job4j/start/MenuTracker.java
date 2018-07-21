@@ -4,6 +4,8 @@ import ru.job4j.start.Input;
 import ru.job4j.start.Item;
 import ru.job4j.start.Tracker;
 
+import java.util.List;
+
 class EditItem extends BaseAction { //Действие "обновить заявку" с ключом ввода "2"
 
     EditItem(String name, int key) {
@@ -18,9 +20,8 @@ class EditItem extends BaseAction { //Действие "обновить зая�
         String id = input.ask("Please, enter the task's ID that you want to edit : ");
         String newName = input.ask("Please, enter the new task's name : ");
         String newDescription = input.ask("Please, enter the new task's Description : ");
-        String newCreated = input.ask("Please, enter the new task's Created : ");
         String newComment = input.ask("Please, enter the new task's comment : ");
-        Item newItem = new Item(newName, newDescription, newCreated, newComment);
+        Item newItem = new Item(newName, newDescription, newComment);
         newItem.setId(id);
         tracker.update(newItem);
     }
@@ -40,6 +41,10 @@ public class MenuTracker {
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
+    }
+
+    protected Tracker getTracker() {
+        return tracker;
     }
 
 
@@ -89,9 +94,8 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {  //реализация самого действия
             String name = input.ask("Please, enter the task's name : ");
             String description = input.ask("Please, enter the task's Description : ");
-            String created = input.ask("Please, enter the task's Created : ");
             String comment = input.ask("Please, enter the task's comment : ");
-            tracker.add(new Item(name, description, created, comment));
+            tracker.add(new Item(name, description, comment));
 
         }
 
@@ -104,25 +108,21 @@ public class MenuTracker {
         ShowItem(String name, int key) {
             super("Show Item", 1);
         }
-
         public int key() {
             return 1;
         }
 
-
         public void execute(Input input, Tracker tracker) { //реализация самого действия
-            for (Item item : tracker.getAll()) {
-                if (item != null) {
-                    System.out.println(item.getName());
-                }
-            }
-        }
+           List<Item> result = tracker.getAll();
+            System.out.println(result);
 
+        }
 
         public String info() {
             return inform();
-        } // Сообщает пользователю о даном действии
     }
+}
+
 
     private class DeleteItem extends BaseAction { //Действие "удаление заявки" с ключом ввода "3"
         DeleteItem(String name, int key) {
@@ -160,7 +160,7 @@ public class MenuTracker {
             String id = input.ask("Please, enter the task's ID : ");
             Item result = tracker.findById(id);
             if (result != null) {
-                System.out.println("Name : " + (tracker.findById(id).getName() + " Desc : " + tracker.findById(id).getDesc() + " Created : " + tracker.findById(id).getCreated() + " Comment : " + tracker.findById(id).getComment()));
+                System.out.println("Name : " + (tracker.findById(id).getName() + " Desc : " + tracker.findById(id).getDesc() + " Created : " + " Comment : " + tracker.findById(id).getComment()));
             } else {
                 System.out.println("Sorry, Item with this id not found ");
             }
@@ -184,9 +184,9 @@ public class MenuTracker {
 
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Please, enter the task's name : ");
-            Item[] findedItems = tracker.findByName(name);
-            for (int i = 0; i < findedItems.length; i++) {
-                System.out.println("Name : " + findedItems[i].getName() + " Desc " + findedItems[i].getDesc() + " Created : " + findedItems[i].getCreated() + " Comment : " + findedItems[i].getComment());
+            List<Item> findedItems = tracker.findByName(name);
+            for (int i = 0; i < findedItems.size(); i++) {
+                System.out.println("Name : " + findedItems.get(i).getName() + " Desc " + findedItems.get(i).getDesc() + " Created : "  + " Comment : " + findedItems.get(i).getComment());
             }
         }
 

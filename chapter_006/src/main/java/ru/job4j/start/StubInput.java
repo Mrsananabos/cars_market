@@ -24,7 +24,4 @@ public class StubInput implements Input {
         return exist ? key : -1;
     }
 
-
-
-
     }
