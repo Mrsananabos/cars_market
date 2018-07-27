@@ -30,7 +30,7 @@ public class StartUI {
         menu.show();
         menu.select(this.input.ask("Select: ", ranges));
       } while (!"y".equals(this.input.ask("Exit?(y): ")));
-      menu.getTracker().closeConnectionSQL();
+      menu.getTracker().getControlPSQL().closeConnection();
     }
 
 }

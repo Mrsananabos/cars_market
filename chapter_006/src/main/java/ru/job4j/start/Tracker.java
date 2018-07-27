@@ -1,6 +1,5 @@
 package ru.job4j.start;
 
-import com.sun.deploy.security.MozillaJSSNONEwithRSASignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.job4j.sql.SQLStorage;
@@ -10,73 +9,53 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Tracker implements AutoCloseable {
+public class Tracker {
     private static final Logger log = LoggerFactory.getLogger(SQLStorage.class);
     private Connection conn = null;
+    private ControlPSQL controlPSQL = null;
     private static final Random RN = new Random();
-    private final String URL;
-    private final String USERNAME;
-    private final String PASSWORD;
+
 
     public Tracker(String URL, String USERNAME, String PASSWORD) {
-        this.URL = URL;
-        this.USERNAME = USERNAME;
-        this.PASSWORD = PASSWORD;
-        this.makeConnectionSQL();
+        this.controlPSQL = new ControlPSQL(URL, USERNAME, PASSWORD);
+        this.conn = controlPSQL.makeConnection();
+        this.createBasicTable();
     }
 
-    public void makeConnectionSQL() {
-        try {
-            this.conn = DriverManager.getConnection(this.URL, this.USERNAME, this.PASSWORD);
-            Statement stmt = conn.createStatement();
-            String sql = "CREATE TABLE ITEMS " +
+    public ControlPSQL getControlPSQL() {
+        return controlPSQL;
+    }
+
+    public void createBasicTable() {
+        try (Statement st = this.conn.createStatement()) {
+            String query = "CREATE TABLE IF NOT EXISTS Items " +
                     "(id VARCHAR(20) UNIQUE, " +
                     " name VARCHAR(100), " +
                     " descrip VARCHAR(250), " +
                     " created DATE, " +
                     " comment VARCHAR(250))";
-
-            stmt = conn.createStatement();
-            stmt.executeUpdate(sql);
+            st.execute(query);
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    log.error(e.getMessage(), e);
-                }
-            }
         }
     }
 
-    public void closeConnectionSQL() {
-        if (this.conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                log.error(e.getMessage(), e);
-            }
-        }
-    }
 
     private String generateId() {
         return ((String.valueOf(System.currentTimeMillis() + RN.nextInt())));
     }
 
     protected Item add(Item item) {
-        try {
-            item.setId(this.generateId());
-            this.conn = DriverManager.getConnection(this.URL, this.USERNAME, this.PASSWORD);
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO items (id, name, descrip, created, comment) VALUES (?, ?, ?, ?, ?)");
+        String stmt = "INSERT INTO items (id, name, descrip, created, comment) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(stmt)) {
+            String id = this.generateId();
+            item.setId(id);
             ps.setString(1, item.getId());
             ps.setString(2, item.getName());
             ps.setString(3, item.getDesc());
             ps.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
             ps.setString(5, item.getComment());
             ps.executeUpdate();
-            ps.close();
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
         }
@@ -86,28 +65,24 @@ public class Tracker implements AutoCloseable {
 
 
     protected void update(Item newItem) {
-        try {
-            this.conn = DriverManager.getConnection(this.URL, this.USERNAME, this.PASSWORD);
-            PreparedStatement ps = conn.prepareStatement("UPDATE Items SET name = ?, descrip = ?, created = ?, comment = ? where id = ?");
+        String query = "UPDATE Items SET name = ?, descrip = ?, created = ?, comment = ? where id = ?";
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, newItem.getName());
             ps.setString(2, newItem.getDesc());
             ps.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
             ps.setString(4, newItem.getComment());
             ps.setString(5, newItem.getId());
             ps.executeUpdate();
-            ps.close();
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
         }
     }
 
     protected void delete(String id) {
-        try {
-            this.conn = DriverManager.getConnection(this.URL, this.USERNAME, this.PASSWORD);
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM Items WHERE id = ?");
-            ps.setString(1, id);
-            ps.executeUpdate();
-            ps.close();
+        String query = "DELETE FROM Items WHERE id = ?";
+        try (PreparedStatement prst = conn.prepareStatement(query)) {
+            prst.setString(1, id);
+            prst.executeUpdate();
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
         }
@@ -116,17 +91,14 @@ public class Tracker implements AutoCloseable {
 
     protected Item findById(String id) {
         Item result = null;
-        try {
-            this.conn = DriverManager.getConnection(this.URL, this.USERNAME, this.PASSWORD);
-            PreparedStatement st = conn.prepareStatement("SELECT * FROM items WHERE id = ?");
-            st.setString(1, id);
-            ResultSet rs = st.executeQuery();
+        String query = "SELECT * FROM items WHERE id = ?";
+        try (PreparedStatement prst = conn.prepareStatement(query)) {
+            prst.setString(1, id);
+            ResultSet rs = prst.executeQuery();
             while (rs.next()) {
                 result = new Item(rs.getString("name"), rs.getString("comment"), rs.getString("descrip"));
                 result.setId(rs.getString("id"));
             }
-            rs.close();
-            st.close();
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
         }
@@ -135,18 +107,15 @@ public class Tracker implements AutoCloseable {
 
     protected List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>();
-        try {
-            this.conn = DriverManager.getConnection(this.URL, this.USERNAME, this.PASSWORD);
-            PreparedStatement st = conn.prepareStatement("SELECT * FROM items WHERE name = ?");
-            st.setString(1, key);
-            ResultSet rs = st.executeQuery();
+        String query = "SELECT * FROM items WHERE name = ?";
+        try (PreparedStatement prst = conn.prepareStatement(query)) {
+            prst.setString(1, key);
+            ResultSet rs = prst.executeQuery();
             while (rs.next()) {
                 Item newItem = new Item(rs.getString("name"), rs.getString("comment"), rs.getString("descrip"));
                 newItem.setId(rs.getString("id"));
                 result.add(newItem);
             }
-            st.close();
-            rs.close();
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
         }
@@ -156,25 +125,19 @@ public class Tracker implements AutoCloseable {
 
     public List<Item> getAll() {
         List<Item> result = new ArrayList<>();
-        try {
-            this.conn = DriverManager.getConnection(this.URL, this.USERNAME, this.PASSWORD);
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM items");
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM items");
             while (rs.next()) {
                 Item newItem = new Item(rs.getString("name"), rs.getString("comment"), rs.getString("descrip"));
                 newItem.setId(rs.getString("id"));
                 result.add(newItem);
             }
-            st.close();
-            rs.close();
+
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
         }
-        return result;
+        return
+                result;
     }
+
 }
-
-
-
-
-

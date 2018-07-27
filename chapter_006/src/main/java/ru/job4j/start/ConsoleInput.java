@@ -3,7 +3,6 @@ import java.util.*;
 
 public class ConsoleInput implements Input {
 private Scanner scanner = new Scanner(System.in);
-
 public final String ask(String question) {
   System.out.println(question);
   return scanner.nextLine();

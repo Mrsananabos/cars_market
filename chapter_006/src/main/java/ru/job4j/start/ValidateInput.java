@@ -16,5 +16,4 @@ public int ask(String question, int[] range){
     } while (invalid);
     return  value;
 }
-
 }

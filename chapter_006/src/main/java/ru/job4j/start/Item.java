@@ -8,8 +8,6 @@ public class Item {
     private String desc;
     private String comments;
 
-
-
     public Item(String name, String desc, String comments) {
         this.name = name;
         this.desc = desc;

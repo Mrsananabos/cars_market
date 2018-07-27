@@ -36,7 +36,7 @@ public class MenuTracker {
 
     private Input input;
     private Tracker tracker;
-    private UserAction[] actions = new UserAction[7];
+    private UserAction[] actions = new UserAction[6];
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -64,7 +64,6 @@ public class MenuTracker {
         this.actions[3] = this.new DeleteItem("Delete Item", 3);
         this.actions[4] = this.new FindbyID("Find by ID", 4);
         this.actions[5] = this.new FindbyName("Find by Name", 5);
-        this.actions[6] = this.new ExitMenu("Exit", 6);
     }
 
     public void select(int key) {
@@ -194,31 +193,4 @@ public class MenuTracker {
             return inform();
         }
     }
-
-    private class ExitMenu extends  BaseAction {
-
-        public ExitMenu(String name, int key) {
-            super("Exit", 6);
-        }
-
-        @Override
-        public int key() {
-            return 6;
-        }
-
-        @Override
-        public void execute(Input input, Tracker tracker) {
-                String answer = input.ask("Are you really want to exit? (Y/N or y/n): ");
-                if ("y".equals(answer.toLowerCase())) {
-                    System.out.println("Exit program, bye!");
-                } else {
-                    System.out.println("Please, enter again.");
-                }
-            }
-
-
-
-    }
-
-
 }
