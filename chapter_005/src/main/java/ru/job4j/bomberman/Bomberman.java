@@ -1,12 +1,19 @@
 package ru.job4j.bomberman;
 
-public class Bomberman extends Player {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
-    public Bomberman(Board board) {
+public class Bomberman extends Player implements Runnable  {
+
+    List<String> steps = new ArrayList<>();
+
+    public Bomberman(Board board, List<String> steps) {
         super(board);
         super.source = super.board.getBoard()[0][0];
         super.source.getLock().lock();
         super.dest = null;
+        this.steps = steps;
     }
 
 
@@ -31,7 +38,22 @@ public class Bomberman extends Player {
         if ((newX > (board.getWeight() - 1) || (newX < 0) || (newY > (board.getHeight() - 1)) || (newY < 0))) {
             throw new ArrayIndexOutOfBoardException("Bomberman went out of bonds");
         }
-        return board.getBoard()[newY][newX];
+        super.dest = board.getBoard()[newY][newX];
+        return super.dest;
+    }
+
+
+    @Override
+    public void run() {
+      int numSteps = this.steps.size();
+      for (int i = 0; i < numSteps; i++) {
+          Cell nextStep = this.nextStep(this.steps.get(i));
+          boolean result = super.board.move(super.source, nextStep);
+          if (result) {
+              super.source = super.dest;
+          }
+      }
+
     }
 
 

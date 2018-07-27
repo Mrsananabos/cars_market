@@ -1,5 +1,8 @@
 package ru.job4j.bomberman;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Cell {
@@ -17,15 +20,12 @@ public class Cell {
         return x;
     }
 
-
     public int getY() {
         return y;
     }
 
-
     public ReentrantLock getLock() {
         return lock;
     }
-
 
 }

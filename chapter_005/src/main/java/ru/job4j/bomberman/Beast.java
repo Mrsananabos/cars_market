@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Beast extends Player implements Runnable {
     private boolean isLockFirstSorce = false;
+
     public Beast(Board board) {
         super(board);
     }
@@ -20,11 +21,13 @@ public class Beast extends Player implements Runnable {
             }
         }
         while (true) {
-            super.move(super.source, super.dest);
+            boolean locked = false;
+            locked = super.board.move(super.source, super.dest);
+            if (locked) {
+                super.source = super.dest;
+            }
             super.dest = board.generateCell();
-
         }
     }
-
 }
 
