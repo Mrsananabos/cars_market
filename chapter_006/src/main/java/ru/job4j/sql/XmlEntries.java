@@ -19,7 +19,6 @@ public class XmlEntries {
             this.entries = entries;
         }
     }
-
     @XmlRootElement
     public static class Field {
         private int field;

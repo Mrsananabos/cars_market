@@ -28,15 +28,26 @@ public class StoreSQL {
             }
             String query1 = "INSERT INTO entry(field) VALUES(?)";
             try (PreparedStatement ps = conn.prepareStatement(query1)) {
+                this.conn.setAutoCommit(false);
+
                 for (int i = 1; i <= numOfFields; i++) {
                     ps.setInt(1, i);
-                    ps.executeUpdate();
+                    ps.addBatch();
                 }
+                ps.executeBatch();
+                this.conn.commit();
+                this.conn.setAutoCommit(true);
             } catch (SQLException e) {
+                try {
+                    this.conn.rollback();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
                 e.printStackTrace();
             }
         }
     }
+
 
     public List<XmlEntries.Field> readDate() {
         List<XmlEntries.Field> result = new ArrayList<>();
@@ -52,4 +63,5 @@ public class StoreSQL {
         }
         return result;
     }
+
 }

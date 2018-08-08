@@ -7,6 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 
 public class ConvertXSQT {
+
     public void convert(String sourceXML, String pathScheme, String pathNewXML) throws TransformerException {
         TransformerFactory factory = TransformerFactory.newInstance();
         Source xslt = new StreamSource(new File(pathScheme));

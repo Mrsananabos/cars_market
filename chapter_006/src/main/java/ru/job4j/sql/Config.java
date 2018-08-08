@@ -5,13 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Config {
-    private  final String URL;
+    private final String URL;
     private Connection c = null;
 
     public Config(String url) {
         URL = url;
     }
-
     protected Connection getConn() {
         try {
             c = DriverManager.getConnection(URL);
@@ -20,7 +19,6 @@ public class Config {
         }
         return this.c;
     }
-
     protected void closeConnection() {
         try {
             this.c.close();

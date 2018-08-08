@@ -14,13 +14,13 @@ public class StoreSQLTest {
     public void show() {
         Config config = new Config("jdbc:sqlite:test1.db");
         StoreSQL s = new StoreSQL(config);
-        s.generate(1000);
+        s.generate(1000000);
         StoreXML sx = new StoreXML();
         ConvertXSQT convertXSQT = new ConvertXSQT();
         String root = "C:\\projects\\ashveytser\\chapter_006\\src\\main\\java\\ru\\job4j\\sql\\firstXML.xml";
         String rootXSL = "C:\\projects\\ashveytser\\chapter_006\\src\\main\\java\\ru\\job4j\\sql\\xslt.xsl";
         String newXml = "C:\\projects\\ashveytser\\chapter_006\\src\\main\\java\\ru\\job4j\\sql\\secondXML.xml";
-        int result = 0;
+        long result = 0;
         try {
             sx.convert(s.readDate(), root);
             convertXSQT.convert(root, rootXSL, newXml);
@@ -28,7 +28,7 @@ public class StoreSQLTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertThat(result, is(28));
+        assertThat(result, is(500000500000L));
         config.closeConnection();
     }
 

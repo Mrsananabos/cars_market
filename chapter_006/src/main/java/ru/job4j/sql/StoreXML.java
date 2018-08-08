@@ -6,6 +6,7 @@ import org.xml.sax.SAXException;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.parsers.*;
+import javax.xml.soap.Node;
 import java.io.IOException;
 import java.io.File;
 import java.util.List;
@@ -20,28 +21,17 @@ public class StoreXML {
         jaxbMarshaller.marshal(new XmlEntries.Entry(entries), file);
     }
 
-    public int sumField(String pathName) {
-        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-        Document doc = null;
-        try {
-            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-            doc = docBuilder.parse(pathName);
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        }
-        NodeList list = doc.getElementsByTagName("entries");
-        NodeList childNodes = list.item(0).getChildNodes();
-        int sum = 0;
-        for (int i = 0; i < childNodes.getLength(); i++) {
-            if (childNodes.item(i).getAttributes() != null) {
-                sum = sum + Integer.parseInt(childNodes.item(i).getAttributes().getNamedItem("field").getNodeValue());
-            }
-        }
-        System.out.println(sum);
-        return sum;
+    public long sumField(String pathName) {
+       SAXParserFactory parser = SAXParserFactory.newInstance();
+       Handler handler = new Handler();
+       try {
+           SAXParser saxParser = parser.newSAXParser();
+           saxParser.parse(new File(pathName), handler);
+       } catch (ParserConfigurationException | SAXException e) {
+           e.printStackTrace();
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+       return handler.getSum();
     }
 }
