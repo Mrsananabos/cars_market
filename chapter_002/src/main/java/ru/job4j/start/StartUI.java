@@ -4,29 +4,54 @@ import ru.job4j.start.MenuTracker;
 
 public class StartUI {
   private Input input;
+    int[] ranges;
+    Tracker tracker;
 
+    /**
+     * Метод заполнения массива <b>ranges</b>.
+     */
+    public void setRanges() {
+      ranges = new int[new MenuTracker(this.input, this.tracker).ranges.length];
+      for (int i = 0; i < ranges.length; i++) {
+        ranges[i] = i;
+      }
+    }
 
-  public StartUI(Input input) {
+    /**
+     * Конструктор класса StartUI с входным параметром (вводом пользователя)
+     * @param input ввод пользователя (целое число).
+     */
+    public StartUI(Input input, Tracker tracker) {
+      this.input = input;
+      this.tracker = tracker;
+    }
 
-    this.input = input;
-  }
+    /**
+     * Метод для выполнения действия над заявкой.
+     */
+    public void init() {
+      MenuTracker menu = new MenuTracker(this.input, this.tracker);
+      menu.fillActions();
+      setRanges();
 
-  public void init() {
-    Tracker tracker = new Tracker();
-    MenuTracker menu = new MenuTracker(this.input, tracker);
-    menu.fillActions();
-    do {                        // цикл, по которому спрашиваем у пользовтеля, выходить из программы или нет
-      menu.show();
-      menu.select(input.ask("select: ", menu.fillRanges()));
-    } while (!"y".equals(this.input.ask("Exit? y")));
-  }
+      do {
+        menu.show();
+        menu.select(this.input.ask("Select: ", ranges));
+      } while (!"y".equals(this.input.ask("Exit?(y): ")));
+      System.out.println("всё");
+    }
 
+    /**
+     * Метод запуска программы <b>Tracker</b>
+     * При помощи объекта типа <b>Input</b> (ввод пользователя)
+     * вызывается конструктор класса <b>StrartUI</b>
+     */
+    public static void main(String[] args) {
+      Input input = new ValidateInput();
+      Tracker tracker = new Tracker();
 
-  public static void main(String[] args) {
-    Input input = new ValidateInput();
-    new StartUI(input).init();
-
-  }
+      new StartUI(input, tracker).init();
+    }
 }
 
 

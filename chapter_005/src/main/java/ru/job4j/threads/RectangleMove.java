@@ -13,8 +13,9 @@ public class RectangleMove implements Runnable {
 
     @Override
     public void run() {
-
-        while (true) {
+        Thread currentThread = Thread.currentThread();
+        boolean a = true;
+        while (a) {
             this.rect.setX(this.rect.getX() + mainDirectionsX);
             this.rect.setY(this.rect.getY() + mainDirectionsY);
             if (this.rect.getY() < 0) {
@@ -29,11 +30,16 @@ public class RectangleMove implements Runnable {
             if (this.rect.getX() < 0) {
                 this.mainDirectionsX = 1;
             }
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                if (currentThread.isInterrupted()) {
+                        System.out.println("Поток прерван");
+                        a = false;
+                        break;
+                    }
+                }
+
             }
-        }
     }
 }

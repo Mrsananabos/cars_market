@@ -4,10 +4,10 @@ package ru.job4j.start;
 public class Item {
 
     private String id;
-    public String name;
-    public String desc;
-    public String created;
-    public String comments;
+    private String name;
+    private String desc;
+    private String created;
+    private String comments;
 
 
     public Item(String name, String desc, String created, String comments) {

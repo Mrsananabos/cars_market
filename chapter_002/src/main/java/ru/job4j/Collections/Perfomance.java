@@ -41,7 +41,7 @@ public class Perfomance {
     }
 
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Random random = new Random();
         Perfomance perfomance = new Perfomance();
         int numberOfStrings = 100 + random.nextInt(401); // количество случайных строк
@@ -62,5 +62,5 @@ public class Perfomance {
         System.out.println("Операция удаление элементов TreeSet: " + perfomance.delete(TrSet, RemovedStrings, ArrayOfStrings));
 
 
-    }
+    }*/
 }

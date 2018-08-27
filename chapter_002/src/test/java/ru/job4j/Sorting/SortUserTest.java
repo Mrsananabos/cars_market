@@ -1,6 +1,8 @@
 package ru.job4j.Sorting;
 
 import org.junit.Test;
+import ru.job4j.sorting.SortUser;
+import ru.job4j.sorting.User;
 
 import java.util.*;
 

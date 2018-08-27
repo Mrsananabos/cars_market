@@ -20,7 +20,7 @@ public class ExchangeCups {
             if (item.selectedType == DELETED) {
                 for (Item it : purchase.values()) {
                     if (it.getId() == item.getId() & it.book.equals(item.book)) {
-                        purchase.remove(item.getId(), item);
+                        purchase.remove(item.getId());
                         break;
                     }
                 }

@@ -1,15 +1,14 @@
-package ru.job4j.collections.list;
+package ru.job4j.threads;
 
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
-import ru.job4j.collections.generic.SimpleArray;
 
-import javax.swing.text.html.HTMLDocument;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
 @ThreadSafe
-public class IteratorOfDynContainer<T> implements Iterator {
+public class ThreadSafeIteratorOfArrayList implements Iterator {
 
     @GuardedBy("this")
     public Object[] container;
@@ -18,7 +17,7 @@ public class IteratorOfDynContainer<T> implements Iterator {
     private int modCount;
     private int[] expectedCount;
 
-    public IteratorOfDynContainer(Object[] cont, int[] expectedCount) {
+    public ThreadSafeIteratorOfArrayList(Object[] cont, int[] expectedCount) {
         this.container = cont;
         this.modCount = expectedCount[0];
         this.expectedCount = expectedCount;
@@ -52,3 +51,5 @@ public class IteratorOfDynContainer<T> implements Iterator {
     }
 
 }
+
+

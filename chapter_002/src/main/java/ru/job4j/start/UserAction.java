@@ -5,6 +5,6 @@ import ru.job4j.start.Tracker;
 
 public interface UserAction{
     int key(); //ключ, по которому пользоватль запрашивает действие
-    void execute(Input input, Tracker tracker);//выполнение основного метода, выбранного по ключу
-    String inform();//оообщает пользователю, что делает данный метод
+    void execute(Input input, Tracker tracker); //выполнение основного метода, выбранного по ключу
+    String inform(); //оообщает пользователю, что делает данный метод
 }

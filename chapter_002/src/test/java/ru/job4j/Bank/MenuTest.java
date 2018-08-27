@@ -1,13 +1,12 @@
-package ru.job4j.Bank;
+package ru.job4j.bank;
 
 import org.junit.Test;
-
 import java.util.*;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class MenuTest {
+
     @Test
     public void WhenAddNewUsersThenDelete() {
         Map<User, ArrayList<Account>> basa = new HashMap<>();

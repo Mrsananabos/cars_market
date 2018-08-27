@@ -24,7 +24,7 @@ public class ThreadingProblem {
             }
         });
 
-        thread1.start();;
+        thread1.start();
         thread2.start();
     }
 

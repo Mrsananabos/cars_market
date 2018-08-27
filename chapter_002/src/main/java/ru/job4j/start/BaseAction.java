@@ -2,8 +2,8 @@ package ru.job4j.start;
 
 public abstract class BaseAction implements UserAction {
 
-    public String name;
-    public int key;
+    private String name;
+    private int key;
 
     public BaseAction(String name, int key) {
         this.name = name;
