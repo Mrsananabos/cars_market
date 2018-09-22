@@ -8,4 +8,6 @@ public interface Store {
     void delete(int id);
     Collection<User> findAll();
     User findByid(int id);
+    boolean storeContainsKey(int key);
+    boolean storeIsEmpty();
 }

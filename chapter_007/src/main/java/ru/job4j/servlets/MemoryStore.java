@@ -26,10 +26,10 @@ public class MemoryStore implements Store {
 
     @Override
     public void update(User newUser) {
-            STORE.put(newUser.getId(), newUser);
-            newUser.updateCreateDate();
-            logger.info("User " + newUser.getName() + " updated");
-        }
+        STORE.put(newUser.getId(), newUser);
+        newUser.updateCreateDate();
+        logger.info("User " + newUser.getName() + " updated");
+    }
 
 
     @Override
@@ -56,11 +56,12 @@ public class MemoryStore implements Store {
         return rsl;
     }
 
+    @Override
     public boolean storeContainsKey(int key) {
         return STORE.containsKey(key);
     }
 
-
+    @Override
     public boolean storeIsEmpty() {
         return STORE.isEmpty();
     }
