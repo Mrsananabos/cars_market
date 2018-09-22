@@ -11,6 +11,7 @@ import ru.job4j.servlets.MemoryStore;
 import javax.jws.soap.SOAPBinding;
 
 public class ValidateService {
+
     public static final ValidateService INSTANCE = new ValidateService();
     private final Store logic = MemoryStore.getInstance();
     private static final Logger logger = Logger.getLogger(ValidateService.class);

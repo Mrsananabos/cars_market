@@ -3,6 +3,7 @@ package ru.job4j.servlets;
 import java.util.Collection;
 
 public interface Store {
+
     void add(User user);
     void update(User newUser);
     void delete(int id);

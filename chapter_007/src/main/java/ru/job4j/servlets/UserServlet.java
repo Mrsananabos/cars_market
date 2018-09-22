@@ -13,6 +13,7 @@ import java.util.List;
 import ru.job4j.servlets.User;
 
 public class UserServlet extends HttpServlet {
+
     private final ValidateService service = ValidateService.getInstance();
 
 
@@ -23,7 +24,6 @@ public class UserServlet extends HttpServlet {
         writer.append(service.findAll().toString());
         writer.flush();
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MemoryStore implements Store {
-
     private static final MemoryStore INSTANCE = new MemoryStore();
     private static final Map<Integer, User> STORE = new ConcurrentHashMap();
     private static Logger logger = Logger.getLogger(MemoryStore.class);
