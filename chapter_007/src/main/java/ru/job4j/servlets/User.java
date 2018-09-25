@@ -88,6 +88,6 @@ public class User {
                 ", login='" + login + '\'' +
                 ", email='" + email + '\'' +
                 ", createDate=" + createDate  +
-                '}'+ '\n';
+                '}';
     }
 }
