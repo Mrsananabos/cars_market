@@ -4,23 +4,29 @@ import java.util.Date;
 
 public class User {
     private int id;
-    private String name;
     private String login;
+    private String role;
     private String email;
+    private String password;
+    private String address;
     private Date createDate;
 
-    public User(int id, String name, String login, String email) {
+    public User(int id, String login, String role, String email, String password, String address) {
         this.id = id;
-        this.name = name;
         this.login = login;
+        this.role = role;
         this.email = email;
+        this.password = password;
+        this.address = address;
         this.createDate = new Date();
     }
 
-    public User(String name, String login, String email) {
-        this.name = name;
+    public User(String login, String role, String email, String password, String address) {
         this.login = login;
+        this.role = role;
         this.email = email;
+        this.password = password;
+        this.address = address;
         this.createDate = new Date();
     }
 
@@ -32,16 +38,24 @@ public class User {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public String getLogin() {
         return login;
     }
 
+    public String getRole() {
+        return role;
+    }
+
     public String getEmail() {
         return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public Date getCreateDate() {
@@ -51,6 +65,7 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
+
 
     public void updateCreateDate() {
         this.createDate = new Date();
@@ -64,18 +79,22 @@ public class User {
         User user = (User) o;
 
         if (id != user.id) return false;
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
         if (login != null ? !login.equals(user.login) : user.login != null) return false;
+        if (role != null ? !role.equals(user.role) : user.role != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (address != null ? !address.equals(user.address) : user.address != null) return false;
         return createDate != null ? createDate.equals(user.createDate) : user.createDate == null;
     }
 
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (login != null ? login.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
         return result;
     }
@@ -84,10 +103,12 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
                 ", login='" + login + '\'' +
+                ", role='" + role + '\'' +
                 ", email='" + email + '\'' +
-                ", createDate=" + createDate  +
+                ", password='" + password + '\'' +
+                ", address='" + address + '\'' +
+                ", createDate=" + createDate + '\'' +
                 '}';
     }
 }

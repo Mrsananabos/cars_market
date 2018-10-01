@@ -9,25 +9,27 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MemoryStore implements Store {
     private static final MemoryStore INSTANCE = new MemoryStore();
     private static final Map<Integer, User> STORE = new ConcurrentHashMap();
-    private static Logger logger = Logger.getLogger(MemoryStore.class);
-    private static int staticID = 0;
+    private static final Logger logger = Logger.getLogger(MemoryStore.class);
+    private static final int[] staticID = {0};
 
     public static MemoryStore getInstance() {
         return INSTANCE;
     }
 
     @Override
-    public void add(User user) {
-        user.setId(staticID++);
+    public void add(String login, String role, String email, String password, String address) {
+        User user = new User(login, role, email, password, address);
+        user.setId(staticID[0]++);
         STORE.put(user.getId(), user);
-        logger.info(user.getName() + " is added, ID = " + user.getId());
+        logger.info(user.getLogin() + " is added, ID = " + user.getId());
     }
 
     @Override
-    public void update(User newUser) {
+    public void update(int id, String login, String role, String email, String password, String address) {
+        User newUser = new User(id, login, role, email, password, address);
         STORE.put(newUser.getId(), newUser);
         newUser.updateCreateDate();
-        logger.info("User " + newUser.getName() + " updated");
+        logger.info("User with id " + newUser.getId() + " updated");
     }
 
 

@@ -15,36 +15,22 @@ public class UserUpdateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String id = req.getParameter("id");
-        User currentUser = service.findById(Integer.valueOf(id));
-        PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        writer.append("<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "<head>\n" +
-                "    <meta charset=\"UTF-8\">\n" +
-                "    <title></title>\n" +
-                "</head>\n" +
-                "<body>" +
-                "<form action='"+ req.getContextPath() + "/edit' method='post'>" +
-                "New name: <input type='text' name='name' value='" + currentUser.getName() + "'/><br>" +
-                "New login: <input type='text' name='login' value='" + currentUser.getLogin() + "'/><br>" +
-                "New email: <input type='text' name='email' value='" + currentUser.getEmail() + "'/><br>" +
-                " <input type='hidden' name='id' value='" + req.getParameter("id") + "'>" +
-                "<input type='submit' value='Add'>" +
-                "</form>" +
-                "</body>" +
-                "</html>");
-        writer.flush();
+        req.setAttribute("id", id);
+        req.getRequestDispatcher("edit.jsp").forward(req, resp);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String name = req.getParameter("name");
-        String login = req.getParameter("login");
-        String email = req.getParameter("email");
         int id =  Integer.valueOf(req.getParameter("id"));
-        User user = new User(id, name, login, email);
-        service.update(user);
+        String login = req.getParameter("login");
+        String role = req.getParameter("role");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+        String address = req.getParameter("address");
+        service.update(id, login, role, email, password, address);
+        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
     }
 
 

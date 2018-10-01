@@ -20,23 +20,24 @@ public class ValidateService {
         return INSTANCE;
     }
 
-    public void add(User user) {
-        if (user != null) {
-            logic.add(user);
+    public void add(String login, String role, String email, String password, String address) {
+        if (login.isEmpty() || role.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty()) {
+             logger.error("Fill in all the fields for add!");
         } else {
-            logger.error("User is empty!");
+            logic.add(login, role, email, password, address);
         }
     }
 
-    public void update(User newUser) {
-        if (newUser != null) {
-            if (logic.storeContainsKey(newUser.getId())){
-                logic.update(newUser);
-            } else {
-                logger.error("User with such ID doesn't exist!");
-            }
+    public void update(int id, String login, String role, String email, String password, String address) {
+        if (login.isEmpty() || role.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty()) {
+            logger.error("Fill in all the fields for edit!");
         } else {
-            logger.error("User for update is empty!");
+            if (logic.storeContainsKey(id)) {
+            logic.update(id, login, role, email, password, address);
+        } else {
+            logger.error("User with such ID doesn't exist!");
+        }
+
         }
     }
 
@@ -69,7 +70,7 @@ public class ValidateService {
         } catch (Exception e) {
             logger.error("User with such ID doesn't exist!");
         }
-        return  rsl;
+        return rsl;
     }
 
 

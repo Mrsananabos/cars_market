@@ -4,8 +4,8 @@ import java.util.Collection;
 
 public interface Store {
 
-    void add(User user);
-    void update(User newUser);
+    void add(String login, String role, String email, String password, String address);
+    void update(int id, String login, String role, String email, String password, String address);
     void delete(int id);
     Collection<User> findAll();
     User findByid(int id);
