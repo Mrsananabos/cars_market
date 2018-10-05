@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class UserUpdateServlet extends HttpServlet {
-
     private final ValidateService service = ValidateService.getInstance();
 
     @Override

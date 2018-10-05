@@ -12,7 +12,6 @@ import java.io.PrintWriter;
 public class UserCreateServlet extends HttpServlet{
     private final ValidateService service = ValidateService.getInstance();
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");

@@ -11,14 +11,14 @@ public class User {
     private String address;
     private Date createDate;
 
-    public User(int id, String login, String role, String email, String password, String address) {
+    public User(int id, String login, String role, String email, String password, String address, Date date) {
         this.id = id;
         this.login = login;
         this.role = role;
         this.email = email;
         this.password = password;
         this.address = address;
-        this.createDate = new Date();
+        this.createDate = date;
     }
 
     public User(String login, String role, String email, String password, String address) {

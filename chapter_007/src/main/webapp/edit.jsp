@@ -12,6 +12,7 @@
     <title>Edit User</title>
 </head>
 <body>
+
 <form action="<%=request.getContextPath()%>/edit" method="post">
     <%String id = request.getParameter("id");%>
     <%User currentUser = ValidateService.getInstance().findById(Integer.valueOf(id));%>
@@ -22,7 +23,7 @@
     New address:<br> <input type="text" name='address' value="<%=currentUser.getAddress()%>"/><br>
     <input type='hidden' name='id' value="<%=id%>">
     <input type='submit' value='Update user'>
-
 </form>
+
 </body>
 </html>

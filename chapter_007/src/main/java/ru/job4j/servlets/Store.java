@@ -10,5 +10,5 @@ public interface Store {
     Collection<User> findAll();
     User findByid(int id);
     boolean storeContainsKey(int key);
-    boolean storeIsEmpty();
+    void createUsersTable();
 }

@@ -8,8 +8,6 @@
 <body>
 
 <form action="<%=request.getContextPath()%>/create" method="post">
-
-
     Login:<br><input type="text" name='login'/><br>
     Password:<br><input type="text" name='password'/><br>
     Email:<br><input type="text" name='email'/><br>
