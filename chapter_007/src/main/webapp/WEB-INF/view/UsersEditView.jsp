@@ -14,7 +14,6 @@
     <title>Edit User</title>
 </head>
 <body>
-
 <form action="${pageContext.servletContext.contextPath}/edit" method="post">
     New login:<br><input type="text" name='login' value="${user.login}"/><br>
     New password:<br><input type="text" name='password' value="${user.password}"><br>

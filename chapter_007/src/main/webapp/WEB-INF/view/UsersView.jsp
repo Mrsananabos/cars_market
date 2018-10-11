@@ -11,7 +11,6 @@
     <title>Users</title>
 </head>
 <body>
-
 <form action="${pageContext.servletContext.contextPath}/create" method="post">
     Login:<br><input type="text" name='login'/><br>
     Password:<br><input type="text" name='password'/><br>

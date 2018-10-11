@@ -1,13 +1,10 @@
 package ru.job4j.servlets.model;
 
 import org.apache.log4j.Logger;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
-
 import org.apache.commons.dbcp2.BasicDataSource;
-
 import java.util.Date;
 import java.util.List;
 

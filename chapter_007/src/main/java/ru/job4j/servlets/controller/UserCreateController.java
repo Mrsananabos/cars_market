@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class UserCreateServlet extends HttpServlet{
+public class UserCreateController extends HttpServlet{
     private final ValidateService service = ValidateService.getInstance();
 
     @Override
