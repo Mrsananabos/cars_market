@@ -1,12 +1,17 @@
 package ru.job4j.servlets.model;
 
 import org.apache.log4j.Logger;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
+
 import org.apache.commons.dbcp2.BasicDataSource;
+
 import java.util.Date;
 import java.util.List;
+
+import static ru.job4j.servlets.model.Role.admin;
 
 public class DBStore implements Store {
     private static final BasicDataSource SOURCE = new BasicDataSource();
@@ -22,6 +27,7 @@ public class DBStore implements Store {
         SOURCE.setMaxIdle(10);
         SOURCE.setMaxOpenPreparedStatements(100);
         this.createUsersTable();
+        this.add("admin", "admin", "admin@bk.ru", "admin", "AD");
     }
 
     public static DBStore getInstance() {
@@ -91,7 +97,7 @@ public class DBStore implements Store {
                 User newUser = new User(
                         rs.getInt("id"),
                         rs.getString("login"),
-                        rs.getString("role"),
+                        Role.valueOf(rs.getString("role")),
                         rs.getString("email"),
                         rs.getString("password"),
                         rs.getString("address"),
@@ -120,7 +126,34 @@ public class DBStore implements Store {
                     rslUser = new User(
                             rs.getInt("id"),
                             rs.getString("login"),
-                            rs.getString("role"),
+                            Role.valueOf(rs.getString("role")),
+                            rs.getString("email"),
+                            rs.getString("password"),
+                            rs.getString("address"),
+                            rs.getDate("date"));
+                }
+            }
+
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+        }
+        return rslUser;
+    }
+
+    @Override
+    public User findByLogin(String login) {
+        User rslUser = null;
+        String queryFindByLogin = "SELECT * FROM users WHERE login = ?";
+        try (Connection connection = SOURCE.getConnection();
+             PreparedStatement ps = connection.prepareStatement(queryFindByLogin);
+        ) {
+            ps.setString(1, login);
+            try (ResultSet rs = ps.executeQuery();) {
+                while (rs.next()) {
+                    rslUser = new User(
+                            rs.getInt("id"),
+                            rs.getString("login"),
+                            Role.valueOf(rs.getString("role")),
                             rs.getString("email"),
                             rs.getString("password"),
                             rs.getString("address"),
@@ -143,15 +176,15 @@ public class DBStore implements Store {
              PreparedStatement ps = connection.prepareStatement(queryFindById);
         ) {
             ps.setInt(1, id);
-           try(ResultSet rs = ps.executeQuery();) {
-               while (rs.next()) {
-                   login = rs.getString("login");
-               }
+            try (ResultSet rs = ps.executeQuery();) {
+                while (rs.next()) {
+                    login = rs.getString("login");
+                }
 
-               if (login.isEmpty()) {
-                   rsl = false;
-               }
-           }
+                if (login.isEmpty()) {
+                    rsl = false;
+                }
+            }
 
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
@@ -179,6 +212,60 @@ public class DBStore implements Store {
         }
     }
 
+    @Override
+    public boolean isCredential(String login, String password) {
+        boolean rsl = false;
+        int id = -1;
+        String queryFindById = "SELECT id FROM users WHERE login = ? AND password = ?";
+        try (Connection connection = SOURCE.getConnection();
+             PreparedStatement ps = connection.prepareStatement(queryFindById);
+        ) {
+            ps.setString(1, login);
+            ps.setString(2, password);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    id = rs.getInt("id");
+                }
+            }
+            if (id > -1) {
+                rsl = true;
+            }
 
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+        }
 
+        return rsl;
+    }
+
+    @Override
+    public String findRoleByLogin(String login) {
+        String result = null;
+        String queryFindRoleByLogin = "SELECT role FROM users WHERE login = ?";
+        try (Connection connection = SOURCE.getConnection();
+             PreparedStatement ps = connection.prepareStatement(queryFindRoleByLogin);
+        ) {
+            ps.setString(1, login);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    result = rs.getString("role");
+                }
+            }
+
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+        }
+        return result;
+    }
+
+    @Override
+    public void createAdmin() {
+        try (Connection connection = SOURCE.getConnection();
+             Statement st = connection.createStatement()) {
+            String query = "";
+            st.execute(query);
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+        }
+    }
 }

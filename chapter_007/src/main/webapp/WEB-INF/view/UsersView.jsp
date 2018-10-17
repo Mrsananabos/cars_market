@@ -15,7 +15,11 @@
     Login:<br><input type="text" name='login'/><br>
     Password:<br><input type="text" name='password'/><br>
     Email:<br><input type="text" name='email'/><br>
-    Role:<br><input type="text" name='role'/><br>
+    Role:
+    <select name="role">
+        <option value="user">user</option>
+        <option value="admin">admin</option>
+    </select><br>
     Address:<br><input type="text" name='address'/><br>
     <input type='submit' value='Add'>
 </form>
@@ -54,7 +58,10 @@
     </tr>
     </c:forEach>
 </table>
-
+<br>
+<form action="${pageContext.servletContext.contextPath}/logout" method="get">
+    <input type='submit' value='Logout'>
+</form>
 
 </body>
 </html>

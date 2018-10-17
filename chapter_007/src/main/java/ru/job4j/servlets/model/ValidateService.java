@@ -69,6 +69,36 @@ public class ValidateService {
         return rsl;
     }
 
+    public User findByLogin(String login) {
+        User rsl = null;
+        if (!login.isEmpty()) {
+            rsl = logic.findByLogin(login);
+        } else {
+            logger.error("Login is empty");
+        }
+        return rsl;
+    }
+
+    public boolean isCredential(String login, String password) {
+        boolean result = false;
+        if (!login.isEmpty() && !password.isEmpty()) {
+            result = logic.isCredential(login, password);
+        } else {
+            logger.error("Empty fields are not allowed");
+        }
+        return result;
+    }
+
+    public String findRoleByLogin(String login) {
+        String result = null;
+        if (!login.isEmpty()) {
+            result = logic.findRoleByLogin(login);
+        } else {
+            logger.error("Login is empty");
+        }
+        return result;
+    }
+
 
 }
 

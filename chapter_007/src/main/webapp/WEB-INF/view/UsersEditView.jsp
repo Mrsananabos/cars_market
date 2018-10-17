@@ -13,6 +13,7 @@
 <head>
     <title>Edit User</title>
 </head>
+
 <body>
 <form action="${pageContext.servletContext.contextPath}/edit" method="post">
     New login:<br><input type="text" name='login' value="${user.login}"/><br>

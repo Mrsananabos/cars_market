@@ -6,13 +6,13 @@ public class User {
 
     private int id;
     private String login;
-    private String role;
+    private Role role;
     private String email;
     private String password;
     private String address;
     private Date createDate;
 
-    public User(int id, String login, String role, String email, String password, String address, Date date) {
+    public User(int id, String login, Role role, String email, String password, String address, Date date) {
         this.id = id;
         this.login = login;
         this.role = role;
@@ -22,7 +22,7 @@ public class User {
         this.createDate = date;
     }
 
-    public User(String login, String role, String email, String password, String address) {
+    public User(String login, Role role, String email, String password, String address) {
         this.login = login;
         this.role = role;
         this.email = email;
@@ -31,9 +31,6 @@ public class User {
         this.createDate = new Date();
     }
 
-    public static void main(String[] args) {
-        System.out.println(new Date());
-    }
 
     public int getId() {
         return this.id;
@@ -43,7 +40,7 @@ public class User {
         return login;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
@@ -102,14 +99,21 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", role='" + role + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", address='" + address + '\'' +
-                ", createDate=" + createDate + '\'' +
-                '}';
+        return "User{"
+                + "id=" + id
+                + ", login='" + login + '\''
+                + ", role='" + role + '\''
+                + ", email='" + email + '\''
+                + ", password='" + password + '\''
+                + ", address='" + address + '\''
+                + ", createDate=" + createDate + '\''
+                + '}';
     }
+
+    public static void main(String[] args) {
+        User user = new User("login", Role.admin, "login", "login", "login");
+        System.out.println(user.toString());
+    }
+
+
 }
