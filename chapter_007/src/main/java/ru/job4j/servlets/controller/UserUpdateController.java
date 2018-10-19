@@ -2,6 +2,7 @@ package ru.job4j.servlets.controller;
 
 import ru.job4j.servlets.model.Role;
 import ru.job4j.servlets.model.User;
+import ru.job4j.servlets.model.Validate;
 import ru.job4j.servlets.model.ValidateService;
 
 import javax.servlet.ServletException;
@@ -13,13 +14,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class UserUpdateController extends HttpServlet {
-    private final ValidateService service = ValidateService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         int id = Integer.valueOf(req.getParameter("id"));
-        req.setAttribute("user", service.findById(id));
+        req.setAttribute("user", ValidateService.getInstance().findById(id));
         req.getRequestDispatcher("/WEB-INF/view/UsersEditView.jsp").forward(req, resp);
     }
 
@@ -32,12 +32,12 @@ public class UserUpdateController extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String address = req.getParameter("address");
-        service.update(id, login, role, email, password, address);
+        ValidateService.getInstance().update(id, login, role, email, password, address);
         HttpSession session = req.getSession();
         Role curRole = Role.valueOf(String.valueOf(session.getAttribute("role")));
         switch (curRole) {
             case admin: {
-                req.setAttribute("users", service.findAll());
+                req.setAttribute("users", ValidateService.getInstance().findAll());
                 resp.sendRedirect(String.format("%s/", req.getContextPath()));
                 break;
             }
@@ -49,6 +49,7 @@ public class UserUpdateController extends HttpServlet {
         }
 
     }
+
 
 
 }

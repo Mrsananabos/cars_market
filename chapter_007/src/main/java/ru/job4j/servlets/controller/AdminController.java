@@ -1,5 +1,6 @@
 package ru.job4j.servlets.controller;
 
+import ru.job4j.servlets.model.Validate;
 import ru.job4j.servlets.model.ValidateService;
 
 import javax.servlet.ServletException;
@@ -10,11 +11,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class AdminController extends HttpServlet {
-    private final ValidateService service = ValidateService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("service", service);
+        req.setAttribute("service", ValidateService.getInstance());
         req.getRequestDispatcher("/WEB-INF/view/UsersView.jsp").forward(req, resp);
 }
 
@@ -22,7 +22,7 @@ public class AdminController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String id = req.getParameter("id");
-        service.delete(Integer.valueOf(id));
+        ValidateService.getInstance().delete(Integer.valueOf(id));
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
 
     }

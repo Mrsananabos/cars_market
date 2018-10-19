@@ -1,6 +1,7 @@
 package ru.job4j.servlets.controller;
 
 import com.sun.javafx.binding.StringFormatter;
+import ru.job4j.servlets.model.Validate;
 import ru.job4j.servlets.model.ValidateService;
 
 import javax.servlet.ServletException;
@@ -11,14 +12,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class UserCreateController extends HttpServlet{
-    private final ValidateService service = ValidateService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        final Validate service = ValidateService.getInstance();
         resp.setContentType("text/html");
         String login = req.getParameter("login");
         String role = req.getParameter("role");
