@@ -22,6 +22,7 @@ import static org.mockito.Mockito.when;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(ValidateService.class)
 public class UserCreateControllerTest {
+
     @Test
     public void whenAddUserThenStoreIt() throws ServletException, IOException {
         UserCreateController createController = new UserCreateController();

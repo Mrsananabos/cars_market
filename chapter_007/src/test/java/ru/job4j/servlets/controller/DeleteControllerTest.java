@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 @PrepareForTest(ValidateService.class)
 public class DeleteControllerTest {
     @Test
-    public void whenAddUserThenStoreIt() throws ServletException, IOException {
+    public void whenAddThreeUsersAndDeleteTwoThenStoreIt() throws ServletException, IOException {
         AdminController controller = new AdminController();
         ValidateStub validate = new ValidateStub();
         PowerMockito.mockStatic(ValidateService.class);

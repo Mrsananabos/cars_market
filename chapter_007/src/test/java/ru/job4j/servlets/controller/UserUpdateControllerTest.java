@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 @PrepareForTest(ValidateService.class)
 public class UserUpdateControllerTest {
     @Test
-    public void whenAddUserThenStoreIt() throws ServletException, IOException {
+    public void whenAddUserAndUpdateThenStoreIt() throws ServletException, IOException {
         UserUpdateController updateController = new UserUpdateController();
         ValidateStub validate = new ValidateStub();
         PowerMockito.mockStatic(ValidateService.class);
