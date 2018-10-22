@@ -1,5 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    function validate() {
+        if (document.forms["form_id"]["fn"].value == '') {
+            alert("Please, fill in the 'First name' field");
+            return false;
+        }
+        if (document.forms["form_id"]["ln"].value == '') {
+            alert("Please, fill in the 'Last name' field");
+            return false;
+        }
+        if (document.forms["form_id"]["description"].value == '') {
+            alert("Please, fill in the 'Description' field");
+            return false;
+        }
+    }
+</script>
 <head>
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
@@ -12,7 +28,7 @@
 <div class="container-fluid">
     <h2 style="text-align: center">My First Bootstrap Page</h2>
 </div>
-<form class="form-horizontal" action="/">
+<form class="form-horizontal" id="form_id">
 <div class="form-group">
     <label class="control-label col-sm-2" for="fn">First name:</label>
     <div class="col-sm-8">
@@ -43,7 +59,7 @@
 
     <div style="text-align: right" class="form-group">
         <div class="col-sm-offset-2 col-sm-8">
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-default" onclick="return validate();">Submit</button>
         </div>
     </div>
 </form>
