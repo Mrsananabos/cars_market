@@ -14,7 +14,20 @@
             alert("Please, fill in the 'Description' field");
             return false;
         }
+
     }
+
+    function addRow() {
+        var fn = $('#fn').val();
+        var ln = $('#ln').val();
+        var sex = $('#sex').val();
+        var desc = $('#description').val();
+
+        $('#table tr:last').after('<tr><td>' + fn +'</td><td>' + ln +'</td><td>' + sex +'</td><td>' + desc +'</td></tr>');
+    }
+
+
+
 </script>
 <head>
     <title>Bootstrap Example</title>
@@ -66,7 +79,7 @@
 
 <div class="container">
     <h3 style="text-align: center">The Table-striped class adds zebra-stripes to a table</h3>
-    <table class="table table-striped">
+    <table class="table table-striped" id='table'>
         <thead>
         <tr>
             <th>Firstname</th>
@@ -96,7 +109,8 @@
             <td>engineer</td>
         </tr>
         </tbody>
-    </table>
+    </table> 
+    <button style="margin-left: 83%" type="submit" onclick="addRow();">Add row</button>
 </div>
 
 </body>
