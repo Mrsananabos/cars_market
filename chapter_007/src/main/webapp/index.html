@@ -1,30 +1,60 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="en">
 <script>
-    function validate() {
-        if (document.forms["form_id"]["fn"].value == '') {
+    function validate(firstName, lastName, description) {
+        var result = true;
+        if (firstName == '') {
             alert("Please, fill in the 'First name' field");
-            return false;
+            result = false;
         }
-        if (document.forms["form_id"]["ln"].value == '') {
+        if (lastName == '') {
             alert("Please, fill in the 'Last name' field");
-            return false;
+            result = false;
         }
-        if (document.forms["form_id"]["description"].value == '') {
+        if (description == '') {
             alert("Please, fill in the 'Description' field");
-            return false;
+            result = false;
         }
 
+        return result;
+
     }
 
-    function addRow() {
-        var fn = $('#fn').val();
-        var ln = $('#ln').val();
-        var sex = $('#sex').val();
-        var desc = $('#description').val();
-
-        $('#table tr:last').after('<tr><td>' + fn +'</td><td>' + ln +'</td><td>' + sex +'</td><td>' + desc +'</td></tr>');
+    function addRow(person) {
+        $('#table tr:last').after('<tr><td>' + person.firstName +'</td><td>' + person.lastName +'</td><td>' + person.sex +'</td><td>' + person.description +'</td></tr>');
     }
+
+    function addIfValid() {
+        var firstName = $('#fn').val();
+        var lastName = $('#ln').val();
+        var sex = $("#sex").val();
+        var description = $('#description').val();
+        var result = false;
+        if (validate(firstName, lastName, description)) {
+            var person = createPerson(firstName, lastName, sex, description);
+            ajax(person);
+        }
+        return result;
+    }
+
+    function createPerson(firstName, lastName, sex, description) {
+        return {
+            firstName: firstName,
+            lastName: lastName,
+            sex: sex,
+            description: description
+        };
+    }
+
+    function ajax(person) {
+        $.ajax({
+            type: "post",
+            url: "./json",
+            dataType: "json",
+            data: JSON.stringify(person),
+            success: addRow(person)
+        });}
 
 
 
@@ -72,7 +102,7 @@
 
     <div style="text-align: right" class="form-group">
         <div class="col-sm-offset-2 col-sm-8">
-            <button type="submit" class="btn btn-default" onclick="return validate();">Submit</button>
+            <button type="submit" class="btn btn-default" onclick="return addIfValid();">Submit</button>
         </div>
     </div>
 </form>
@@ -96,21 +126,8 @@
             <td>teacher</td>
 
         </tr>
-        <tr>
-            <td>Ivan</td>
-            <td>Plehanov</td>
-            <td>Male</td>
-            <td>doctor</td>
-        </tr>
-        <tr>
-            <td>Oleg</td>
-            <td>Tennikov</td>
-            <td>Male</td>
-            <td>engineer</td>
-        </tr>
         </tbody>
-    </table> 
-    <button style="margin-left: 83%" type="submit" onclick="addRow();">Add row</button>
+    </table>
 </div>
 
 </body>
