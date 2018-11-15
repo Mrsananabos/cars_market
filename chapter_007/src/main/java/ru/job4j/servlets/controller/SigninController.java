@@ -1,52 +1,70 @@
 package ru.job4j.servlets.controller;
 
-import ru.job4j.servlets.model.Role;
-import ru.job4j.servlets.model.ValidateService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONObject;
+import ru.job4j.servlets.model.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import static ru.job4j.servlets.model.Role.admin;
 import static ru.job4j.servlets.model.Role.user;
 
 public class SigninController extends HttpServlet {
-    private final ValidateService service = ValidateService.getInstance();
 
+    private final Validate service = ValidateService.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/view/LoginView.jsp").forward(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/enter.html");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
-        if (service.isCredential(login, password)) {
-            moveRoleTo(login, req, resp);
+        HttpSession session = req.getSession();
+        Client client = new Client();
+        StringBuilder sb = new StringBuilder();
+        ObjectMapper mapper = new ObjectMapper();
+        String line;
+        try (BufferedReader reader = req.getReader()) {
+            line = reader.readLine();
+            sb.append(line);
+            client = mapper.readValue(sb.toString(), Client.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String login = client.getLogin();
+        String password = client.getPassword();
+        String answer = null;
+        int id = service.isCredential(login, password);
+        if (id >= 0)
+        {
+            String role = service.findRoleByLogin(login);
+            session.setAttribute("login", login);
+            session.setAttribute("role", role);
+            String idStr = String.valueOf(id);
+            answer = new JSONObject()
+                    .put("role", role)
+                    .put("id", idStr).toString();
+
         } else {
-            req.setAttribute("error", "Credential invalid");
-            doGet(req, resp);
+
+            answer = new JSONObject()
+                    .put("role", "error").toString();
+
         }
+        PrintWriter writer = new PrintWriter(resp.getOutputStream());
+        writer.append(answer);
+        writer.flush();
 
     }
 
-    private void moveRoleTo(String login, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
-        String role = service.findRoleByLogin(login);
-        session.setAttribute("login", login);
-        session.setAttribute("role", role);
-        Role curRole = Role.valueOf(role);
-        switch (curRole) {
-            case admin: response.sendRedirect(String.format("%s/", request.getContextPath()));
-            break;
 
-            case user: response.sendRedirect(String.format("%s/user", request.getContextPath()));
-            break;
-        }
-    }
+
 
 }

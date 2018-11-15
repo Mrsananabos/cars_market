@@ -6,31 +6,40 @@ public class User {
 
     private int id;
     private String login;
+    private String password;
     private Role role;
     private String email;
-    private String password;
-    private String address;
+    private String country;
+    private String region;
+    private String city;
     private Date createDate;
 
-    public User(int id, String login, Role role, String email, String password, String address, Date date) {
-        this.id = id;
-        this.login = login;
-        this.role = role;
-        this.email = email;
-        this.password = password;
-        this.address = address;
-        this.createDate = date;
+    public User() {
+        super();
     }
 
-    public User(String login, Role role, String email, String password, String address) {
+    public User(String login, String password, Role role, String email, String country, String region, String city) {
         this.login = login;
+        this.password = password;
         this.role = role;
         this.email = email;
-        this.password = password;
-        this.address = address;
+        this.country = country;
+        this.region = region;
+        this.city = city;
         this.createDate = new Date();
     }
 
+    public User(int id, String login, String password, Role role, String email, String country, String region, String city, java.sql.Date date) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.role = role;
+        this.email = email;
+        this.country = country;
+        this.region = region;
+        this.city = city;
+        this.createDate = date;
+    }
 
     public int getId() {
         return this.id;
@@ -52,8 +61,16 @@ public class User {
         return password;
     }
 
-    public String getAddress() {
-        return this.address;
+    public String getCountry() {
+        return country;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public String getCity() {
+        return city;
     }
 
     public Date getCreateDate() {
@@ -78,10 +95,12 @@ public class User {
 
         if (id != user.id) return false;
         if (login != null ? !login.equals(user.login) : user.login != null) return false;
-        if (role != null ? !role.equals(user.role) : user.role != null) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (address != null ? !address.equals(user.address) : user.address != null) return false;
+        if (role != user.role) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        if (country != null ? !country.equals(user.country) : user.country != null) return false;
+        if (region != null ? !region.equals(user.region) : user.region != null) return false;
+        if (city != null ? !city.equals(user.city) : user.city != null) return false;
         return createDate != null ? createDate.equals(user.createDate) : user.createDate == null;
     }
 
@@ -89,31 +108,28 @@ public class User {
     public int hashCode() {
         int result = id;
         result = 31 * result + (login != null ? login.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (country != null ? country.hashCode() : 0);
+        result = 31 * result + (region != null ? region.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
         result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "User{"
-                + "id=" + id
-                + ", login='" + login + '\''
-                + ", role='" + role + '\''
-                + ", email='" + email + '\''
-                + ", password='" + password + '\''
-                + ", address='" + address + '\''
-                + ", createDate=" + createDate + '\''
-                + '}';
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", email='" + email + '\'' +
+                ", country='" + country + '\'' +
+                ", region='" + region + '\'' +
+                ", city='" + city + '\'' +
+                ", createDate=" + createDate +
+                '}';
     }
-
-    public static void main(String[] args) {
-        User user = new User("login", Role.admin, "login", "login", "login");
-        System.out.println(user.toString());
-    }
-
-
 }

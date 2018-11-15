@@ -6,40 +6,39 @@ import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
-import ru.job4j.servlets.MemoryStore;
 
 import javax.jws.soap.SOAPBinding;
 
-public class ValidateService {
-
-    public static final ValidateService INSTANCE = new ValidateService();
+public class ValidateService implements Validate {
+    public static final Validate INSTANCE = new ValidateService();
     private final Store logic = DBStore.getInstance();
     private static final Logger logger = Logger.getLogger(ValidateService.class);
 
-    public static ValidateService getInstance() {
+    public static Validate getInstance() {
         return INSTANCE;
     }
 
-    public void add(String login, String role, String email, String password, String address) {
-        if (login.isEmpty() || role.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty()) {
+    public void add(String login, String password, String role, String email, String country, String region, String city) {
+        if (login.isEmpty() || role.isEmpty() || email.isEmpty() || password.isEmpty() || country.isEmpty()  || region.isEmpty() || city.isEmpty()) {
             logger.error("Fill in all the fields for add!");
         } else {
-            logic.add(login, role, email, password, address);
+            logic.add(login, password, role, email, country, region, city);
         }
     }
 
-    public void update(int id, String login, String role, String email, String password, String address) {
-        if (login.isEmpty() || role.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty()) {
+    public void update(int id, String login, String password, String role, String email, String country, String region, String city) {
+        if (login.isEmpty() || role.isEmpty() || email.isEmpty() || password.isEmpty() || country.isEmpty()  || region.isEmpty() || city.isEmpty()) {
             logger.error("Fill in all the fields for edit!");
         } else {
             if (logic.storeContainsKey(id)) {
-                logic.update(id, login, role, email, password, address);
+                logic.update(id, login, password, role, email, country, region, city);
             } else {
                 logger.error("User with such ID doesn't exist!");
             }
 
         }
     }
+
 
     public void delete(int id) {
         if (logic.storeContainsKey(id)) {
@@ -79,8 +78,8 @@ public class ValidateService {
         return rsl;
     }
 
-    public boolean isCredential(String login, String password) {
-        boolean result = false;
+    public int isCredential(String login, String password) {
+        int result = -1;
         if (!login.isEmpty() && !password.isEmpty()) {
             result = logic.isCredential(login, password);
         } else {
@@ -99,6 +98,41 @@ public class ValidateService {
         return result;
     }
 
+    @Override
+    public Collection<GeoPoint> getCountries() {
+        Collection<GeoPoint> rsl = new ArrayList<>();
+        rsl = logic.getCountries();
+        if (rsl.isEmpty()) {
+            logger.info("Countries not found");
+        }
+        return rsl;
+    }
+
+    @Override
+    public Collection<GeoPoint> getRegionsByCountry(String country) {
+        Collection<GeoPoint> rsl = new ArrayList<>();
+        if (country.isEmpty()) {
+            logger.info("Country is empty");
+        }
+        rsl = logic.getRegionsByCountry(country);
+        if (rsl.isEmpty()) {
+            logger.info("Regions not found");
+        }
+        return rsl;
+    }
+
+    @Override
+    public Collection<GeoPoint> getCitiesByRegion(String region) {
+        Collection<GeoPoint> rsl = new ArrayList<>();
+        if (region.isEmpty()) {
+            logger.info("Region is empty");
+        }
+        rsl = logic.getCitiesByRegion(region);
+        if (rsl.isEmpty()) {
+            logger.info("Cities not found");
+        }
+        return rsl;
+    }
 
 }
 

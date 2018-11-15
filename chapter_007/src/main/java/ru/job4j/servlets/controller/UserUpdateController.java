@@ -1,5 +1,6 @@
 package ru.job4j.servlets.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.job4j.servlets.model.Role;
 import ru.job4j.servlets.model.User;
 import ru.job4j.servlets.model.Validate;
@@ -10,46 +11,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 
 public class UserUpdateController extends HttpServlet {
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        int id = Integer.valueOf(req.getParameter("id"));
-        req.setAttribute("user", ValidateService.getInstance().findById(id));
-        req.getRequestDispatcher("/WEB-INF/view/UsersEditView.jsp").forward(req, resp);
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        int id = Integer.valueOf(req.getParameter("id"));
-        String login = req.getParameter("login");
-        String role = req.getParameter("role");
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
-        String address = req.getParameter("address");
-        ValidateService.getInstance().update(id, login, role, email, password, address);
-        HttpSession session = req.getSession();
-        Role curRole = Role.valueOf(String.valueOf(session.getAttribute("role")));
-        switch (curRole) {
-            case admin: {
-                req.setAttribute("users", ValidateService.getInstance().findAll());
-                resp.sendRedirect(String.format("%s/", req.getContextPath()));
-                break;
-            }
-            case user: {
-                resp.sendRedirect(String.format("%s/user", req.getContextPath()));
-                break;
-            }
-
+        resp.setContentType("text/html; charset=windows-1251");
+        User user = null;
+        StringBuilder sb = new StringBuilder();
+        ObjectMapper mapper = new ObjectMapper();
+        String line;
+        try (BufferedReader reader = req.getReader()) {
+            line = reader.readLine();
+            sb.append(line);
+            user = mapper.readValue(sb.toString(), User.class);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+        ValidateService.getInstance().update(user.getId(), user.getLogin(), user.getPassword(), user.getRole().name(), user.getEmail(), user.getCountry(), user.getRegion(), user.getCity());
     }
-
 
 
 }

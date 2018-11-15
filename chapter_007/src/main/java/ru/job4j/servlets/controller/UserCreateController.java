@@ -1,15 +1,20 @@
 package ru.job4j.servlets.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.sun.javafx.binding.StringFormatter;
-import ru.job4j.servlets.model.Validate;
-import ru.job4j.servlets.model.ValidateService;
+import ru.job4j.servlets.model.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class UserCreateController extends HttpServlet{
 
@@ -19,17 +24,19 @@ public class UserCreateController extends HttpServlet{
 
     @Override
      protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final Validate service = ValidateService.getInstance();
-        resp.setContentType("text/html");
-        String login = req.getParameter("login");
-        String role = req.getParameter("role");
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
-        String address = req.getParameter("address");
-        service.add(login, role, email, password, address);
-        resp.sendRedirect(String.format("%s/", req.getContextPath()));
+        resp.setContentType("text/html; charset=windows-1251");
+        User user = null;
+        StringBuilder sb = new StringBuilder();
+        ObjectMapper mapper = new ObjectMapper();
+        String line;
+        try (BufferedReader reader = req.getReader()) {
+            line = reader.readLine();
+            sb.append(line);
+           user = mapper.readValue(sb.toString(), User.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ValidateService.getInstance().add(user.getLogin(), user.getPassword(), user.getRole().name(), user.getEmail(), user.getCountry(), user.getRegion(), user.getCity());
     }
-
-
 
 }

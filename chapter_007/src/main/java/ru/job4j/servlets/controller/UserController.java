@@ -1,6 +1,7 @@
 package ru.job4j.servlets.controller;
 
 import ru.job4j.servlets.model.User;
+import ru.job4j.servlets.model.Validate;
 import ru.job4j.servlets.model.ValidateService;
 
 import javax.servlet.ServletException;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class UserController extends HttpServlet {
-    private final ValidateService service = ValidateService.getInstance();
+    private final Validate service = ValidateService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

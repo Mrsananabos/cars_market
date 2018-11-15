@@ -1,5 +1,7 @@
 package ru.job4j.servlets.controller;
 
+import com.google.gson.Gson;
+import ru.job4j.servlets.model.User;
 import ru.job4j.servlets.model.Validate;
 import ru.job4j.servlets.model.ValidateService;
 
@@ -9,22 +11,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class AdminController extends HttpServlet {
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("service", ValidateService.getInstance());
-        req.getRequestDispatcher("/WEB-INF/view/UsersView.jsp").forward(req, resp);
+        resp.setContentType("text/html; charset=windows-1251");
+        int id =  Integer.valueOf(req.getParameter("id"));
+        User user;
+        user = ValidateService.getInstance().findById(id);
+        Gson gson = new Gson();
+        String json = toString();
+        json = gson.toJson(user);
+        PrintWriter writer = new PrintWriter(resp.getOutputStream());
+        writer.append(json);
+        writer.flush();
 }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        String id = req.getParameter("id");
-        ValidateService.getInstance().delete(Integer.valueOf(id));
-        resp.sendRedirect(String.format("%s/", req.getContextPath()));
-
+        resp.setContentType("text/html; charset=windows-1251");
+        Collection<User> users = new ArrayList<>();
+        users = ValidateService.getInstance().findAll();
+        Gson gson = new Gson();
+        String json = toString();
+        json = gson.toJson(users);
+        PrintWriter writer = new PrintWriter(resp.getOutputStream());
+        writer.append(json);
+        writer.flush();
     }
 
 

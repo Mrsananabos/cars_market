@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(ValidateService.class)
 public class UserUpdateControllerTest {
-    @Test
+  /*  @Test
     public void whenAddUserAndUpdateThenStoreIt() throws ServletException, IOException {
         UserUpdateController updateController = new UserUpdateController();
         ValidateStub validate = new ValidateStub();
@@ -48,5 +48,5 @@ public class UserUpdateControllerTest {
         validate.findAll();
         assertThat(validate.findAll().iterator().next().getLogin(), is("katya"));
     }
-
+*/
 }

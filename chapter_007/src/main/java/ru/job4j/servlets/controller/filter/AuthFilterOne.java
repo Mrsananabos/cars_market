@@ -23,10 +23,12 @@ public class AuthFilterOne implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
-        if (request.getRequestURI().contains("/signin")) {
+        System.out.println(request.getRequestURI());
+        if (request.getRequestURI().contains("/signin") || request.getRequestURI().contains("/enter.html")) {
             chain.doFilter(req, resp);
         } else {
             HttpSession session = request.getSession();
+            System.out.println("ROLE " + session.getAttribute("role"));
             if (session.getAttribute("role") == null) {
                 ((HttpServletResponse) resp).sendRedirect(String.format("%s/signin", request.getContextPath()));
                 return;
