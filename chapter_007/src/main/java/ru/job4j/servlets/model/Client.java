@@ -1,6 +1,7 @@
 package ru.job4j.servlets.model;
 
 public class Client {
+
     private String login;
     private String password;
 

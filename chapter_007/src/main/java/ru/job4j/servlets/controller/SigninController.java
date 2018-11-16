@@ -19,6 +19,7 @@ import static ru.job4j.servlets.model.Role.user;
 public class SigninController extends HttpServlet {
 
     private final Validate service = ValidateService.getInstance();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.sendRedirect(req.getContextPath() + "/enter.html");

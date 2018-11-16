@@ -8,9 +8,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 
-//    $(document).ready(loadCountries);
-
-
     $(function () {
         $('#country').change(function () {
             var code = $(this).val();
@@ -30,14 +27,14 @@
     });
 
 
-
-
     $(function () {
         var url = document.location.href;
         var id = url.split("id=")[1];
         getUser(id);
         loadCountries();
     });
+
+
 
     function loadCountries() {
         $.ajax({

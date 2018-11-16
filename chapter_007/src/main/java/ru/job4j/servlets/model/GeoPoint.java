@@ -1,6 +1,7 @@
 package ru.job4j.servlets.model;
 
 public class GeoPoint {
+
     private String id;
     private String name;
 

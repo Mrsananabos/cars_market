@@ -17,6 +17,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 
 public class UserUpdateController extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     }

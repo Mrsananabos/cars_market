@@ -3,6 +3,7 @@ package ru.job4j.servlets.model;
 import java.util.Collection;
 
 public interface Validate {
+
     void add(String login, String password, String role, String email, String country, String region, String city);
     void update(int id, String login, String password, String role, String email, String country, String region, String city);
     void delete(int id);

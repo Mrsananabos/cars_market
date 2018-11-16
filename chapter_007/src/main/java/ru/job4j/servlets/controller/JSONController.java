@@ -1,13 +1,8 @@
 package ru.job4j.servlets.controller;
 
-<<<<<<< HEAD
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.job4j.servlets.model.*;
-=======
-import ru.job4j.servlets.model.MapStore;
-import ru.job4j.servlets.model.Person;
->>>>>>> origin/master
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.ServletException;
@@ -16,19 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-<<<<<<< HEAD
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.*;
-=======
-import java.util.Map;
->>>>>>> origin/master
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class JSONController extends HttpServlet {
-<<<<<<< HEAD
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=windows-1251");
@@ -64,15 +53,6 @@ public class JSONController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-=======
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/chapter_007/index.html");
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
->>>>>>> origin/master
         Person person = null;
         StringBuilder sb = new StringBuilder();
         ObjectMapper mapper = new ObjectMapper();
@@ -85,14 +65,10 @@ public class JSONController extends HttpServlet {
             e.printStackTrace();
         }
         MapStore.getInstance().add(person);
-<<<<<<< HEAD
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         writer.append(mapper.writeValueAsString("Я пришёл с SERVLETa"));
         writer.flush();
     }
 
 
-=======
-    }
->>>>>>> origin/master
 }

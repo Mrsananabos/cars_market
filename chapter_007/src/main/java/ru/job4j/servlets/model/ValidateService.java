@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import javax.jws.soap.SOAPBinding;
 
 public class ValidateService implements Validate {
+
     public static final Validate INSTANCE = new ValidateService();
     private final Store logic = DBStore.getInstance();
     private static final Logger logger = Logger.getLogger(ValidateService.class);

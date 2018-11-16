@@ -91,7 +91,7 @@ public class DBStore implements Store {
         try (Connection connection = SOURCE.getConnection();
              Statement statement = connection.createStatement();
         ) {
-            ResultSet rs = statement.executeQuery("SELECT * FROM users");
+            ResultSet rs = statement.executeQuery("SELECT * FROM users ORDER BY id");
             while (rs.next()) {
                 User newUser = new User(
                         rs.getInt("id"),
