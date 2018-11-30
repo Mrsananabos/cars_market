@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.sun.javafx.binding.StringFormatter;
 import ru.job4j.servlets.model.*;
+import ru.job4j.servlets.model.service.ValidateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +38,7 @@ public class UserCreateController extends HttpServlet{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ValidateService.getInstance().add(user.getLogin(), user.getPassword(), user.getRole().name(), user.getEmail(), user.getCountry(), user.getRegion(), user.getCity());
+        ValidateService.getInstance().add(user.getLogin(), user.getPassword(), user.getRole().name(), user.getEmail(), user.getCountry(), user.getCity());
     }
 
 }

@@ -11,16 +11,7 @@
     $(function () {
         $('#country').change(function () {
             var code = $(this).val();
-            loadRegions(code);
-
-        });
-
-    });
-
-    $(function () {
-        $('#region').change(function () {
-            var regi = $(this).val();
-            loadCities(regi)
+            loadCities(code);
 
         });
 
@@ -53,36 +44,13 @@
     }
 
 
-    function loadRegions(country) {
-        $.ajax({
-            url: "./json",
-            method: "get",
-            data: {
-                action: 'region',
-                country: country
-            },
-            dataType: "json",
-            complete:
-                function (data) {
-                    var json = JSON.parse(data.responseText);
-                    var select = $("#region");
-                    select.empty();
-                    select.append("<option value='zero'></option>");
-                    for (var i = 0; i < json.length; i++) {
-                        select.append('<option value=' + json[i]['id'] + '>' + json[i]['name'] + '</option>');
-                    }
-                }
-
-        })
-    }
-
-    function loadCities(region) {
+    function loadCities(country) {
         $.ajax({
             url: "./json",
             method: "get",
             data: {
                 action: 'city',
-                region: region
+                country: country
             },
             dataType: "json",
             complete:
@@ -123,7 +91,7 @@
     }
 
 
-function validate(login, password, email, country, region, city) {
+function validate(login, password, email, country, city) {
     var result = true;
     if (login == '') {
         alert("Please, fill in the 'Login' field");
@@ -135,10 +103,6 @@ function validate(login, password, email, country, region, city) {
     }
     if (country == '') {
         alert("Please, fill in the 'Country' field");
-        result = false;
-    }
-    if (region == '') {
-        alert("Please, fill in the 'Region' field");
         result = false;
     }
     if (city == '') {
@@ -154,7 +118,7 @@ function validate(login, password, email, country, region, city) {
 
 }
 
-function createUser(id, login, password, role, email, country, region, city) {
+function createUser(id, login, password, role, email, country, city) {
     return {
         id: id,
         login: login,
@@ -162,7 +126,6 @@ function createUser(id, login, password, role, email, country, region, city) {
         role: role,
         email: email,
         country: country,
-        region: region,
         city: city
     };
 }
@@ -175,10 +138,9 @@ function createUser(id, login, password, role, email, country, region, city) {
         var role = $('#role option:selected').text();
         var email = $('#email').val();
         var country = $('#country option:selected').text();
-        var region = $('#region option:selected').text();
         var city = $('#city option:selected').text();
-        if (validate(login, password, email, country, region, city)) {
-            var newUser = createUser(id, login, password, role, email, country, region, city);
+        if (validate(login, password, email, country, city)) {
+            var newUser = createUser(id, login, password, role, email, country, city);
             sendTo(newUser);
         }
     }
@@ -194,6 +156,10 @@ function sendTo(newUser) {
         }
     });
 }
+
+    function back() {
+        window.location.href = "http://localhost:8080/chapter_007/admin.html";
+    }
 </script>
 </head>
 <body>
@@ -233,17 +199,10 @@ function sendTo(newUser) {
                 <option value="zero"></option>
             </select>
         </div>
-        <label class="control-label col-xs-1" for="region">Region:</label>
-        <div class="col-sm-2">
-            <select name="region" class="form-control" id="region" style="color: darkgreen">
-                <option value="zero"></option>
-            </select>
-        </div>
         <label class="control-label col-xs-1" for="city">City:</label>
         <div class="col-sm-2">
-            <select name="region" class="form-control" id="city" style="color: darkgreen">
+            <select name="city" class="form-control" id="city" style="color: darkgreen">
                 <option value="zero"></option>
-
             </select>
         </div>
     </div>
@@ -251,6 +210,7 @@ function sendTo(newUser) {
     <div style="text-align: right" class="form-group">
         <div class="col-sm-offset-7 col-sm-2">
             <button class="btn btn-success" type="button" class="btn btn-default" onclick="update()">Update</button>
+            <button class="btn btn-success" type="button" class="btn btn-default" onclick="back()">Back</button>
         </div>
     </div>
     <div id="msg"  style="background-color: limegreen"></div>

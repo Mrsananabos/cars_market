@@ -2,7 +2,6 @@
 <!--suppress ALL -->
 <html lang="en">
 <script>
-
     function signin() {
         var login = $('#login').val();
         var password = $('#password').val();
@@ -11,8 +10,6 @@
             sendTo(client)
         }
     }
-
-
     function validate(login, password) {
         var result = true;
         if (login == '') {
@@ -25,15 +22,12 @@
         }
         return result;
     }
-
     function createClient(login, password) {
         return {
             login: login,
             password: password,
         };
     }
-
-
     function sendTo(client) {
         $.ajax({
             type: "post",
@@ -54,8 +48,6 @@
                 }
             }
         });}
-
-
 </script>
 <head>
     <title>Signin</title>

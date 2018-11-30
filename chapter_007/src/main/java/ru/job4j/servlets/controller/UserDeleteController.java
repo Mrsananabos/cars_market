@@ -1,6 +1,6 @@
 package ru.job4j.servlets.controller;
 
-import ru.job4j.servlets.model.ValidateService;
+import ru.job4j.servlets.model.service.ValidateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

@@ -3,6 +3,8 @@ package ru.job4j.servlets.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 import ru.job4j.servlets.model.*;
+import ru.job4j.servlets.model.service.Validate;
+import ru.job4j.servlets.model.service.ValidateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +15,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import static ru.job4j.servlets.model.Role.admin;
-import static ru.job4j.servlets.model.Role.user;
-
 public class SigninController extends HttpServlet {
 
     private final Validate service = ValidateService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect(req.getContextPath() + "/enter.html");
+        req.getRequestDispatcher("/enter.html").forward(req, resp);
     }
 
     @Override
@@ -62,7 +61,6 @@ public class SigninController extends HttpServlet {
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         writer.append(answer);
         writer.flush();
-
     }
 
 

@@ -2,8 +2,7 @@ package ru.job4j.servlets.controller;
 
 import com.google.gson.Gson;
 import ru.job4j.servlets.model.User;
-import ru.job4j.servlets.model.Validate;
-import ru.job4j.servlets.model.ValidateService;
+import ru.job4j.servlets.model.service.ValidateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +13,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class AdminController extends HttpServlet {
+public class UsersController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

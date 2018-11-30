@@ -1,20 +1,15 @@
 package ru.job4j.servlets.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ru.job4j.servlets.model.Role;
 import ru.job4j.servlets.model.User;
-import ru.job4j.servlets.model.Validate;
-import ru.job4j.servlets.model.ValidateService;
+import ru.job4j.servlets.model.service.ValidateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Date;
 
 public class UserUpdateController extends HttpServlet {
 
@@ -36,7 +31,7 @@ public class UserUpdateController extends HttpServlet {
             e.printStackTrace();
         }
 
-        ValidateService.getInstance().update(user.getId(), user.getLogin(), user.getPassword(), user.getRole().name(), user.getEmail(), user.getCountry(), user.getRegion(), user.getCity());
+        ValidateService.getInstance().update(user.getId(), user.getLogin(), user.getPassword(), user.getRole().name(), user.getEmail(), user.getCountry(), user.getCity());
     }
 
 

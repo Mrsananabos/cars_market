@@ -9,7 +9,6 @@ public class User {
     private Role role;
     private String email;
     private String country;
-    private String region;
     private String city;
     private Date createDate;
 
@@ -17,25 +16,23 @@ public class User {
         super();
     }
 
-    public User(String login, String password, Role role, String email, String country, String region, String city) {
+    public User(String login, String password, Role role, String email, String country, String city) {
         this.login = login;
         this.password = password;
         this.role = role;
         this.email = email;
         this.country = country;
-        this.region = region;
         this.city = city;
         this.createDate = new Date();
     }
 
-    public User(int id, String login, String password, Role role, String email, String country, String region, String city, java.sql.Date date) {
+    public User(int id, String login, String password, Role role, String email, String country, String city, java.sql.Date date) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.role = role;
         this.email = email;
         this.country = country;
-        this.region = region;
         this.city = city;
         this.createDate = date;
     }
@@ -62,10 +59,6 @@ public class User {
 
     public String getCountry() {
         return country;
-    }
-
-    public String getRegion() {
-        return region;
     }
 
     public String getCity() {
@@ -98,7 +91,6 @@ public class User {
         if (role != user.role) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
         if (country != null ? !country.equals(user.country) : user.country != null) return false;
-        if (region != null ? !region.equals(user.region) : user.region != null) return false;
         if (city != null ? !city.equals(user.city) : user.city != null) return false;
         return createDate != null ? createDate.equals(user.createDate) : user.createDate == null;
     }
@@ -111,7 +103,6 @@ public class User {
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (country != null ? country.hashCode() : 0);
-        result = 31 * result + (region != null ? region.hashCode() : 0);
         result = 31 * result + (city != null ? city.hashCode() : 0);
         result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
         return result;
@@ -126,7 +117,6 @@ public class User {
                 ", role=" + role +
                 ", email='" + email + '\'' +
                 ", country='" + country + '\'' +
-                ", region='" + region + '\'' +
                 ", city='" + city + '\'' +
                 ", createDate=" + createDate +
                 '}';

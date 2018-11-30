@@ -8,7 +8,6 @@ public class Person {
     private String sex;
     private String description;
     private String country;
-    private String region;
     private String city;
 
 
@@ -16,13 +15,12 @@ public class Person {
         super();
     }
 
-    public Person(String firstName, String lastName, String sex, String description, String country, String region, String city) {
+    public Person(String firstName, String lastName, String sex, String description, String country, String city) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.sex = sex;
         this.description = description;
         this.country = country;
-        this.region = region;
         this.city = city;
     }
 
@@ -66,14 +64,6 @@ public class Person {
         this.country = country;
     }
 
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
     public String getCity() {
         return city;
     }
@@ -94,7 +84,6 @@ public class Person {
         if (sex != null ? !sex.equals(person.sex) : person.sex != null) return false;
         if (description != null ? !description.equals(person.description) : person.description != null) return false;
         if (country != null ? !country.equals(person.country) : person.country != null) return false;
-        if (region != null ? !region.equals(person.region) : person.region != null) return false;
         return city != null ? city.equals(person.city) : person.city == null;
     }
 
@@ -105,7 +94,6 @@ public class Person {
         result = 31 * result + (sex != null ? sex.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (country != null ? country.hashCode() : 0);
-        result = 31 * result + (region != null ? region.hashCode() : 0);
         result = 31 * result + (city != null ? city.hashCode() : 0);
         return result;
     }
@@ -118,7 +106,6 @@ public class Person {
                 ", sex='" + sex + '\'' +
                 ", description='" + description + '\'' +
                 ", country='" + country + '\'' +
-                ", region='" + region + '\'' +
                 ", city='" + city + '\'' +
                 '}';
     }
