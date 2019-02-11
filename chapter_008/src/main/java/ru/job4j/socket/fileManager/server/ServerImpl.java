@@ -19,7 +19,7 @@ public class ServerImpl {
     }
 
     public void start() {
-        try (DataOutputStream out = new DataOutputStream(this.socket.getOutputStream());
+        try (PrintWriter out = new PrintWriter(this.socket.getOutputStream(), true);
              BufferedReader in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()))) {
             String ask;
             do {
@@ -28,27 +28,26 @@ public class ServerImpl {
                 System.out.println(ask);
                 switch (ask) {
                     case ("goHome"): {
-                        System.out.println(this.getList(this.homePath));
-                        out.writeBytes(this.getList(this.homePath));
+                        out.println(this.getList(this.homePath));
                         this.currentDirectory = this.homePath;
                         break;
                     }
-//                    case ("goTo"): {
-//                        String path = in.readLine();
-//                        out.writeUTF(this.goTo(path));
-//                        break;
-//                    }
-//                    case ("download"): {
-//                        String name = in.readUTF();
-//                        out.writeUTF(this.downloadFile(name));
-//                        break;
-//                    }
-//                    case ("push"): {
-//                        String name = in.readUTF();
-//                        String text = in.readUTF();
-//                        out.writeUTF(this.pushFile(name, text));
-//                        break;
-//                    }
+                    case ("goTo"): {
+                        String path = in.readLine();
+                        out.println(this.goTo(path));
+                        break;
+                    }
+                    case ("download"): {
+                        String name = in.readLine();
+                        out.println(this.downloadFile(name));
+                        break;
+                    }
+                    case ("push"): {
+                        String name = in.readLine();
+                        String text = in.readLine();
+                        out.println(this.pushFile(name, text));
+                        break;
+                    }
                 }
                 if ("exit".equals(ask)) {
                     this.working = false;
@@ -64,19 +63,18 @@ public class ServerImpl {
         StringBuilder string = new StringBuilder();
         File file = new File(path);
         String[] files = file.list();
+
         if (files != null) {
             if (files.length == 0) {
-                string.append("Directory is empty");
+                string.append("Directory is empty!\r\n");
             } else {
                 Stream.of(files).forEach(nameFile -> {
-                            string.append(nameFile);
-                            string.append("\r\n");
-                        }
-                );
-                string.append("!!!");
+                    string.append(nameFile);
+                    string.append(System.getProperty("line.separator"));
+                });
             }
         } else {
-            string.append("Error!");
+            string.append("Error!\r\n");
         }
         return string.toString();
     }
@@ -89,7 +87,7 @@ public class ServerImpl {
             this.currentDirectory = toDirect;
             rsl = getList(this.currentDirectory);
         } else {
-            rsl = path + " is not directory!";
+            rsl = path + " is not directory!\r\n";
         }
         return rsl;
     }
@@ -108,7 +106,7 @@ public class ServerImpl {
                 e.printStackTrace();
             }
         } else {
-            result.append("Loading error");
+            result.append("Loading error\r\n");
         }
         return result.toString();
     }
@@ -120,7 +118,7 @@ public class ServerImpl {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "success";
+        return "success\r\n";
     }
 
 

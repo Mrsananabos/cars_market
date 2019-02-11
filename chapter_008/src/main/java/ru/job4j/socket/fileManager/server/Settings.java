@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class Settings {
+
     private static final Settings INSTANCE = new Settings();
     private final Properties properties = new Properties();
 

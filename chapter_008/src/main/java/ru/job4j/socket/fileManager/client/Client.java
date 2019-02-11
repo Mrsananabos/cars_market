@@ -14,15 +14,23 @@ public class Client {
 
     public Client(Socket socket) {
         this.socket = socket;
+        this.showInstruction();
     }
 
+    private void showInstruction() {
+        String preview = "Hello, user.\n" +
+                "Enter \"goHome\" to see the list of files in the main directory\n" +
+                "Enter \"goTo\" and then the directory to see the list of files\n" +
+                "Enter \"download\" and then name of file with extension to see contents\n" +
+                "Enter \"push\" and then name with extension and text of new file to create";
+        System.out.println(preview);
+    }
     public void start() {
         try (PrintWriter out = new PrintWriter(this.socket.getOutputStream(), true);
              BufferedReader in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
              Scanner console = new Scanner(System.in)) {
             String action;
             String outString;
-
             String answer;
             do {
                 action = console.nextLine();
@@ -32,16 +40,18 @@ public class Client {
                         System.out.println("Enter name of directory");
                         outString = console.nextLine();
                         out.println(outString);
-                        answer = in.readLine();
-                        System.out.println(answer);
+                        while (!(answer = in.readLine()).isEmpty()) {
+                            System.out.println(answer);
+                        }
                         break;
                     }
                     case("download"): {
                         System.out.println("Enter name of file for download");
                         outString = console.nextLine();
                         out.println(outString);
-                        answer = in.readLine();
-                        System.out.println(answer);
+                        while (!(answer = in.readLine()).isEmpty()) {
+                            System.out.println(answer);
+                        }
                         break;
                     }
                     case("push"): {
@@ -51,15 +61,15 @@ public class Client {
                         System.out.println("Enter text");
                         outString = console.nextLine();
                         out.println(outString);
-                        answer = in.readLine();
-                        System.out.println(answer);
+                        while (!(answer = in.readLine()).isEmpty()) {
+                            System.out.println(answer);
+                        }
                         break;
                     }
                     case ("goHome"): {
                         while (!(answer = in.readLine()).isEmpty()) {
                             System.out.println(answer);
                         }
-                        System.out.println(888);
                         break;
                     }
                     case ("exit"): {
