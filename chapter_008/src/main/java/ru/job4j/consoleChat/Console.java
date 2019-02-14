@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 import static java.lang.System.in;
 
 public class Console {
-    private static final Logger LOGGER = LogManager.getLogger(ru.job4j.consoleChat.PhraseProducer.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(Console.class);
     private static final Marker USER = MarkerManager.getMarker("USER");
     private static final Marker BOT = MarkerManager.getMarker("BOT");
     private static final String TEMPLATE_MSG = "{} : {}";
