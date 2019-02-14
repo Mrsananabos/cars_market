@@ -1,0 +1,20 @@
+<Configuration>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5p %c{1}:%L - %m%n" />
+        </Console>
+        <File name="file" fileName = "output.log" bufferedIO = "false" advertiseURI = "C:/projects/ashveytser/chapter_008/src/main/resources/log/out.log" advertise = "true">
+            <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5p %c{1}:%L - %m%n"/>
+            <Filters>
+                <MarkerFilter marker="USER" onMatch="ACCEPT" onMismatch="DENY"/>
+                <MarkerFilter marker="BOT" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="trace">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="file" />
+        </Root>
+    </Loggers>
+</Configuration>
