@@ -1,4 +1,4 @@
-package ru.job4j.Generalizations;
+package ru.job4j.generalizations;
 
 import org.junit.Test;
 

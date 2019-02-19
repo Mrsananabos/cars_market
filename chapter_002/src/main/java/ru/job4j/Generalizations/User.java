@@ -1,4 +1,4 @@
-package ru.job4j.Generalizations;
+package ru.job4j.generalizations;
 
 public class User{
    private int id;
@@ -22,5 +22,4 @@ public class User{
     String getCity() {
         return this.city;
     }
-
 }

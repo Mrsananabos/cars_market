@@ -40,8 +40,7 @@ public class MenuTest {
         m.addAccountToUser("001", account1);
         m.addAccountToUser("002", account2);
         boolean result = m.transferMoney("001", "901", "002", "902", 700);
-        boolean expect = true;
-        assertThat(result, is(expect));
+        assertThat(result, is(true));
     }
 
     @Test
@@ -57,8 +56,7 @@ public class MenuTest {
         m.addAccountToUser("001", account1);
         m.addAccountToUser("002", account2);
         boolean result = m.transferMoney("001", "901", "002", "902", 1700);
-        boolean expect = false;
-        assertThat(result, is(expect));
+        assertThat(result, is(false));
     }
 
 }

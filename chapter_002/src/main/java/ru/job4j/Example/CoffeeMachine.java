@@ -1,7 +1,6 @@
-package ru.job4j.Example;
+package ru.job4j.example;
 
-class CoffeMachine {
-
+class CoffeeMachine{
     int ten = 0;
     int five = 0;
     int two = 0;
@@ -20,34 +19,27 @@ class CoffeMachine {
             five = remain / 5;
             remain = remain % 5;
         }
-            if (remain > 2) {
-                two = remain / 2;
-                remain = remain % 2;
-                one = remain / 1;
-            }
-
-
+        if (remain > 2) {
+            two = remain / 2;
+            remain = remain % 2;
+            one = remain;
+        }
         int sum = ten + five + two + one;
         int[] change = new int[sum];
         int i = 0;
         for (; i < ten; i++) {
             change[i] = 10;
         }
-        for (; i < ten+five; i++) {
+        for (; i < ten + five; i++) {
             change[i] = 5;
         }
-        for (; i < ten+five+two; i++) {
+        for (; i < ten + five + two; i++) {
             change[i] = 2;
         }
-        for (; i < ten+five+two+one; i++) {
+        for (; i < ten + five + two + one; i++) {
             change[i] = 1;
         }
-
-
-
         return change;
     }
 
 }
-
-

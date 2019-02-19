@@ -3,7 +3,6 @@ package ru.job4j.bank;
 import java.util.*;
 
 public class Menu {
-
     private Map<User, ArrayList<Account>> bankBase = new HashMap<>();
 
     public Menu(Map<User, ArrayList<Account>> bankBase) {
@@ -20,8 +19,6 @@ public class Menu {
         }
         return null;
     }
-
-    ;
 
     private Account searchOfAccount(User user, String requisite) {
         for (Account account : this.bankBase.get(user)) {

@@ -1,16 +1,10 @@
 package ru.job4j.collections;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
-import static jdk.nashorn.internal.objects.NativeBoolean.valueOf;
-
 class ConvertList {
-
     public List<Integer> toList(int[][] array) {
         List<Integer> list = new ArrayList<Integer>();
         for (int[] i : array) {
@@ -21,7 +15,6 @@ class ConvertList {
         return list;
     }
 
-
     public int[][] toArray(List<Integer> list, int rows) {
         List<Integer> finalList = new ArrayList<Integer>();
         int columns = 0;
@@ -30,7 +23,7 @@ class ConvertList {
             columns = (list.size() / rows) + 1;
             int newCells = columns * rows - list.size();
             Integer[] newList = new Integer[newCells];
-            for (int q = 0; q<newCells; q++ ){
+            for (int q = 0; q < newCells; q++) {
                 newList[q] = 0;
             }
             finalList.addAll(list);
@@ -46,10 +39,8 @@ class ConvertList {
                 newArray[a][b] = finalList.get(i);
             }
         }
-
         return newArray;
     }
-
 
     public List<Integer> convert(List<int[]> list) {
         List<Integer> newList = new ArrayList<Integer>();
@@ -58,8 +49,6 @@ class ConvertList {
             for (int a : list.get(i)) {
                 newList.add(a);
             }
-
-
         }
         return newList;
     }

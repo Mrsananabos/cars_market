@@ -1,13 +1,12 @@
 package ru.job4j.bank;
 
 public class Account {
-
     private int value;
     private String requisies;
 
-    public Account(int value, String requisies) {
+    public Account(int value, String requisites) {
         this.value = value;
-        this.requisies = requisies;
+        this.requisies = requisites;
     }
 
     int getValue() {

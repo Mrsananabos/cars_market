@@ -1,4 +1,4 @@
-package ru.job4j.Sorting;
+package ru.job4j.sorting;
 
 import org.junit.Test;
 import ru.job4j.sorting.Departments;
