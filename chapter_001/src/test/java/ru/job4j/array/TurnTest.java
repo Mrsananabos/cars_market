@@ -12,7 +12,6 @@ public class TurnTest {
         int[] resultArray = turn.back(new int[]{1, 2, 3, 4, 5});
         int[] expectArray = {5, 4, 3, 2, 1};
         assertThat(resultArray, is(expectArray));
-
     }
 
     @Test

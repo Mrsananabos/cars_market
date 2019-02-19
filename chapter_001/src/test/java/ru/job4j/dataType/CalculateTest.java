@@ -1,7 +1,8 @@
 
-package ru.job4j;
+package ru.job4j.dataType;
 
 import org.junit.Test;
+import ru.job4j.data_type.Calculate;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
