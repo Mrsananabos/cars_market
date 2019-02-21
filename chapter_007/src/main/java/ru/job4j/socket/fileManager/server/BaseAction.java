@@ -1,4 +1,4 @@
-package ru.job4j.start;
+package ru.job4j.socket.fileManager.server;
 
 public abstract class BaseAction implements UserAction {
     private String name;
