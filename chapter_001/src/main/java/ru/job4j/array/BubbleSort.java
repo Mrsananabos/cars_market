@@ -1,9 +1,5 @@
 package ru.job4j.array;
 
-import com.sun.prism.shader.Solid_TextureYV12_AlphaTest_Loader;
-
-import java.util.Arrays;
-
 public class BubbleSort {
     public int[] sort(int[] array) {
         int length = array.length;
