@@ -4,12 +4,13 @@ import java.io.*;
 import java.util.stream.Stream;
 
 public class Managing {
-    private final static Settings SETTINGS = Settings.getInstance();
     private final String homePath;
     private String currentDirectory;
 
     public Managing() {
-        this.homePath = SETTINGS.value("homeDirectory");
+        String s =  this.getClass().getClassLoader().getResource("fileManager").getPath();
+        System.out.println(s);
+        this.homePath = this.getClass().getClassLoader().getResource("fileManager").getPath();
         this.currentDirectory = homePath;
     }
 
