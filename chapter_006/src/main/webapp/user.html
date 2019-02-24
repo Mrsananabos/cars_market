@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+
+
+        $(function () {
+            $('#country').change(function () {
+                var code = $(this).val();
+                loadCities(code);
+
+            });
+
+        });
+
+
+
+
+        $(function () {
+            var url = document.location.href;
+            var id = url.split("id=")[1];
+            getUser(id);
+            loadCountries();
+        });
+
+        function loadCountries() {
+            $.ajax({
+                url: "./json",
+                method: "get",
+                data: {action: 'country'},
+                dataType: "json",
+                complete:
+                    function (data) {
+                        var json = JSON.parse(data.responseText);
+                        for (var i = 0; i < json.length; i++) {
+                            $('#country option:last').after('<option value=' + json[i]['id'] + '>' + json[i]['name'] + '</option>');
+                        }
+                    }
+            })
+        }
+
+
+
+        function loadCities(country) {
+            $.ajax({
+                url: "./json",
+                method: "get",
+                data: {
+                    action: 'city',
+                    country: country
+                },
+                dataType: "json",
+                complete:
+                    function (data) {
+                        var json = JSON.parse(data.responseText);
+                        var select = $("#city");
+                        select.empty();
+                        select.append("<option value='zero'></option>");
+                        for (var i = 0; i < json.length; i++) {
+                            select.append('<option value=' + json[i]['id'] + '>' + json[i]['name'] + '</option>');
+                        }
+                    }
+            })
+        }
+
+
+        function getUser(id) {
+            $.ajax({
+                type: "get",
+                url: "./list",
+                dataType: "json",
+                data: {id: id},
+                complete:
+                    function (data) {
+                        var json = JSON.parse(data.responseText)
+                        $("#login").val(json['login']);
+                        $("#password").val(json['password']);
+                        $("#email").val(json['email']);
+                        setRole(json['role']);
+                        $("#title").text ("Hello, " + json['login']);
+                    }
+
+            });
+        }
+
+        function setRole(role) {
+            const select = document.querySelector('#role').getElementsByTagName('option'); for (var i = 0; i < select.length; i++) { if (select[i].value === role) select[i].selected = true; }
+
+        }
+
+
+        function validate(login, password, email, country, city) {
+            var result = true;
+            if (login == '') {
+                alert("Please, fill in the 'Login' field");
+                result = false;
+            }
+            if (password == '') {
+                alert("Please, fill in the 'Password' field");
+                result = false;
+            }
+            if (country == '') {
+                alert("Please, fill in the 'Country' field");
+                result = false;
+            }
+            if (city == '') {
+                alert("Please, fill in the 'City' field");
+                result = false;
+            }
+            if (email == '') {
+                alert("Please, fill in the 'Email' field");
+                result = false;
+            }
+
+            return result;
+
+        }
+
+        function createUser(id, login, password, role, email, country, city) {
+            return {
+                id: id,
+                login: login,
+                password: password,
+                role: role,
+                email: email,
+                country: country,
+                city: city
+            };
+        }
+
+        function update() {
+            var url = document.location.href;
+            var id = url.split("id=")[1];
+            var login = $('#login').val();
+            var password = $('#password').val();
+            var role = $('#role option:selected').text();
+            var email = $('#email').val();
+            var country = $('#country option:selected').text();
+            var city = $('#city option:selected').text();
+            if (validate(login, password, email, country, city)) {
+                var newUser = createUser(id, login, password, role, email, country, city);
+                sendTo(newUser);
+            }
+        }
+
+
+        function sendTo(newUser) {
+            $.ajax({
+                type: "post",
+                url: "./edit",
+                dataType: "json",
+                data: JSON.stringify(newUser),
+                complete: function () {
+                    $("#msg").text ("User successfully updated ")
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<h1 style="text-align: center" id="title"></h1>
+<form class="form-horizontal" id="form_id">
+    <div class="form-group">
+        <label class="control-label col-sm-1" for="login">Login: </label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="login" style="color: darkgreen">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-1" for="password">Password:</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="password" style="color: darkgreen">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-1" for="role">Role:</label>
+        <div class="col-sm-2">
+            <select name="sex" class="form-control" id="role" style="color: darkgreen" onchange="a1">
+                <option value="user">user</option>
+                <option value="admin">admin</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-1" for="email">Email:</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="email" style="color: darkgreen">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-1" for="country">Country:</label>
+        <div class="col-sm-2">
+            <select name="country" class="form-control" id="country" style="color: darkgreen">
+                <option value="zero"></option>
+            </select>
+        </div>
+        <label class="control-label col-xs-1" for="city">City:</label>
+        <div class="col-sm-2">
+            <select name="city" class="form-control" id="city" style="color: darkgreen">
+                <option value="zero"></option>
+
+            </select>
+        </div>
+    </div>
+
+    <div style="text-align: right" class="form-group">
+        <div class="col-sm-offset-7 col-sm-2">
+            <button class="btn btn-success" type="button" class="btn btn-default" onclick="update()">Update</button>
+        </div>
+    </div>
+    <div id="msg" style="background-color: limegreen"></div>
+
+</form>
+</body>
+</html>

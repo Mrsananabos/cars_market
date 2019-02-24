@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<script>
+    function signin() {
+        var login = $('#login').val();
+        var password = $('#password').val();
+        if (validate(login, password)) {
+            var client = createClient(login, password);
+            sendTo(client)
+        }
+    }
+    function validate(login, password) {
+        var result = true;
+        if (login == '') {
+            alert("Please, fill in the 'login' field");
+            result = false;
+        }
+        if (password == '') {
+            alert("Please, fill in the 'password' field");
+            result = false;
+        }
+        return result;
+    }
+    function createClient(login, password) {
+        return {
+            login: login,
+            password: password,
+        };
+    }
+    function sendTo(client) {
+        $.ajax({
+            type: "post",
+            url: "./signin",
+            dataType: "json",
+            data: JSON.stringify(client),
+            complete: function (data) {
+                var json = JSON.parse(data.responseText);
+                if (json['role'] == "admin") {
+                    window.location.href = "http://localhost:8080/chapter_006/admin.html"
+                }
+                if (json['role'] == "user") {
+                    var id = json['id'];
+                    window.location.href = "http://localhost:8080/chapter_006/user.html?id="+id;
+                }
+                if (json['role'] == "error") {
+                    $("#error").text ("ERROR. PLEASE CHECK YOUR LOGIN AND PASSWORD")
+                }
+            }
+        });}
+</script>
+<head>
+    <title>Signin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/script.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div id="error" style="background-color: red"></div>
+<div class="container-fluid">
+    <h2 style="text-align: center">User authorization</h2>
+</div><br>
+<form class="form-horizontal" id="form_id">
+    <div class="form-group">
+        <label class="control-label col-sm-4" for="fn">Login:</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="login">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-4" for="fn">Password:</label>
+        <div class="col-sm-4">
+            <input type="password" class="form-control" id="password">
+        </div>
+    </div>
+    <div style="text-align: right" class="form-group">
+        <div class="col-sm-offset-4 col-sm-4">
+            <button class="btn btn-success" type="button" class="btn btn-default" onclick="signin()">Submit</button>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>
