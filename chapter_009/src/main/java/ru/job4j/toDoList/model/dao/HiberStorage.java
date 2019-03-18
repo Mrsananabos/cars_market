@@ -4,6 +4,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import ru.job4j.toDoList.model.entity.Item;
 
@@ -11,6 +12,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 
 public class HiberStorage implements Storage {
     private static final Logger LOGGER = LogManager.getLogger(HiberStorage.class);
@@ -24,55 +26,59 @@ public class HiberStorage implements Storage {
 
     public static HiberStorage getInstance() {
         return INSTANCE;
+    }
 
+    private <T> T tx(final Function<Session, T> command) {
+        final Session session = factory.openSession();
+        final Transaction tx = session.beginTransaction();
+        try {
+            return command.apply(session);
+        } catch (final Exception e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            tx.commit();
+            session.close();
+        }
     }
 
     @Override
     public Item add(Item item) {
         item.setId(NEXT_ID.getAndIncrement());
         item.setCreated(new Timestamp(new Date().getTime()));
-        System.out.println(item);
-        try (Session session = this.factory.openSession()) {
-            session.beginTransaction();
+        return tx(session -> {
             session.save(item);
-            session.getTransaction().commit();
-        }
-        return item;
+            return item;
+        });
     }
 
     @Override
-    public void update(Item item) {
-        try (Session session = this.factory.openSession()) {
-            session.beginTransaction();
+    public Item update(Item item) {
+       return tx(session -> {
             session.update(item);
-            session.getTransaction().commit();
-        }
+            return item;
+        });
     }
 
     @Override
     public void delete(Item item) {
-        try (Session session = this.factory.openSession()) {
-            session.beginTransaction();
+        tx(session -> {
             session.delete(item);
-            session.getTransaction().commit();
-        }
+            return null;
+        });
     }
 
     @Override
     public List findAll() {
-        try (Session session = this.factory.openSession()) {
-            List a = session.createQuery("FROM Item i ORDER BY i.id").list();
-            return a;
-        }
+        return tx(session -> session.createQuery("FROM Item i ORDER BY i.id").list());
     }
 
     @Override
     public void doneItem(int id) {
-        try (Session session = this.factory.openSession()) {
-            session.beginTransaction();
+        tx(session -> {
             Item item = session.load(Item.class, id);
             item.setDone(true);
-            session.getTransaction().commit();
-        }
+            return null;
+        });
     }
 }

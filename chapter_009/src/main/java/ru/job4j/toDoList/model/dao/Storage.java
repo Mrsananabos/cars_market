@@ -8,7 +8,7 @@ public interface Storage {
 
     Item add(Item item);
 
-    void update(Item item);
+    Item update(Item item);
 
     void delete(Item item);
 
