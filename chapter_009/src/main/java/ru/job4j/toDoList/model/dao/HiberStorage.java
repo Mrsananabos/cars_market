@@ -76,7 +76,7 @@ public class HiberStorage implements Storage {
     @Override
     public void doneItem(int id) {
         tx(session -> {
-            Item item = session.load(Item.class, id);
+            Item item = session.get(Item.class, id);
             item.setDone(true);
             return null;
         });
