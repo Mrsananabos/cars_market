@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car sale</title>
+</head>
+<body>
+<div class="container-fluid">
+    <h2 style="text-align: center">Creating new ad</h2>
+</div>
+<form class="form-horizontal" id="form_id">
+    <div class="form-group">
+        <label class="control-label col-sm-1" for="login">Login: </label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="login" style="color: darkgreen">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-1" for="password">Pssword:</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="password" style="color: darkgreen">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-1" for="role">Role:</label>
+        <div class="col-sm-2">
+            <select name="sex" class="form-control" id="role" style="color: darkgreen" onchange="a1">
+                <option value="user">user</option>
+                <option value="admin">admin</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-1" for="email">Email:</label>
+        <div class="col-sm-2">
+            <input type="email" class="form-control" id="email" style="color: darkgreen">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-1" for="country">Country:</label>
+        <div class="col-sm-2">
+            <select name="country" class="form-control" id="country" style="color: darkgreen">
+                <option value="zero"></option>
+            </select>
+        </div>
+        <label class="control-label col-xs-1" for="city">City:</label>
+        <div class="col-sm-2">
+            <select name="city" class="form-control" id="city" style="color: darkgreen">
+                <option value="zero"></option>
+            </select>
+        </div>
+    </div>
+
+
+    <div style="text-align: right" class="form-group">
+        <div class="col-sm-offset-7 col-sm-2">
+            <button  class="btn btn-success" type="submit" class="btn btn-default" onclick="create()">
+                Create
+            </button>
+            <button  class="btn btn-success" type="submit" class="btn btn-default" onclick="getAll()">
+                Update Table
+            </button>
+        </div>
+    </div>
+</form>
+</body>
+</html>
