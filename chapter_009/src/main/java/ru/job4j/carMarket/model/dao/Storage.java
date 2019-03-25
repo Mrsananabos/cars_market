@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface Storage {
 
-    List<Mark> getMarks();
+    List getMarks();
 
-    List<String> getTransmission();
+    List getTransmission();
 
-    List<String> getBodyType();
+    List getBodyType();
 }

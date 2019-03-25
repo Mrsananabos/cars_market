@@ -33,4 +33,13 @@ public class Mark {
     public void setModels(List<Model> models) {
         this.models = models;
     }
+
+    @Override
+    public String toString() {
+        return "Mark{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", models=" + models +
+                '}';
+    }
 }

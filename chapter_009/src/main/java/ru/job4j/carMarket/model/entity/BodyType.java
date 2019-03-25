@@ -1,14 +1,13 @@
 package ru.job4j.carMarket.model.entity;
 
-public class Model {
+public class BodyType {
     private int id;
     private String name;
 
-    public Model() {
+    public BodyType() {
     }
 
-    public Model(int id, String name) {
-        this.id = id;
+    public BodyType(String name) {
         this.name = name;
     }
 
@@ -26,13 +25,5 @@ public class Model {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Model{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
     }
 }

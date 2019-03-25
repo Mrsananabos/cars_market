@@ -7,9 +7,9 @@
 --    name		VARCHAR(50) NOT NULL,
 --    mark_id integer not null REFERENCES car_marks (id));
 --
- CREATE TABLE transmission (id SERIAL PRIMARY KEY, name VARCHAR(50) NOT NULL);
-
- CREATE TABLE body_type (id SERIAL PRIMARY KEY,name VARCHAR(50) NOT NULL);
+--  CREATE TABLE transmission (id SERIAL PRIMARY KEY, name VARCHAR(50) NOT NULL);
+--
+--  CREATE TABLE body_type (id SERIAL PRIMARY KEY,name VARCHAR(50) NOT NULL);
 
 -- insert into car_marks(name) values ('Honda', 'honda1');
 -- insert into car_marks(name) values ('Honda', 'honda2');

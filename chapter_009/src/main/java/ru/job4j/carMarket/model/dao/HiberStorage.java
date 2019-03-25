@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import ru.job4j.carMarket.model.entity.Mark;
+import ru.job4j.carMarket.model.entity.Model;
 import ru.job4j.toDoList.model.entity.Item;
 
 import java.sql.Timestamp;
@@ -33,7 +34,9 @@ public class HiberStorage implements Storage {
         final Session session = factory.openSession();
         final Transaction tx = session.beginTransaction();
         try {
-            return command.apply(session);
+            T rsl = command.apply(session);
+            System.out.println(rsl);
+            return rsl;
         } catch (final Exception e) {
             session.getTransaction().rollback();
             throw e;
@@ -44,17 +47,15 @@ public class HiberStorage implements Storage {
     }
 
     @Override
-    public List<Mark> getMarks() {
-            return tx(session -> session.createQuery("FROM car_marks").list());
-    }
+    public List getMarks() { return tx(session -> session.createQuery("FROM Mark").list()); }
 
     @Override
-    public List<String> getTransmission() {
+    public List getTransmission() {
         return tx(session -> session.createQuery("FROM transmission").list());
     }
 
     @Override
-    public List<String> getBodyType() {
+    public List getBodyType() {
         return tx(session -> session.createQuery("FROM body_type").list());
     }
 }

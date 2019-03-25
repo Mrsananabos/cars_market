@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.List;
 
 public class SignInController extends HttpServlet {
 
@@ -24,10 +25,9 @@ public class SignInController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=windows-1251");
-        System.out.println(1111);
-        Collection<Mark> users = HiberStorage.getInstance().getMarks();
+        List marks = HiberStorage.getInstance().getMarks();
         Gson gson = new Gson();
-        String json = gson.toJson(users);
+        String json = gson.toJson(marks);
         System.out.println(json);
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         writer.append(json);
