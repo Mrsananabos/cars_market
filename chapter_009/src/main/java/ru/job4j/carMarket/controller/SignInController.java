@@ -19,11 +19,6 @@ public class SignInController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/market.html").forward(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=windows-1251");
         List marks = HiberStorage.getInstance().getMarks();
         Gson gson = new Gson();
@@ -32,5 +27,10 @@ public class SignInController extends HttpServlet {
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         writer.append(json);
         writer.flush();
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
     }
 }

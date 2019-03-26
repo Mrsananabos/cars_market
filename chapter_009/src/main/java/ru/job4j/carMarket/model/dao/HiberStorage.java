@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import ru.job4j.carMarket.model.entity.Car;
 import ru.job4j.carMarket.model.entity.Mark;
 import ru.job4j.carMarket.model.entity.Model;
 import ru.job4j.toDoList.model.entity.Item;
@@ -47,15 +48,34 @@ public class HiberStorage implements Storage {
     }
 
     @Override
-    public List getMarks() { return tx(session -> session.createQuery("FROM Mark").list()); }
+    public List getMarks() { return tx(session -> {
+       return session.createQuery("FROM Mark").list();
+        });
+    }
+
+    @Override
+    public List findModelsByMark(int id) {
+        return tx(session -> {
+            List rsl = session.createQuery("FROM Mark where id = " + id).list();
+            return rsl;
+        });
+    }
 
     @Override
     public List getTransmission() {
-        return tx(session -> session.createQuery("FROM transmission").list());
+        return tx(session -> session.createQuery("FROM Transmission").list());
     }
 
     @Override
     public List getBodyType() {
-        return tx(session -> session.createQuery("FROM body_type").list());
+        return tx(session -> session.createQuery("FROM BodyType").list());
+    }
+
+    @Override
+    public Car addCar(Car car) {
+        return tx(session -> {
+            session.save(car);
+            return car;
+        });
     }
 }

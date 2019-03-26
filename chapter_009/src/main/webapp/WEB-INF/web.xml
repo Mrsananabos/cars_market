@@ -61,6 +61,47 @@
         <url-pattern>/signin</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>MarketController</servlet-name>
+        <servlet-class>ru.job4j.carMarket.controller.MarketController</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MarketController</servlet-name>
+        <url-pattern>/market</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdController</servlet-name>
+        <servlet-class>ru.job4j.carMarket.controller.AdController</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdController</servlet-name>
+        <url-pattern>/ad</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CarPartsInfoController</servlet-name>
+        <servlet-class>ru.job4j.carMarket.controller.CarPartsInfoController</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CarPartsInfoController</servlet-name>
+        <url-pattern>/parts</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>

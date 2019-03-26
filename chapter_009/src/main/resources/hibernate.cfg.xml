@@ -13,5 +13,6 @@
         <mapping resource="ru/job4j/carMarket/entity/Model.hbm.xml"/>
         <mapping resource="ru/job4j/carMarket/entity/Transmission.hbm.xml"/>
         <mapping resource="ru/job4j/carMarket/entity/BodyType.hbm.xml"/>
+        <mapping resource="ru/job4j/carMarket/entity/Car.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

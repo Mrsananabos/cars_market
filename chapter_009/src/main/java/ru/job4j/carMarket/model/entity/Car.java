@@ -99,4 +99,19 @@ public class Car {
     public void setAuthor(String author) {
         this.author = author;
     }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", mark='" + mark + '\'' +
+                ", model='" + model + '\'' +
+                ", transmission='" + transmission + '\'' +
+                ", bodyType='" + bodyType + '\'' +
+                ", yearIssue=" + yearIssue +
+                ", price=" + price +
+                ", pathImage='" + pathImage + '\'' +
+                ", author='" + author + '\'' +
+                '}';
+    }
 }

@@ -5,9 +5,5 @@
             <generator class="identity"/>
         </id>
         <property name="name" column="name"/>
-
-        <!--<many-to-one name="mark"-->
-                     <!--column="mark_id"-->
-                     <!--class="ru.job4j.carMarket.model.entity.Mark"/>-->
     </class>
 </hibernate-mapping>
