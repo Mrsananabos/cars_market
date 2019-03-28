@@ -102,6 +102,4 @@
         <servlet-name>CarPartsInfoController</servlet-name>
         <url-pattern>/parts</url-pattern>
     </servlet-mapping>
-
-
 </web-app>

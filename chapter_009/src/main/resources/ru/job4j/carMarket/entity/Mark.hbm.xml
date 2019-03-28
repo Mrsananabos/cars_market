@@ -6,7 +6,7 @@
         </id>
         <property name="name" column="name"/>
 
-        <bag name="models" inverse="true">
+        <bag name="models" inverse="true" lazy="false">
             <key column="mark_id" not-null="true"/>
             <one-to-many class="ru.job4j.carMarket.model.entity.Model"/>
         </bag>

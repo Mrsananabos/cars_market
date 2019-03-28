@@ -3,6 +3,7 @@ package ru.job4j.carMarket.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.job4j.carMarket.model.dao.HiberStorage;
 import ru.job4j.carMarket.model.entity.Car;
+import ru.job4j.carMarket.model.entity.Mark;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,7 @@ public class AdController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       Car car = new Car(1, new Mark("KIA"), )
         req.getRequestDispatcher("/newAd.html").forward(req, resp);
 
     }
@@ -31,6 +33,7 @@ public class AdController extends HttpServlet {
             sb.append(line);
             carAd = mapper.readValue(sb.toString(), Car.class);
             System.out.println(carAd);
+            carAd.setModel("1");
         } catch (IOException e) {
             e.printStackTrace();
         }

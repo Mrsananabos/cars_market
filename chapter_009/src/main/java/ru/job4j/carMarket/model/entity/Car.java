@@ -1,7 +1,5 @@
 package ru.job4j.carMarket.model.entity;
 
-import javax.persistence.Entity;
-
 public class Car {
     private int id;
     private String mark;
@@ -11,12 +9,12 @@ public class Car {
     private int yearIssue;
     private int price;
     private String pathImage;
-    private String author;
+    private User user;
 
     public Car() {
     }
 
-    public Car(int id, String mark, String model, String transmission, String bodyType, int yearIssue, int price, String pathImage, String author) {
+    public Car(int id, String mark, String model, String transmission, String bodyType, int yearIssue, int price, String pathImage, User user) {
         this.id = id;
         this.mark = mark;
         this.model = model;
@@ -25,7 +23,7 @@ public class Car {
         this.yearIssue = yearIssue;
         this.price = price;
         this.pathImage = pathImage;
-        this.author = author;
+        this.user = user;
     }
 
     public int getId() {
@@ -92,12 +90,12 @@ public class Car {
         this.pathImage = pathImage;
     }
 
-    public String getAuthor() {
-        return author;
+    public User getUser() {
+        return user;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setUser(User author) {
+        this.user = author;
     }
 
     @Override
@@ -111,7 +109,7 @@ public class Car {
                 ", yearIssue=" + yearIssue +
                 ", price=" + price +
                 ", pathImage='" + pathImage + '\'' +
-                ", author='" + author + '\'' +
+                ", user='" + user + '\'' +
                 '}';
     }
 }

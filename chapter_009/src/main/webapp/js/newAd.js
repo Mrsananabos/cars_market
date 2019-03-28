@@ -1,4 +1,7 @@
+
+
 $(function () {
+    defineUser();
     loadMarks();
     loadTransmission();
     loadBodyType();
@@ -16,6 +19,12 @@ $(function () {
         createAd();
     });
 });
+
+function defineUser() {
+    var url = document.location.href;
+    var login = url.split("login=")[1];
+    $("#login").text ("Hello, " + login);
+}
 
 function sendTo(carAd) {
     $.ajax({

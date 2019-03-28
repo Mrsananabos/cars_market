@@ -16,6 +16,9 @@
         <many-to-one name="bodyType"
                      column="body_type_id"
                      class="ru.job4j.carMarket.model.entity.BodyType"/>
+        <many-to-one name="user"
+                     column="user_id"
+                     class="ru.job4j.carMarket.model.entity.User"/>
         <property name="yearIssue" column="year_issue"/>
         <property name="price" column="price"/>
     </class>

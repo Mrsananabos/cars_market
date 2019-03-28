@@ -77,6 +77,7 @@
        <module>chapter_007</module>
        <module>chapter_008</module>
        <module>chapter_009</module>
+       <module>test</module>
        <module>parser</module>
    </modules>
 
