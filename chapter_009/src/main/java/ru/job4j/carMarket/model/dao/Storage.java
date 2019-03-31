@@ -15,5 +15,4 @@ public interface Storage {
     List getBodyType();
 
     Car addCar(Car car);
-
 }

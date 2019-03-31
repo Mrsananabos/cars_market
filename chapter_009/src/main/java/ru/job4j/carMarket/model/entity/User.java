@@ -10,8 +10,7 @@ public class User {
 
     public User() {};
 
-    public User(int id, String login, String password, List<Car> cars) {
-        this.id = id;
+    public User(String login, String password, List<Car> cars) {
         this.login = login;
         this.password = password;
         this.cars = cars;

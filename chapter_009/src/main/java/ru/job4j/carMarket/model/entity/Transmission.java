@@ -7,8 +7,7 @@ public class Transmission {
     public Transmission() {
     }
 
-    public Transmission(int id, String name) {
-        this.id = id;
+    public Transmission(String name) {
         this.name = name;
     }
 

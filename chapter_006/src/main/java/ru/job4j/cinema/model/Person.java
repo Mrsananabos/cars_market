@@ -2,7 +2,6 @@ package ru.job4j.cinema.model;
 
 
 public class Person {
-
     private String username;
     private String phone;
     private int idPlace;

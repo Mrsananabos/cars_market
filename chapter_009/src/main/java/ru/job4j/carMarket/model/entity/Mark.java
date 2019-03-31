@@ -10,6 +10,11 @@ public class Mark {
     public Mark() {
     }
 
+    public Mark(String name, List<Model> models) {
+        this.name = name;
+        this.models = models;
+    }
+
     public int getId() {
         return id;
     }

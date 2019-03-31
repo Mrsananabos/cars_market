@@ -1,7 +1,6 @@
 package ru.job4j.carMarket.model.entity;
 
-public class Car {
-    private int id;
+public class CarTempl {
     private String mark;
     private String model;
     private String transmission;
@@ -9,12 +8,12 @@ public class Car {
     private int yearIssue;
     private int price;
     private String pathImage;
-    private User user;
+    private String user;
 
-    public Car() {
+    public CarTempl() {
     }
 
-    public Car(String mark, String model, String transmission, String bodyType, int yearIssue, int price, String pathImage, User user) {
+    public CarTempl(String mark, String model, String transmission, String bodyType, int yearIssue, int price, String pathImage, String user) {
         this.mark = mark;
         this.model = model;
         this.transmission = transmission;
@@ -23,14 +22,6 @@ public class Car {
         this.price = price;
         this.pathImage = pathImage;
         this.user = user;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getMark() {
@@ -89,26 +80,11 @@ public class Car {
         this.pathImage = pathImage;
     }
 
-    public User getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(User author) {
-        this.user = author;
-    }
-
-    @Override
-    public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", mark='" + mark + '\'' +
-                ", model='" + model + '\'' +
-                ", transmission='" + transmission + '\'' +
-                ", bodyType='" + bodyType + '\'' +
-                ", yearIssue=" + yearIssue +
-                ", price=" + price +
-                ", pathImage='" + pathImage + '\'' +
-                ", user='" + user + '\'' +
-                '}';
+    public void setUser(String user) {
+        this.user = user;
     }
 }

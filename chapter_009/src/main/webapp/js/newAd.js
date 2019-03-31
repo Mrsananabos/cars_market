@@ -1,7 +1,5 @@
-
-
 $(function () {
-    defineUser();
+    // defineUser();
     loadMarks();
     loadTransmission();
     loadBodyType();
@@ -15,6 +13,53 @@ $(function () {
 });
 
 $(function () {
+    $('#upload').click(function () {
+        var url = "upload";
+        var form = $("#sampleUploadFrm")[0];
+        var data = new FormData(form);
+        /* var data = {};
+        data['key1'] = 'value1';
+        data['key2'] = 'value2'; */
+        $.ajax({
+            type: "POST",
+            encType: "multipart/form-data",
+            url: url,
+            cache: false,
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (msg) {
+                var response = JSON.parse(msg);
+                var status = response.status;
+                if (status == 1) {
+                    alert("File has been uploaded successfully");
+                } else {
+                    alert("Couldn't upload file");
+                }
+            },
+            error: function (msg) {
+                alert("Couldn't upload file");
+            }
+        });
+    });
+});
+    // $.ajax({
+    //     url: "./upload",
+    //     type: "POST",
+    //     data: fd,
+    //     cache: false,
+    //     contentType: false,
+    //     processData: false,
+    //     success: function (data) {
+    //         if (data != 0) {
+    //             alert('ge')
+    //         }
+    //     }
+    // })
+
+
+
+$(function () {
     $('#ad').click(function () {
         createAd();
     });
@@ -23,8 +68,9 @@ $(function () {
 function defineUser() {
     var url = document.location.href;
     var login = url.split("login=")[1];
-    $("#login").text ("Hello, " + login);
+    $("#login").text("Hello, " + login);
 }
+
 
 function sendTo(carAd) {
     $.ajax({
@@ -37,19 +83,20 @@ function sendTo(carAd) {
         }
     });
 }
+
 function createAd() {
     var mark = $('#mark').find('option:selected').text();
     var model = $('#model').find('option:selected').text();
-    var trans = $('#trans option:selected').text();
-    var body = $('#body option:selected').text();
+    var trans = $('#trans').find('option:selected').text();
+    var body = $('#body').find('option:selected').text();
     var year = $('#year').val();
     var price = $('#price').val();
+    var photo = $('#photo').val();
     if (validate(mark, model, trans, body, year, price)) {
         var carAd = newAd(mark, model, trans, body, year, price);
         sendTo(carAd);
     }
 }
-
 
 
 function validate(mark, model, trans, body, year, price) {
@@ -112,8 +159,9 @@ function loadModels(mark) {
     $.ajax({
         url: "./parts",
         method: "get",
-        data: {part: 'model',
-               mark: mark
+        data: {
+            part: 'model',
+            mark: mark
         },
         dataType: "json",
         complete:

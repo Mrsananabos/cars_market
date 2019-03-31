@@ -16,7 +16,6 @@ public class AdController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       Car car = new Car(1, new Mark("KIA"), )
         req.getRequestDispatcher("/newAd.html").forward(req, resp);
 
     }
@@ -26,17 +25,16 @@ public class AdController extends HttpServlet {
         resp.setContentType("text/html; charset=windows-1251");
         StringBuilder sb = new StringBuilder();
         ObjectMapper mapper = new ObjectMapper();
-        Car carAd = new Car();
+        Car car = new Car();
         try (BufferedReader reader = req.getReader()) {
             String line = reader.readLine();
             System.out.println(line);
             sb.append(line);
-            carAd = mapper.readValue(sb.toString(), Car.class);
-            System.out.println(carAd);
-            carAd.setModel("1");
+            car = mapper.readValue(sb.toString(), Car.class);
+            System.out.println(car);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        HiberStorage.getInstance().addCar(carAd);
+        HiberStorage.getInstance().addCar(car);
     }
 }
