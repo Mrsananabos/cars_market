@@ -14,35 +14,38 @@ $(function () {
 
 $(function () {
     $('#upload').click(function () {
-        var url = "upload";
         var form = $("#sampleUploadFrm")[0];
         var data = new FormData(form);
         /* var data = {};
         data['key1'] = 'value1';
         data['key2'] = 'value2'; */
-        $.ajax({
-            type: "POST",
-            encType: "multipart/form-data",
-            url: url,
-            cache: false,
-            processData: false,
-            contentType: false,
-            data: data,
-            success: function (msg) {
-                var response = JSON.parse(msg);
-                var status = response.status;
-                if (status == 1) {
-                    alert("File has been uploaded successfully");
-                } else {
-                    alert("Couldn't upload file");
-                }
-            },
-            error: function (msg) {
-                alert("Couldn't upload file");
-            }
-        });
+       sendPhoto(data);
     });
 });
+
+function sendPhoto(photo) {
+    $.ajax({
+        type: "post",
+        encType: "multipart/form-data",
+        url: "/upload",
+        cache: false,
+        processData: false,
+        contentType: false,
+        data: photo,
+        success: function (msg) {
+            var response = JSON.parse(msg);
+            var status = response.status;
+            if (status == 1) {
+                alert("File has been uploaded successfully");
+            } else {
+                alert("Couldn't upload file");
+            }
+        },
+        error: function (msg) {
+            alert("Couldn't upload file");
+        }
+    })
+}
     // $.ajax({
     //     url: "./upload",
     //     type: "POST",
