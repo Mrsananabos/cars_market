@@ -76,7 +76,7 @@
 
     <servlet>
         <servlet-name>UploadServlet</servlet-name>
-        <servlet-class>ru.job4j.carMarket.controller.UploadServlet</servlet-class>
+        <servlet-class>ru.job4j.carMarket.controller.UploadController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UploadServlet</servlet-name>

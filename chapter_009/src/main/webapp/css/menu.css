@@ -1,0 +1,17 @@
+.article {
+    align: center;
+    font-family: "Courier New",fantasy;
+    font-weight: 700;
+}
+
+.inf {
+    width: 100%;
+    outline: 2px solid #64AEE8;
+}
+
+.table {
+    margin-top: 1cm;
+}
+.main {
+    margin: 5%;
+}

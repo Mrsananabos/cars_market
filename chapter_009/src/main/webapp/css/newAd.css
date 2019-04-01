@@ -1,0 +1,23 @@
+.row {
+    margin-left: .1cm;
+    padding-top: .3cm;
+}
+
+.form-horizontal {
+    margin-left: .5cm;
+    padding-top: 1em;
+}
+
+.article {
+    align: center;
+    font-family: "Courier New", fantasy;
+    font-weight: 700;
+}
+
+.inf {
+    outline: 2px solid #64AEE8; /* Чёрная рамка */
+    width: 100%;
+}
+.image {
+    margin-left: .6cm;
+}
