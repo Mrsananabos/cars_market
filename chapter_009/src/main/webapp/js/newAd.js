@@ -1,5 +1,8 @@
+login = '';
+url = '';
+
 $(function () {
-    // defineUser();
+    getLogin();
     loadMarks();
     loadTransmission();
     loadBodyType();
@@ -13,13 +16,43 @@ $(function () {
 });
 
 $(function () {
+    $('#back').click(function () {
+        alert('back');
+        window.location.href = "/market";
+    });
+});
+
+function getLogin() {
+    $.ajax({
+        type: "get",
+        url: "./authentic",
+        dataType: "json",
+        complete: function (data) {
+            var json = JSON.parse(data);
+            login = json.login;
+            alert(login);
+            logoBox(login);
+        }
+    });
+}
+
+function logoBox(login) {
+    var btnText = 'Enter profile';
+    idBtn = 'profile';
+    if (login == null) {
+        login = 'guest';
+        btnText = 'Sign in or create an account';
+        idBtn = 'login';
+    }
+    $('p.login').html('Hello, ' + login);
+}
+
+$(function () {
     $('#upload').click(function () {
-        var form = $("#sampleUploadFrm")[0];
-        var data = new FormData(form);
-        /* var data = {};
-        data['key1'] = 'value1';
-        data['key2'] = 'value2'; */
-       sendPhoto(data);
+        var form = $("#myFile");
+        var data = new FormData();
+        data.append("file", form[0].files[0]);
+        sendPhoto(data);
     });
 });
 
@@ -36,6 +69,7 @@ function sendPhoto(photo) {
             var response = JSON.parse(msg);
             var status = response.status;
             if (status == 1) {
+                url = response.url;
                 alert("File has been uploaded successfully");
             } else {
                 alert("Couldn't upload file");
@@ -46,21 +80,6 @@ function sendPhoto(photo) {
         }
     })
 }
-    // $.ajax({
-    //     url: "./upload",
-    //     type: "POST",
-    //     data: fd,
-    //     cache: false,
-    //     contentType: false,
-    //     processData: false,
-    //     success: function (data) {
-    //         if (data != 0) {
-    //             alert('ge')
-    //         }
-    //     }
-    // })
-
-
 
 $(function () {
     $('#ad').click(function () {
@@ -68,20 +87,13 @@ $(function () {
     });
 });
 
-function defineUser() {
-    var url = document.location.href;
-    var login = url.split("login=")[1];
-    $("#login").text("Hello, " + login);
-}
-
-
 function sendTo(carAd) {
     $.ajax({
         type: "post",
         url: "./ad",
         dataType: "json",
         data: JSON.stringify(carAd),
-        complete: function () {
+        success: function () {
             $('#success').text("The ad has been added successfully");
         }
     });
@@ -95,14 +107,14 @@ function createAd() {
     var year = $('#year').val();
     var price = $('#price').val();
     var photo = $('#photo').val();
-    if (validate(mark, model, trans, body, year, price)) {
-        var carAd = newAd(mark, model, trans, body, year, price);
+    if (validate(mark, model, trans, body, year, price, login, url)) {
+        var carAd = newAd(mark, model, trans, body, year, price, login, url);
         sendTo(carAd);
     }
 }
 
 
-function validate(mark, model, trans, body, year, price) {
+function validate(mark, model, trans, body, year, price, login, url) {
     var result = true;
     if (mark == '') {
         alert("Please, fill in the 'Mark' field");
@@ -128,17 +140,27 @@ function validate(mark, model, trans, body, year, price) {
         alert("Please, fill in the 'Price' field");
         result = false;
     }
+    if (login == '') {
+        alert("Error, user not found");
+        result = false;
+    }
+    if (url == '') {
+        alert("Please, upload car photo");
+        result = false;
+    }
     return result;
 }
 
-function newAd(mark, model, trans, body, year, price) {
+function newAd(mark, model, trans, body, year, price, login, imageURL) {
     return {
         mark: mark,
         model: model,
         transmission: trans,
         bodyType: body,
         yearIssue: year,
-        price: price
+        price: price,
+        author: login,
+        pathImage: imageURL
     };
 }
 

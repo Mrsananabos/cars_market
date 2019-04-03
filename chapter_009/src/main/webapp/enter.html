@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--suppress ALL -->
 <html lang="en">
 <head>
     <title>Signin</title>
@@ -8,50 +7,112 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="js/script.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="js/enter.js"></script>
-    <link href="/css/enter.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/enter.css">
+    <style>
+        .main {
+            border-spacing: 5em;
+        }
+
+        .form-horizontal {
+            margin-left: .5cm;
+            padding-top: 1em;
+        }
+
+        .article {
+            align: center;
+        }
+
+        .inf {
+            margin-bottom: 2em;
+            outline: 2px solid #64AEE8;
+            width: 100%;
+        }
+
+        .tdLeft {
+            padding-left: 2em;
+            border: 2px solid #64AEE8;
+        }
+    </style>
 </head>
 <div id="error" style="background-color: red"></div>
 <body>
 <table class="inf">
     <tr>
-        <td width="23%">
+        <td width="12%">
             <div class="msg">
                 <img src="car.JPG" width="200" height="100" alt="logo" align="right">
             </div>
         </td>
+        <td width="12%">
+            <div class="msg2">
+                <img src="whiteCar.png" width="160" height="75" alt="logo" align="">
+            </div>
+        </td>
         <td width="60%">
             <div class="article">
-                <h2 align="center">Sign in</h2>
+                <h1 align="center">Car market</h1>
             </div>
         </td>
         <td>
-            <p class="btf" align="center">
-                <button type="button" class="btn btn-primary btn btn-default" id="back">Back menu</button>
+            <h4><p align="left" class="demo-container">
+            </p></h4>
+            <p class="btf" align="left">
             </p>
         </td>
     </tr>
 </table>
-<form class="form-horizontal" id="form_id">
-    <div class="form-group">
-        <label class="control-label col-sm-4" for="fn">Login:</label>
-        <div class="col-sm-4">
-            <input type="text" class="form-control" id="login">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-4" for="fn">Password:</label>
-        <div class="col-sm-4">
-            <input type="password" class="form-control" id="password">
-        </div>
-    </div>
-    <div style="text-align: right" class="form-group">
-        <div class="col-sm-offset-4 col-sm-4">
-            <button class="btn btn-primary btn btn-default" type="button" onclick="signin()">Submit</button>
-        </div>
-    </div>
-</form>
+<table class="main">
+    <thead>
+    <th><h4>Enter profile</h4></th>
+    <th><h4>Create new profile</h4></th>
+    </thead>
+    <tr>
+        <td class="tdLeft" width="40%">
+            <form class="form-horizontal" id="form_id">
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="login">Login:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="login">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="password">Password:</label>
+                    <div class="col-sm-4">
+                        <input type="password" class="form-control" id="password">
+                    </div>
+                </div>
+                <div style="text-align: right" class="form-group">
+                    <div class="col-sm-offset-4 col-sm-4">
+                        <button class="btn btn-primary btn btn-default" type="button" id="enter">Enter</button>
+                    </div>
+                </div>
+            </form>
+        </td>
+        <td width="40%">
+            <form class="form-horizontal" id="id">
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="newLogin">Login:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="newLogin">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="newPassword">Password:</label>
+                    <div class="col-sm-4">
+                        <input type="password" class="form-control" id="newPassword">
+                    </div>
+                </div>
+                <div style="text-align: right" class="form-group">
+                    <div class="col-sm-offset-4 col-sm-4">
+                        <button class="btn btn-primary btn btn-default" type="button" id="createProfile">Create new profile</button>
+                    </div>
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>
+
 
 </body>
 </html>

@@ -53,3 +53,5 @@ insert into body_type(name) values ('pickup');
 insert into body_type(name) values ('Van');
 insert into body_type(name) values ('minibus');
 
+insert into usr(login, password) values ('user', 'user');
+

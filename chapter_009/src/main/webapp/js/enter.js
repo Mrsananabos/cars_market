@@ -1,17 +1,32 @@
-$(document).ready(function () {
-    $('#back').click(function () {
-        window.location.href = "/menu.html"
-    })
+
+$(function () {
+    $('#enter').click(function () {
+        createUser();
+    });
 });
 
-function signin() {
+$(function () {
+    $('#createProfile').click(function () {
+        createNewUser();
+    });
+});
+
+function createNewUser() {
+    var login = $('#newLogin').val();
+    var password = $('#newPassword').val();
+    if (validate(login, password)) {
+        createNewProf(login, password);
+    }
+}
+
+function createUser() {
     var login = $('#login').val();
     var password = $('#password').val();
     if (validate(login, password)) {
-        var client = createClient(login, password);
-        sendTo(client)
+        goToProfile(login, password);
     }
 }
+
 function validate(login, password) {
     var result = true;
     if (login == '') {
@@ -24,29 +39,43 @@ function validate(login, password) {
     }
     return result;
 }
-function createClient(login, password) {
-    return {
-        login: login,
-        password: password,
-    };
-}
-function sendTo(client) {
+
+function createNewProf(login, password) {
     $.ajax({
         type: "post",
-        url: "./signin",
+        url: "./authentic",
         dataType: "json",
-        data: JSON.stringify(client),
+        data: {login: login,
+            password: password},
         complete: function (data) {
             var json = JSON.parse(data.responseText);
-            if (json['role'] == "admin") {
-                window.location.href = "http://localhost:8080/chapter_006/admin.html"
+            var status = json['status'];
+            if (status == '1') {
+                window.location.href = "/ad";
+            } else {
+                alert('Sorry, login is already taken')
             }
-            if (json['role'] == "user") {
-                var id = json['id'];
-                window.location.href = "http://localhost:8080/chapter_006/user.html?id="+id;
-            }
-            if (json['role'] == "error") {
-                $("#error").text ("ERROR. PLEASE CHECK YOUR LOGIN AND PASSWORD")
-            }
+
         }
-    });}
+    });
+}
+
+function goToProfile(login, password) {
+    $.ajax({
+        type: "post",
+        url: "./authoriz",
+        dataType: "json",
+        data: {login: login,
+               password: password},
+        complete: function (data) {
+            var json = JSON.parse(data.responseText);
+            var status = json['status'];
+            if (status == '1') {
+                window.location.href = "/ad";
+            } else {
+                alert('Invalid data')
+            }
+
+        }
+    });
+}

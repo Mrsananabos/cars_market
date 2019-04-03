@@ -3,7 +3,7 @@ package ru.job4j.carMarket.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.job4j.carMarket.model.dao.HiberStorage;
 import ru.job4j.carMarket.model.entity.Car;
-import ru.job4j.carMarket.model.entity.Mark;
+import ru.job4j.carMarket.model.entity.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,16 +25,19 @@ public class AdController extends HttpServlet {
         resp.setContentType("text/html; charset=windows-1251");
         StringBuilder sb = new StringBuilder();
         ObjectMapper mapper = new ObjectMapper();
-        Car car = new Car();
         try (BufferedReader reader = req.getReader()) {
             String line = reader.readLine();
             System.out.println(line);
             sb.append(line);
-            car = mapper.readValue(sb.toString(), Car.class);
+            Car car = mapper.readValue(sb.toString(), Car.class);
             System.out.println(car);
+            HiberStorage.getInstance().addCar(car);
+            User user = HiberStorage.getInstance().findUserByLogin(car.getAuthor());
+            System.out.println("нашли юзера " + user);
+            HiberStorage.getInstance().addCarToUser(user, car);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        HiberStorage.getInstance().addCar(car);
+
     }
 }

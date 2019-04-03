@@ -10,6 +10,10 @@
     align: center;
 }
 .inf {
-    outline: 2px solid #64AEE8; /* Чёрная рамка */
-    width: 100%;
+    outline: 2px solid #64AEE8;
+    width: 90%;
+}
+.main.td {
+   padding: 5px;
+    border: 2px solid #64AEE8;
 }

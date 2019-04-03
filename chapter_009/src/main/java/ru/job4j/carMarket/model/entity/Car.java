@@ -9,12 +9,12 @@ public class Car {
     private int yearIssue;
     private int price;
     private String pathImage;
-    private User user;
+    private String author;
 
     public Car() {
     }
 
-    public Car(String mark, String model, String transmission, String bodyType, int yearIssue, int price, String pathImage, User user) {
+    public Car(String mark, String model, String transmission, String bodyType, int yearIssue, int price, String pathImage, String author) {
         this.mark = mark;
         this.model = model;
         this.transmission = transmission;
@@ -22,7 +22,7 @@ public class Car {
         this.yearIssue = yearIssue;
         this.price = price;
         this.pathImage = pathImage;
-        this.user = user;
+        this.author = author;
     }
 
     public int getId() {
@@ -89,16 +89,16 @@ public class Car {
         this.pathImage = pathImage;
     }
 
-    public User getUser() {
-        return user;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setUser(User author) {
-        this.user = author;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override
-    public String toString() {
+    public java.lang.String toString() {
         return "Car{" +
                 "id=" + id +
                 ", mark='" + mark + '\'' +
@@ -108,7 +108,7 @@ public class Car {
                 ", yearIssue=" + yearIssue +
                 ", price=" + price +
                 ", pathImage='" + pathImage + '\'' +
-                ", user='" + user + '\'' +
+                ", user='" + author + '\'' +
                 '}';
     }
 }

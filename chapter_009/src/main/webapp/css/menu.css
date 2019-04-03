@@ -1,7 +1,9 @@
 .article {
-    align: center;
     font-family: "Courier New",fantasy;
     font-weight: 700;
+}
+.demo-container {
+    font-family: "Courier New",fantasy;
 }
 
 .inf {
@@ -14,4 +16,7 @@
 }
 .main {
     margin: 5%;
+}
+.msg {
+    margin-left: 2cm;
 }

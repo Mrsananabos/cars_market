@@ -92,5 +92,32 @@
         <url-pattern>/parts</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AuthenticController</servlet-name>
+        <servlet-class>ru.job4j.carMarket.controller.AuthenticController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AuthenticController</servlet-name>
+        <url-pattern>/authentic</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AuthorizationController</servlet-name>
+        <servlet-class>ru.job4j.carMarket.controller.AuthorizationController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AuthorizationController</servlet-name>
+        <url-pattern>/authoriz</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>ru.job4j.carMarket.controller.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+
 
 </web-app>

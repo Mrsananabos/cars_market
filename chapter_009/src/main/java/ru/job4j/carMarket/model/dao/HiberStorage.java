@@ -6,20 +6,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import ru.job4j.carMarket.model.entity.Car;
-import ru.job4j.carMarket.model.entity.Mark;
-import ru.job4j.carMarket.model.entity.Model;
-import ru.job4j.toDoList.model.entity.Item;
+import ru.job4j.carMarket.model.entity.User;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
 public class HiberStorage implements Storage {
     private static final Logger LOGGER = LogManager.getLogger(HiberStorage.class);
-    private static AtomicInteger NEXT_ID = new AtomicInteger(-1);
     private static final HiberStorage INSTANCE = new HiberStorage();
     private final SessionFactory factory;
 
@@ -48,8 +43,9 @@ public class HiberStorage implements Storage {
     }
 
     @Override
-    public List getMarks() { return tx(session -> {
-       return session.createQuery("FROM Mark").list();
+    public List getMarks() {
+        return tx(session -> {
+            return session.createQuery("FROM Mark").list();
         });
     }
 
@@ -74,8 +70,34 @@ public class HiberStorage implements Storage {
     @Override
     public Car addCar(Car car) {
         return tx(session -> {
-            session.save(car);
+           session.save(car);
             return car;
         });
     }
+
+    @Override
+    public User addUser(User user) {
+        return tx(session -> {
+            session.save(user);
+            return user;
+        });
+    }
+
+    @Override
+    public User findUserByLogin(String login) {
+        return tx(session -> {
+            Query query = session.createQuery("FROM User where login = \'" + login + "\'");
+            return (User) query.uniqueResult();
+        });
+    }
+
+    @Override
+    public Car addCarToUser(User user, Car car) {
+        user.getCars().add(car);
+        return tx(session -> {
+            session.saveOrUpdate(user);
+            return car;
+        });
+    }
+
 }

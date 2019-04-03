@@ -6,7 +6,7 @@
         </id>
         <property name="login" column="login"/>
         <property name="password" column="password"/>
-        <bag name="cars" inverse="true" lazy="true">
+        <bag name="cars" inverse="true" lazy="false">
             <key column="user_id" not-null="false"/>
             <one-to-many class="ru.job4j.carMarket.model.entity.Car"/>
         </bag>
