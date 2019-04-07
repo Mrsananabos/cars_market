@@ -17,7 +17,6 @@ $(function () {
 
 $(function () {
     $('#back').click(function () {
-        alert('back');
         window.location.href = "/market";
     });
 });
@@ -28,9 +27,8 @@ function getLogin() {
         url: "./authentic",
         dataType: "json",
         complete: function (data) {
-            var json = JSON.parse(data);
+            var json = JSON.parse(data.responseText);
             login = json.login;
-            alert(login);
             logoBox(login);
         }
     });
@@ -40,9 +38,7 @@ function logoBox(login) {
     var btnText = 'Enter profile';
     idBtn = 'profile';
     if (login == null) {
-        login = 'guest';
-        btnText = 'Sign in or create an account';
-        idBtn = 'login';
+        window.location.href = "/authoriz";
     }
     $('p.login').html('Hello, ' + login);
 }
@@ -92,7 +88,7 @@ function sendTo(carAd) {
         type: "post",
         url: "./ad",
         dataType: "json",
-        data: JSON.stringify(carAd),
+        data: JSON.stringify(carAd) ,
         success: function () {
             $('#success').text("The ad has been added successfully");
         }
@@ -159,7 +155,7 @@ function newAd(mark, model, trans, body, year, price, login, imageURL) {
         bodyType: body,
         yearIssue: year,
         price: price,
-        author: login,
+        user: login,
         pathImage: imageURL
     };
 }

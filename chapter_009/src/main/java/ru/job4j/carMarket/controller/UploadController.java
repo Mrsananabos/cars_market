@@ -1,6 +1,5 @@
 package ru.job4j.carMarket.controller;
 
-import com.google.gson.Gson;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -17,7 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class UploadController extends HttpServlet {
-    final String UPLOAD_DIRECTORY = "uploads";
+    final String UPLOAD_DIRECTORY = "C:/projects/ashveytser/chapter_009/src/main/webapp/img";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,12 +26,10 @@ public class UploadController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html; charset=windows-1251");
         String fileName = "";
-        String path = req.getSession().getServletContext().getRealPath(File.separator + UPLOAD_DIRECTORY);
-        System.out.println(path);
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
-        System.out.println(UPLOAD_DIRECTORY);
         try {
             List fileItems = upload.parseRequest(req);
             Iterator iteraror = fileItems.iterator();
@@ -40,20 +37,22 @@ public class UploadController extends HttpServlet {
                 FileItem fileItem = (FileItem) iteraror.next();
                 if (!(fileItem).isFormField()) {
                     fileName = fileItem.getName();
-                    File file = new File(path + File.separator + fileName);
+                    String path = UPLOAD_DIRECTORY + File.separator + fileName;
+                    File file = new File(path);
                     System.out.println(file.getAbsolutePath());
                     fileItem.write(file);
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         String answer = new JSONObject()
                 .put("status", "1").put("url", fileName).toString();
+        System.out.println(answer);
         PrintWriter out = resp.getWriter();
         out.print(answer);
     }
+
 
 }
 

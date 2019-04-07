@@ -9,12 +9,13 @@ public class Car {
     private int yearIssue;
     private int price;
     private String pathImage;
-    private String author;
+    private boolean isSold;
+    private User user;
 
     public Car() {
     }
 
-    public Car(String mark, String model, String transmission, String bodyType, int yearIssue, int price, String pathImage, String author) {
+    public Car(String mark, String model, String transmission, String bodyType, int yearIssue, int price, String pathImage, User user) {
         this.mark = mark;
         this.model = model;
         this.transmission = transmission;
@@ -22,7 +23,8 @@ public class Car {
         this.yearIssue = yearIssue;
         this.price = price;
         this.pathImage = pathImage;
-        this.author = author;
+        this.isSold = false;
+        this.user = user;
     }
 
     public int getId() {
@@ -89,16 +91,24 @@ public class Car {
         this.pathImage = pathImage;
     }
 
-    public String getAuthor() {
-        return author;
+    public boolean isIsSold() {
+        return isSold;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setIsSold(boolean sold) {
+        this.isSold = sold;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
-    public java.lang.String toString() {
+    public String toString() {
         return "Car{" +
                 "id=" + id +
                 ", mark='" + mark + '\'' +
@@ -108,7 +118,8 @@ public class Car {
                 ", yearIssue=" + yearIssue +
                 ", price=" + price +
                 ", pathImage='" + pathImage + '\'' +
-                ", user='" + author + '\'' +
+                ", sold=" + isSold +
+                ", user=" + user.getLogin() +
                 '}';
     }
 }

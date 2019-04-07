@@ -2,6 +2,7 @@ idBtn = 'login';
 
 $(document).ready(function () {
     getLogin();
+    getCars();
 
 });
 
@@ -11,6 +12,23 @@ $(function () {
 
     });
 });
+
+function getCars() {
+    // $("td").remove();
+    $.ajax({
+        url: "./cars",
+        method: "get",
+        dataType: "json",
+        complete:
+            function (data) {
+                var json = JSON.parse(data.responseText);
+                for (var i = 0; i < json.length; i++) {
+                    alert('<td><img src="img/'+ json[i][6] + '" width="120" height="80" alt="car"></td>');
+                    $('#table tr:last').after('<tr><td><img src="img/'+ json[i][6] + '" width="120" height="80" alt="car"></td><td>' + json[i][0] + '</td><td>' + json[i][1] +'</td><td>' + json[i][2] +'</td><td>' + json[i][3] +'</td><td>' + json[i][4] +'</td><td>' + json[i][5] + '</td><td>' + json[i][7] + '</td><td>' + json[i][8] + '</td></tr>');
+                }
+            }
+    })
+}
 
 
 function getLogin() {

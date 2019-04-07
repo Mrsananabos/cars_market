@@ -3,6 +3,7 @@ package ru.job4j.carMarket.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.job4j.carMarket.model.dao.HiberStorage;
 import ru.job4j.carMarket.model.entity.Car;
+import ru.job4j.carMarket.model.entity.FormCarSale;
 import ru.job4j.carMarket.model.entity.User;
 
 import javax.servlet.ServletException;
@@ -25,19 +26,20 @@ public class AdController extends HttpServlet {
         resp.setContentType("text/html; charset=windows-1251");
         StringBuilder sb = new StringBuilder();
         ObjectMapper mapper = new ObjectMapper();
+        String line;
+        FormCarSale formCarSale = null;
         try (BufferedReader reader = req.getReader()) {
-            String line = reader.readLine();
-            System.out.println(line);
+            line = reader.readLine();
             sb.append(line);
-            Car car = mapper.readValue(sb.toString(), Car.class);
-            System.out.println(car);
-            HiberStorage.getInstance().addCar(car);
-            User user = HiberStorage.getInstance().findUserByLogin(car.getAuthor());
-            System.out.println("нашли юзера " + user);
-            HiberStorage.getInstance().addCarToUser(user, car);
+            formCarSale = mapper.readValue(sb.toString(), FormCarSale.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        User user = HiberStorage.getInstance().findUserByLogin(formCarSale.getUser());
+        Car car = formCarSale.getCar();
+        car.setUser(user);
+        HiberStorage.getInstance().addCar(car);
     }
 }
+
+

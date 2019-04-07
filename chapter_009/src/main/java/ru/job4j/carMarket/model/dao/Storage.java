@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface Storage {
 
+    List getCars();
+
     List getMarks();
 
     List findModelsByMark(int id);
@@ -21,6 +23,6 @@ public interface Storage {
 
     User findUserByLogin(String login);
 
-    Car addCarToUser(User user, Car car);
+//    Car addCarToUser(User user, Car car);
 
 }

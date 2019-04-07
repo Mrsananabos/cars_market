@@ -110,6 +110,15 @@
         <url-pattern>/authoriz</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CarItemControllerr</servlet-name>
+        <servlet-class>ru.job4j.carMarket.controller.CarItemController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CarItemControllerr</servlet-name>
+        <url-pattern>/cars</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>LoginFilter</filter-name>
         <filter-class>ru.job4j.carMarket.controller.filter.LoginFilter</filter-class>

@@ -1,5 +1,6 @@
 package ru.job4j.carMarket.controller;
 
+import org.json.JSONObject;
 import ru.job4j.carMarket.model.dao.HiberStorage;
 import ru.job4j.carMarket.model.entity.User;
 
@@ -30,7 +31,9 @@ public class AuthorizationController extends HttpServlet {
             rsl = "1";
             session.setAttribute("login", login);
         }
-        writer.append("{\"status\":" + rsl + "}");
+        String answer = new JSONObject()
+                .put("status", rsl).toString();
+        writer.append(answer);
         writer.flush();
     }
 

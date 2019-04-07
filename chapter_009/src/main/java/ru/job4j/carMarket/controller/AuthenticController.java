@@ -21,7 +21,9 @@ public class AuthenticController extends HttpServlet {
         String login = (String) session.getAttribute("login");
         System.out.println("login " + login);
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        writer.append("{\"login\":" + login + "}");
+        String answer = new JSONObject()
+                .put("login", login).toString();
+        writer.append(answer);
         writer.flush();
     }
 
@@ -41,7 +43,9 @@ public class AuthenticController extends HttpServlet {
             HiberStorage.getInstance().addUser(newUser);
             session.setAttribute("login", login);
         }
-        writer.append("{\"status\":" + rsl + "}");
+        String answer = new JSONObject()
+                .put("status", rsl).toString();
+        writer.append(answer);
         writer.flush();
     }
 
