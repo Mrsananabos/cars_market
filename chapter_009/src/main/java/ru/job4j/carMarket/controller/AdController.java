@@ -10,8 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class AdController extends HttpServlet {
 
@@ -24,21 +26,21 @@ public class AdController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=windows-1251");
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
         StringBuilder sb = new StringBuilder();
         ObjectMapper mapper = new ObjectMapper();
         String line;
-        FormCarSale formCarSale = null;
+        Car car = null;
         try (BufferedReader reader = req.getReader()) {
             line = reader.readLine();
             sb.append(line);
-            formCarSale = mapper.readValue(sb.toString(), FormCarSale.class);
+            car = mapper.readValue(sb.toString(), Car.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        User user = HiberStorage.getInstance().findUserByLogin(formCarSale.getUser());
-        Car car = formCarSale.getCar();
-        car.setUser(user);
-        HiberStorage.getInstance().addCar(car);
+        System.out.println("Car from front: \n" + car);
+        HiberStorage.getInstance().addCarToUser(car, car.getAuthor());
     }
 }
 

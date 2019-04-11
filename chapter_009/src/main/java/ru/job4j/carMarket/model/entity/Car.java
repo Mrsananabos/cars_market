@@ -10,12 +10,12 @@ public class Car {
     private int price;
     private String pathImage;
     private boolean isSold;
-    private User user;
+    private String author;
 
     public Car() {
     }
 
-    public Car(String mark, String model, String transmission, String bodyType, int yearIssue, int price, String pathImage, User user) {
+    public Car(String mark, String model, String transmission, String bodyType, int yearIssue, int price, String pathImage, String author) {
         this.mark = mark;
         this.model = model;
         this.transmission = transmission;
@@ -24,7 +24,7 @@ public class Car {
         this.price = price;
         this.pathImage = pathImage;
         this.isSold = false;
-        this.user = user;
+        this.author = author;
     }
 
     public int getId() {
@@ -91,7 +91,7 @@ public class Car {
         this.pathImage = pathImage;
     }
 
-    public boolean isIsSold() {
+    public boolean getIsSold() {
         return isSold;
     }
 
@@ -99,12 +99,45 @@ public class Car {
         this.isSold = sold;
     }
 
-    public User getUser() {
-        return user;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAuthor(String user) {
+        this.author = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Car)) return false;
+
+        Car car = (Car) o;
+
+        if (id != car.id) return false;
+        if (yearIssue != car.yearIssue) return false;
+        if (price != car.price) return false;
+        if (isSold != car.isSold) return false;
+        if (!mark.equals(car.mark)) return false;
+        if (!model.equals(car.model)) return false;
+        if (!transmission.equals(car.transmission)) return false;
+        if (!bodyType.equals(car.bodyType)) return false;
+        return pathImage.equals(car.pathImage);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + mark.hashCode();
+        result = 31 * result + model.hashCode();
+        result = 31 * result + transmission.hashCode();
+        result = 31 * result + bodyType.hashCode();
+        result = 31 * result + yearIssue;
+        result = 31 * result + price;
+        result = 31 * result + pathImage.hashCode();
+        result = 31 * result + (isSold ? 1 : 0);
+        result = 31 * result + author.hashCode();
+        return result;
     }
 
     @Override
@@ -119,7 +152,7 @@ public class Car {
                 ", price=" + price +
                 ", pathImage='" + pathImage + '\'' +
                 ", sold=" + isSold +
-                ", user=" + user.getLogin() +
+                ", user=" + author +
                 '}';
     }
 }

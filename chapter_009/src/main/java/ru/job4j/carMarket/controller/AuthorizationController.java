@@ -26,10 +26,12 @@ public class AuthorizationController extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         System.out.println(login);
+        System.out.println(password);
         User user = HiberStorage.getInstance().findUserByLogin(login);
+        System.out.println("password finded user: " + user.getPassword());
         if (user != null && user.getPassword().equals(password)) {
             rsl = "1";
-            session.setAttribute("login", login);
+            session.setAttribute("user", user);
         }
         String answer = new JSONObject()
                 .put("status", rsl).toString();

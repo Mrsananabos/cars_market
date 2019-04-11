@@ -4,6 +4,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.JSONObject;
+import ru.job4j.carMarket.model.Settings;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class UploadController extends HttpServlet {
-    final String UPLOAD_DIRECTORY = "C:/projects/ashveytser/chapter_009/src/main/webapp/img";
+    final String UPLOAD_DIRECTORY = "0";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,6 +28,8 @@ public class UploadController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=windows-1251");
+        getPath();
+        System.out.println(req.getAttribute("OriginURL").toString());
         String fileName = "";
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
@@ -53,6 +56,14 @@ public class UploadController extends HttpServlet {
         out.print(answer);
     }
 
+    private String getPath() {
+        System.out.println("!!!");
+        String tomcatBase = System.getProperty("catalina.base");
+        String webApp = String.format("%s/webapps", tomcatBase);
+        System.out.println(tomcatBase);
+        System.out.println(webApp);
+        return webApp;
+    }
 
 }
 

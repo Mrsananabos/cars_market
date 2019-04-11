@@ -7,12 +7,18 @@
         <property name="mark" column="mark"/>
         <property name="model" column="model"/>
         <property name="transmission" column="transmission"/>
-        <property name="bodyType" column="body_Type"/>
+        <property name="bodyType" column="body_type"/>
         <property name="yearIssue" column="year_issue"/>
         <property name="price" column="price"/>
         <property name="pathImage" column="path_image"/>
         <property name="isSold" column="sold"/>
-        <many-to-one name="user" column="user_id"
-                     class="ru.job4j.carMarket.model.entity.User"/>
+        <property name="author" column="author"/>
+        <!--<many-to-one name="user"-->
+                     <!--column="user_id"-->
+                     <!--class="ru.job4j.carMarket.model.entity.User"-->
+                     <!--not-null="true"-->
+                     <!--cascade="save-update"-->
+                     <!--&lt;!&ndash;lazy="proxy"&ndash;&gt;-->
+        <!--/>-->
     </class>
 </hibernate-mapping>

@@ -1,13 +1,7 @@
-.row {
+.row.row2 {
     margin-left: .1cm;
     padding-top: .3cm;
 }
-
-.form-horizontal {
-    margin-left: .5cm;
-    padding-top: 1em;
-}
-
 .article {
     align: center;
     font-family: "Courier New", fantasy;

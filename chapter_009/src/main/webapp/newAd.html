@@ -13,12 +13,17 @@
 <body>
 <table class="inf">
     <tr>
-        <td width="23%">
+        <td width="12%">
             <div class="msg">
                 <img src="car.JPG" width="200" height="100" alt="logo" align="right">
             </div>
         </td>
-        <td width="60%">
+        <td width="12%">
+            <div class="msg2">
+                <img src="whiteCar.png" width="160" height="75" alt="logo" align="">
+            </div>
+        </td>
+        <td width="50%">
             <div class="article">
                 <h1 align="center">Car market</h1>
             </div>
@@ -46,8 +51,6 @@
             <option value="zero"></option>
         </select>
     </div>
-</div>
-<form class="form-horizontal" id="form_id">
     <div class="form-group">
         <div class="col-sm-3">
             <label>Transmission:</label>
@@ -56,6 +59,8 @@
             </select>
         </div>
     </div>
+</div>
+<div class="row2">
     <div class="form-group">
         <div class="col-sm-3">
             <label>Body type:</label>
@@ -76,15 +81,43 @@
             <input type="number" step="1000" min="0" class="form-control" id="year" style="color: darkblue">
         </div>
     </div>
+</div>
+<div class="form-group">
     <form id="sampleUploadFrm" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <input type="file" class="form-control-file" id="myFile">
-        <input type="button" class="button" value="upload" id="upload">
-    </div>
+        <div class="form-group">
+            <input type="file" class="form-control-file" id="myFile">
+            <input type="button" class="button" value="upload" id="upload">
+        </div>
     </form>
+</div>
+<div class="form-group">
     <div class="bt">
         <button type="button" class="btn btn-primary btn btn-default" id="ad">Create new ad</button>
     </div>
-</form>
+</div>
+<div class="main">
+    <table class="table table-striped" id='table'>
+        <thead>
+        <tr>
+            <th>Photo</th>
+            <th>Mark</th>
+            <th>Model</th>
+            <th>Transmission</th>
+            <th>BodyType</th>
+            <th>Year of issue</th>
+            <th>Price</th>
+            <th>Author</th>
+            <th>Sale status</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <tr id="tr">
+        </tr>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

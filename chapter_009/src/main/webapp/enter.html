@@ -11,28 +11,34 @@
     <link rel="stylesheet" type="text/css" href="/css/enter.css">
     <style>
         .main {
-            border-spacing: 5em;
+            margin-left: 5cm;
         }
-
         .form-horizontal {
             margin-left: .5cm;
             padding-top: 1em;
         }
 
         .article {
-            align: center;
+            font-family: "Courier New", fantasy;
         }
-
         .inf {
             margin-bottom: 2em;
             outline: 2px solid #64AEE8;
-            width: 100%;
+            /*width: 100%;*/
+            border-color: #64AEE8;
         }
 
         .tdLeft {
-            padding-left: 2em;
             border: 2px solid #64AEE8;
         }
+        .create{
+            border: 2px solid #64AEE8;
+
+        }
+        .control-label {
+            font-family: "Courier New", fantasy;
+        }
+
     </style>
 </head>
 <div id="error" style="background-color: red"></div>
@@ -49,7 +55,7 @@
                 <img src="whiteCar.png" width="160" height="75" alt="logo" align="">
             </div>
         </td>
-        <td width="60%">
+        <td width="45%">
             <div class="article">
                 <h1 align="center">Car market</h1>
             </div>
@@ -63,7 +69,7 @@
     </tr>
 </table>
 <table class="main">
-    <thead>
+    <thead style="font-family: DokChampa">
     <th><h4>Enter profile</h4></th>
     <th><h4>Create new profile</h4></th>
     </thead>
@@ -89,7 +95,7 @@
                 </div>
             </form>
         </td>
-        <td width="40%">
+        <td width="40%" class="create">
             <form class="form-horizontal" id="id">
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="newLogin">Login:</label>

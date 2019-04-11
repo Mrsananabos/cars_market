@@ -18,8 +18,12 @@ public class AuthenticController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=windows-1251");
         HttpSession session = req.getSession();
-        String login = (String) session.getAttribute("login");
-        System.out.println("login " + login);
+        String login = "null";
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            login = user.getLogin();
+        }
+        System.out.println("К сессии привязан: " + login);
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         String answer = new JSONObject()
                 .put("login", login).toString();
@@ -41,7 +45,7 @@ public class AuthenticController extends HttpServlet {
             newUser.setLogin(login);
             newUser.setPassword(password);
             HiberStorage.getInstance().addUser(newUser);
-            session.setAttribute("login", login);
+            session.setAttribute("user", newUser);
         }
         String answer = new JSONObject()
                 .put("status", rsl).toString();

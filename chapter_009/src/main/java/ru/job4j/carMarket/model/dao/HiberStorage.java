@@ -31,9 +31,7 @@ public class HiberStorage implements Storage {
         final Session session = factory.openSession();
         final Transaction tx = session.beginTransaction();
         try {
-            T t = command.apply(session);
-            System.out.println(t);
-            return t;
+            return command.apply(session);
         } catch (final Exception e) {
             session.getTransaction().rollback();
             throw e;
@@ -43,19 +41,20 @@ public class HiberStorage implements Storage {
         }
     }
 
+//    @Override
+//    public List getCars() {
+//        return tx(session -> session.createQuery("SELECT c.mark, c.model, c.transmission, c.bodyType, c.yearIssue, c.price, " +
+//                "c.pathImage, u.login, c.isSold, c.id from Car c join fetch User u on c.user.id = u.id").list());
+//    }
+
     @Override
     public List getCars() {
-        return tx(session -> {
-            return session.createQuery("SELECT c.mark, c.model, c.transmission, c.bodyType, c.yearIssue, c.price, " +
-                    "c.pathImage, u.login, c.isSold from Car c inner join User u on c.user.id = u.id").list();
-        });
+        return tx(session -> session.createQuery("FROM Car").list());
     }
 
     @Override
     public List getMarks() {
-        return tx(session -> {
-            return session.createQuery("FROM Mark").list();
-        });
+        return tx(session -> session.createQuery("FROM Mark").list());
     }
 
     @Override
@@ -77,9 +76,24 @@ public class HiberStorage implements Storage {
     }
 
     @Override
-    public Car addCar(Car car) {
+    public List findCarsByLogin(String login) {
         return tx(session -> {
+            User user = this.findUserByLogin(login);
+            System.out.println("Машины юзера " + user.getCars());
+            List rsl = user.getCars();
+            return rsl;
+        });
+    }
+
+    @Override
+    public Car addCarToUser(Car car, String login) {
+        return tx(session -> {
+            User user = this.findUserByLogin(login);
+            System.out.println("Машина добавляется к юзеру " + user.getLogin());
+            user.getCars().add(car);
+            System.out.println("Машины юзера " + user.getCars());
             session.save(car);
+            session.update(user);
             return car;
         });
     }

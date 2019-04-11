@@ -1,11 +1,14 @@
 login = '';
-url = '';
+pathImage ='';
 
 $(function () {
+    var url = document.location.href;
+    login = url.split("login=")[1];
     getLogin();
     loadMarks();
     loadTransmission();
     loadBodyType();
+    getCars(login);
 });
 
 $(function () {
@@ -20,6 +23,46 @@ $(function () {
         window.location.href = "/market";
     });
 });
+//
+// function getCars(login) {
+//     // $("td").remove();
+//     $.ajax({
+//         url: "./cars",
+//         method: "get",
+//         dataType: "json",
+//         data:  {data: login},
+//         complete:
+//             function (data) {
+//                 var json = JSON.parse(data.responseText);
+//                 for (var i = 0; i < json.length; i++) {
+//                     // alert('<td><img src="img/'+ json[i][7] + '" width="120" height="80" alt="car"></td>');
+//                     $('#table tr:last').after('<tr><td><img src="img/'+ json[i][7] + '" width="120" height="80" alt="car"></td><td>' + json[i][1] + '</td><td>' + json[i][2] +'</td><td>' + json[i][3] +'</td><td>' + json[i][4] +'</td><td>' + json[i][5] +'</td><td>' + json[i][6] + '</td><td>' + json[i][8] + '</td><td>' + json[i][9] + '</td><td><button type="button" class="btn btn-primary btn btn-default" onclick="sold(' + json[i][0] + ')">Car sold</button></td></tr>');
+//                 }
+//             }
+//     })
+// }
+
+function getCars() {
+    // $("td").remove();
+    $.ajax({
+        url: "./cars",
+        method: "get",
+        dataType: "json",
+        data:  {data: login},
+        success:
+            function (data) {
+                var json = JSON.parse(data.responseText);
+                for (var i = 0; i < json.length; i++) {
+                    // alert('<td><img src="img/'+ json[i][7] + '" width="120" height="80" alt="car"></td>');
+                    $('#table tr:last').after('<tr><td><img src="img/'+ json[i][6] + '" width="120" height="80" alt="car"></td><td>' + json[i][1] + '</td><td>' + json[i][2] +'</td><td>' + json[i][3] +'</td><td>' + json[i][4] +'</td><td>' + json[i][5] +'</td><td>' + json[i][6] + '</td><td>' + json[i][8] + '</td><td>' + json[i][9] + '</td></tr>');
+                }
+            }
+    })
+}
+
+function sold(id) {
+    alert(id);
+}
 
 function getLogin() {
     $.ajax({
@@ -28,16 +71,14 @@ function getLogin() {
         dataType: "json",
         complete: function (data) {
             var json = JSON.parse(data.responseText);
-            login = json.login;
+            var login = json.login;
             logoBox(login);
         }
     });
 }
 
 function logoBox(login) {
-    var btnText = 'Enter profile';
-    idBtn = 'profile';
-    if (login == null) {
+    if (login == "null") {
         window.location.href = "/authoriz";
     }
     $('p.login').html('Hello, ' + login);
@@ -65,7 +106,7 @@ function sendPhoto(photo) {
             var response = JSON.parse(msg);
             var status = response.status;
             if (status == 1) {
-                url = response.url;
+                pathImage = response.url;
                 alert("File has been uploaded successfully");
             } else {
                 alert("Couldn't upload file");
@@ -103,14 +144,15 @@ function createAd() {
     var year = $('#year').val();
     var price = $('#price').val();
     var photo = $('#photo').val();
-    if (validate(mark, model, trans, body, year, price, login, url)) {
-        var carAd = newAd(mark, model, trans, body, year, price, login, url);
+    if (validate(mark, model, trans, body, year, price, login, pathImage)) {
+        var carAd = newAd(mark, model, trans, body, year, price, login, pathImage);
         sendTo(carAd);
+        getCars(login);
     }
 }
 
 
-function validate(mark, model, trans, body, year, price, login, url) {
+function validate(mark, model, trans, body, year, price, login, pathImage) {
     var result = true;
     if (mark == '') {
         alert("Please, fill in the 'Mark' field");
@@ -140,14 +182,14 @@ function validate(mark, model, trans, body, year, price, login, url) {
         alert("Error, user not found");
         result = false;
     }
-    if (url == '') {
+    if (pathImage == '') {
         alert("Please, upload car photo");
         result = false;
     }
     return result;
 }
 
-function newAd(mark, model, trans, body, year, price, login, imageURL) {
+function newAd(mark, model, trans, body, year, price, login, pathImage) {
     return {
         mark: mark,
         model: model,
@@ -155,8 +197,8 @@ function newAd(mark, model, trans, body, year, price, login, imageURL) {
         bodyType: body,
         yearIssue: year,
         price: price,
-        user: login,
-        pathImage: imageURL
+        author: login,
+        pathImage: pathImage
     };
 }
 

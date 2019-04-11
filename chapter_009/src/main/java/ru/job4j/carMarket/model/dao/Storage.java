@@ -17,12 +17,12 @@ public interface Storage {
 
     List getBodyType();
 
-    Car addCar(Car car);
+    List findCarsByLogin(String login);
+
+    Car addCarToUser(Car car, String login);
 
     User addUser(User user);
 
     User findUserByLogin(String login);
-
-//    Car addCarToUser(User user, Car car);
 
 }

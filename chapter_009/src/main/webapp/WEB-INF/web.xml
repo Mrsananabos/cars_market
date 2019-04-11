@@ -112,7 +112,7 @@
 
     <servlet>
         <servlet-name>CarItemControllerr</servlet-name>
-        <servlet-class>ru.job4j.carMarket.controller.CarItemController</servlet-class>
+        <servlet-class>ru.job4j.carMarket.controller.CarsItemController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CarItemControllerr</servlet-name>

@@ -51,7 +51,7 @@ function createNewProf(login, password) {
             var json = JSON.parse(data.responseText);
             var status = json['status'];
             if (status == '1') {
-                window.location.href = "/ad";
+                window.location.href = "/ad?login="+login;
             } else {
                 alert('Sorry, login is already taken')
             }
@@ -71,7 +71,7 @@ function goToProfile(login, password) {
             var json = JSON.parse(data.responseText);
             var status = json['status'];
             if (status == '1') {
-                window.location.href = "/ad";
+                window.location.href = "/ad?login="+login;
             } else {
                 alert('Invalid data')
             }
