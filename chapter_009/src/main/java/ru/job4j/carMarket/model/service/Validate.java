@@ -1,14 +1,21 @@
 package ru.job4j.carMarket.model.service;
 
-import ru.job4j.toDoList.model.entity.Item;
+import ru.job4j.carMarket.model.entity.Car;
+import ru.job4j.carMarket.model.entity.User;
 
 import java.util.List;
 
 public interface Validate {
 
-    List findAll();
+    List findCarsByKey(String key);
 
-    Item add(String desc);
+    List findPartsCarByKey(String key);
 
-    void doneItem(int id);
+    List findModelsByMark(String idMark);
+
+    Car addCarToUser(Car car);
+
+    User findUserByLogin(String login);
+
+    boolean addUser(String login, String password);
 }

@@ -1,24 +1,22 @@
 package ru.job4j.carMarket.model;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
 public class Settings {
-    private static final Settings INSTANCE = new Settings();
     private final Properties properties = new Properties();
+    private final String NAME_PROPERTIES = "settings.properties";
 
-    private Settings() {
+    public Settings(String path) {
         try {
-            properties.load(new FileInputStream(this.getClass().getClassLoader().getResource("WEB-INF/resources/settings.properties").getFile()));
+            properties.load(new FileInputStream(path + File.separator + NAME_PROPERTIES));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static Settings getInstance() {
-        return INSTANCE;
-    }
 
     public String getValue(String key) {
         return this.properties.getProperty(key);

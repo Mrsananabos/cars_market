@@ -18,7 +18,7 @@ public class LoginFilter implements Filter {
         if (request.getRequestURI().contains("/ad")) {
             System.out.println("ad");
             HttpSession session = request.getSession();
-            if (session.getAttribute("user") == null) {
+            if (session.getAttribute("login") == null) {
                 ((HttpServletResponse) resp).sendRedirect(String.format("%s/authoriz", request.getContextPath()));
                 return;
             }

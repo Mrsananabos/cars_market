@@ -54,7 +54,7 @@ function getCars() {
                 var json = JSON.parse(data.responseText);
                 for (var i = 0; i < json.length; i++) {
                     // alert('<td><img src="img/'+ json[i][7] + '" width="120" height="80" alt="car"></td>');
-                    $('#table tr:last').after('<tr><td><img src="img/'+ json[i][6] + '" width="120" height="80" alt="car"></td><td>' + json[i][1] + '</td><td>' + json[i][2] +'</td><td>' + json[i][3] +'</td><td>' + json[i][4] +'</td><td>' + json[i][5] +'</td><td>' + json[i][6] + '</td><td>' + json[i][8] + '</td><td>' + json[i][9] + '</td></tr>');
+                    $('#table tr:last').after('<tr><td><img src="img/'+ json[i]['pathImage'] + '" width="120" height="80" alt="car"></td><td>' + json[i]['mark'] + '</td><td>' + json[i]['model'] +'</td><td>' + json[i][3] +'</td><td>' + json[i][4] +'</td><td>' + json[i][5] +'</td><td>' + json[i][6] + '</td><td>' + json[i][8] + '</td><td>' + json[i][9] + '</td></tr>');
                 }
             }
     })
@@ -105,7 +105,7 @@ function sendPhoto(photo) {
         success: function (msg) {
             var response = JSON.parse(msg);
             var status = response.status;
-            if (status == 1) {
+            if (status == "1") {
                 pathImage = response.url;
                 alert("File has been uploaded successfully");
             } else {

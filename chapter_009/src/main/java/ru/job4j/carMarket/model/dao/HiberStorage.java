@@ -36,7 +36,9 @@ public class HiberStorage implements Storage {
             session.getTransaction().rollback();
             throw e;
         } finally {
-            tx.commit();
+            if (tx.isActive()) {
+                tx.commit();
+            }
             session.close();
         }
     }
@@ -78,9 +80,12 @@ public class HiberStorage implements Storage {
     @Override
     public List findCarsByLogin(String login) {
         return tx(session -> {
+            List rsl = null;
             User user = this.findUserByLogin(login);
-            System.out.println("Машины юзера " + user.getCars());
-            List rsl = user.getCars();
+            if (user != null) {
+                rsl = user.getCars();
+            }
+            System.out.println("Машины юзера " + rsl);
             return rsl;
         });
     }
@@ -92,8 +97,8 @@ public class HiberStorage implements Storage {
             System.out.println("Машина добавляется к юзеру " + user.getLogin());
             user.getCars().add(car);
             System.out.println("Машины юзера " + user.getCars());
+            session.save(user);
             session.save(car);
-            session.update(user);
             return car;
         });
     }

@@ -1,49 +1,138 @@
 package ru.job4j.carMarket.model.service;
 
 import org.apache.log4j.Logger;
-import ru.job4j.toDoList.model.dao.HiberStorage;
-import ru.job4j.toDoList.model.dao.Storage;
-import ru.job4j.toDoList.model.entity.Item;
+import ru.job4j.carMarket.model.dao.HiberStorage;
+import ru.job4j.carMarket.model.dao.Storage;
+import ru.job4j.carMarket.model.entity.Car;
+import ru.job4j.carMarket.model.entity.User;
 
 import java.util.List;
 
 public class ValidateService implements Validate {
     private static final Validate INSTANCE = new ValidateService();
-    private final Storage logic = HiberStorage.getInstance();
     private static final Logger LOGGER = Logger.getLogger(ValidateService.class);
+    private final Storage storage = HiberStorage.getInstance();
+
 
     public static Validate getInstance() {
         return INSTANCE;
     }
 
-    public List<Item> findAll() {
-        List<Item> result = logic.findAll();
-        if (result == null) {
-            LOGGER.error("Items are not finded");
+    @Override
+    public List findCarsByKey(String key) {
+        List result = null;
+        if (isValid(key)) {
+            if ("all".equals(key)) {
+                result = storage.getCars();
+            } else {
+                User user = storage.findUserByLogin(key);
+                System.out.println(user);
+                result = user.getCars();
+            }
+            if (result == null) {
+                LOGGER.info("Cars with key(" + key + ") are not found");
+            }
+        } else {
+            LOGGER.info("Key is not valid");
         }
         return result;
     }
 
-    public Item add(String desc) {
-        Item item = new Item();
-        item.setDesc(desc);
-        Item result = this.logic.add(item);
-        if (!validItem(result)) {
-            LOGGER.error("item is incorrect");
+    @Override
+    public List findPartsCarByKey(String key) {
+        List result = null;
+        if (isValid(key)) {
+            switch (key) {
+                case ("mark"): {
+                    result = storage.getMarks();
+                    break;
+                }
+                case ("trans"): {
+                    result = storage.getTransmission();
+                    break;
+                }
+                case ("body"): {
+                    result = storage.getBodyType();
+                    break;
+                }
+                default:
+                    LOGGER.info(String.format("key %s is not exist", key));
+            }
+            if (result == null) {
+                LOGGER.info(String.format("Parts of %s are not found", key));
+            }
+        } else {
+            LOGGER.info("Key is not valid");
         }
-        return item;
+        System.out.println(result);
+        return result;
     }
 
     @Override
-    public void doneItem(int id) {
-        if (id < 0) {
-            LOGGER.error("invalid id");
+    public List findModelsByMark(String idMark) {
+        List result = null;
+        if (isValid(idMark)) {
+            result = storage.findModelsByMark(Integer.valueOf(idMark));
+            if (result == null) {
+                LOGGER.info(String.format("Models of idMark(%s) are not found", idMark));
+            }
         } else {
-            logic.doneItem(id);
+            LOGGER.info("Id of mark is not valid");
         }
+        return result;
     }
 
-    private boolean validItem(Item item) {
-        return ((item.getId() >= 0) && (!item.getDesc().isEmpty()) && (item.getCreated() != null));
+    @Override
+    public Car addCarToUser(Car car) {
+        if (car != null) {
+            if (isValid(car.getAuthor())) {
+                storage.addCarToUser(car, car.getAuthor());
+            } else {
+                LOGGER.info("Car does't have author");
+            }
+        } else {
+            LOGGER.info("Car is empty");
+        }
+        return car;
     }
+
+    @Override
+    public User findUserByLogin(String login) {
+        User result = null;
+        if (isValid(login)) {
+            result = storage.findUserByLogin(login);
+            if (result == null) {
+                LOGGER.info("User with login(" + login + ") is not found");
+            }
+        } else {
+            LOGGER.info("login is not valid");
+        }
+        return result;
+    }
+
+    @Override
+    public boolean addUser(String login, String password) {
+        boolean result = false;
+        if (isValid(login) && isValid(password)) {
+            User user = storage.findUserByLogin(login);
+            if (user == null) {
+                User newUser = new User();
+                newUser.setLogin(login);
+                newUser.setPassword(password);
+                storage.addUser(newUser);
+                result = true;
+            } else {
+                LOGGER.info("User with login(" + login + ") is already exists");
+            }
+        } else {
+            LOGGER.info("Data of user are not valid");
+        }
+        return result;
+    }
+
+    private boolean isValid(String value) {
+        return ((value != null) && (!value.isEmpty()));
+    }
+
+
 }

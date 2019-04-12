@@ -48,15 +48,6 @@
     <!--</servlet-mapping>  -->
 
     <servlet>
-        <servlet-name>SignInController</servlet-name>
-        <servlet-class>ru.job4j.carMarket.controller.SignInController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>SignInController</servlet-name>
-        <url-pattern>/signin</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>MarketController</servlet-name>
         <servlet-class>ru.job4j.carMarket.controller.MarketController</servlet-class>
     </servlet>

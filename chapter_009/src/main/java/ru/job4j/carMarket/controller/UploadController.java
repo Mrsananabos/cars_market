@@ -17,20 +17,19 @@ import java.util.Iterator;
 import java.util.List;
 
 public class UploadController extends HttpServlet {
-    final String UPLOAD_DIRECTORY = "0";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/index.html").forward(req, resp);
-
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=windows-1251");
-        getPath();
-        System.out.println(req.getAttribute("OriginURL").toString());
+        Settings settings = new Settings(this.getServletContext().getRealPath("/WEB-INF/classes"));
+        String pathToImg = settings.getValue("ImgPath");
         String fileName = "";
+        String status = "0";
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
         try {
@@ -40,29 +39,21 @@ public class UploadController extends HttpServlet {
                 FileItem fileItem = (FileItem) iteraror.next();
                 if (!(fileItem).isFormField()) {
                     fileName = fileItem.getName();
-                    String path = UPLOAD_DIRECTORY + File.separator + fileName;
+                    String path = pathToImg + File.separator + fileName;
                     File file = new File(path);
                     System.out.println(file.getAbsolutePath());
                     fileItem.write(file);
+                    status = "1";
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         String answer = new JSONObject()
-                .put("status", "1").put("url", fileName).toString();
+                .put("status", status).put("url", fileName).toString();
         System.out.println(answer);
         PrintWriter out = resp.getWriter();
         out.print(answer);
-    }
-
-    private String getPath() {
-        System.out.println("!!!");
-        String tomcatBase = System.getProperty("catalina.base");
-        String webApp = String.format("%s/webapps", tomcatBase);
-        System.out.println(tomcatBase);
-        System.out.println(webApp);
-        return webApp;
     }
 
 }

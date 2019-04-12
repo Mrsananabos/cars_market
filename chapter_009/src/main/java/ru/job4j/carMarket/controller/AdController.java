@@ -27,7 +27,6 @@ public class AdController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=windows-1251");
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
         StringBuilder sb = new StringBuilder();
         ObjectMapper mapper = new ObjectMapper();
         String line;

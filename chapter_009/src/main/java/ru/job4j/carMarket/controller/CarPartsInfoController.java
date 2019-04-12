@@ -1,7 +1,8 @@
 package ru.job4j.carMarket.controller;
 
 import com.google.gson.Gson;
-import ru.job4j.carMarket.model.dao.HiberStorage;
+import ru.job4j.carMarket.model.service.Validate;
+import ru.job4j.carMarket.model.service.ValidateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,8 @@ import java.io.PrintWriter;
 import java.util.List;
 
 public class CarPartsInfoController extends HttpServlet {
+    private final Validate service = ValidateService.getInstance();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=windows-1251");
@@ -19,36 +22,16 @@ public class CarPartsInfoController extends HttpServlet {
         List result;
         String json;
         String part = req.getParameter("part");
-        switch (part) {
-            case ("mark"): {
-                result = HiberStorage.getInstance().getMarks();
-                break;
-            }
-            case ("model"): {
-                String idMark = req.getParameter("mark");
-                result = HiberStorage.getInstance().findModelsByMark(Integer.valueOf(idMark));
-                break;
-            }
-            case ("trans"): {
-                result = HiberStorage.getInstance().getTransmission();
-                break;
-            }
-            case ("body"): {
-                result = HiberStorage.getInstance().getBodyType();
-                break;
-            }
-            default:
-                throw new UnsupportedOperationException(String.format("Part of car : %s not found", part));
+        if (part.equals("model")) {
+            String idMark = req.getParameter("mark");
+            result = service.findModelsByMark(idMark);
+        } else {
+            result = service.findPartsCarByKey(part);
         }
         json = gson.toJson(result);
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         writer.append(json);
         writer.flush();
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
     }
 
 }
