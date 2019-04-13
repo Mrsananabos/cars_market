@@ -5,6 +5,8 @@ import ru.job4j.carMarket.model.dao.HiberStorage;
 import ru.job4j.carMarket.model.entity.Car;
 import ru.job4j.carMarket.model.entity.FormCarSale;
 import ru.job4j.carMarket.model.entity.User;
+import ru.job4j.carMarket.model.service.Validate;
+import ru.job4j.carMarket.model.service.ValidateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -30,16 +32,16 @@ public class AdController extends HttpServlet {
         StringBuilder sb = new StringBuilder();
         ObjectMapper mapper = new ObjectMapper();
         String line;
-        Car car = null;
+        FormCarSale formCar = null;
         try (BufferedReader reader = req.getReader()) {
             line = reader.readLine();
             sb.append(line);
-            car = mapper.readValue(sb.toString(), Car.class);
+            formCar = mapper.readValue(sb.toString(), FormCarSale.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Car from front: \n" + car);
-        HiberStorage.getInstance().addCarToUser(car, car.getAuthor());
+        System.out.println("Car from front: \n" + formCar);
+        ValidateService.getInstance().addCarToUser(formCar);
     }
 }
 

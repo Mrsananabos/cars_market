@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ru.job4j.carMarket.model.dao.HiberStorage;
 import ru.job4j.carMarket.model.dao.Storage;
 import ru.job4j.carMarket.model.entity.Car;
+import ru.job4j.carMarket.model.entity.FormCarSale;
 import ru.job4j.carMarket.model.entity.User;
 
 import java.util.List;
@@ -19,8 +20,8 @@ public class ValidateService implements Validate {
     }
 
     @Override
-    public List findCarsByKey(String key) {
-        List result = null;
+    public List<Car> findCarsByKey(String key) {
+        List<Car> result = null;
         if (isValid(key)) {
             if ("all".equals(key)) {
                 result = storage.getCars();
@@ -28,6 +29,7 @@ public class ValidateService implements Validate {
                 User user = storage.findUserByLogin(key);
                 System.out.println(user);
                 result = user.getCars();
+                System.out.println(result);
             }
             if (result == null) {
                 LOGGER.info("Cars with key(" + key + ") are not found");
@@ -83,17 +85,18 @@ public class ValidateService implements Validate {
     }
 
     @Override
-    public Car addCarToUser(Car car) {
-        if (car != null) {
-            if (isValid(car.getAuthor())) {
-                storage.addCarToUser(car, car.getAuthor());
+    public Car addCarToUser(FormCarSale formCar) {
+        if (formCar != null) {
+            if (isValid(formCar.getAuthor())) {
+                User user = storage.findUserByLogin(formCar.getAuthor());
+                storage.addCarToUser(user, formCar.getCar());
             } else {
                 LOGGER.info("Car does't have author");
             }
         } else {
             LOGGER.info("Car is empty");
         }
-        return car;
+        return null;
     }
 
     @Override
@@ -114,6 +117,7 @@ public class ValidateService implements Validate {
     public boolean addUser(String login, String password) {
         boolean result = false;
         if (isValid(login) && isValid(password)) {
+            System.out.println(login + password);
             User user = storage.findUserByLogin(login);
             if (user == null) {
                 User newUser = new User();
@@ -127,6 +131,7 @@ public class ValidateService implements Validate {
         } else {
             LOGGER.info("Data of user are not valid");
         }
+        System.out.println(result);
         return result;
     }
 

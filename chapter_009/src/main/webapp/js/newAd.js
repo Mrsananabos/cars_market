@@ -51,10 +51,8 @@ function getCars() {
         data:  {data: login},
         success:
             function (data) {
-                var json = JSON.parse(data.responseText);
-                for (var i = 0; i < json.length; i++) {
-                    // alert('<td><img src="img/'+ json[i][7] + '" width="120" height="80" alt="car"></td>');
-                    $('#table tr:last').after('<tr><td><img src="img/'+ json[i]['pathImage'] + '" width="120" height="80" alt="car"></td><td>' + json[i]['mark'] + '</td><td>' + json[i]['model'] +'</td><td>' + json[i][3] +'</td><td>' + json[i][4] +'</td><td>' + json[i][5] +'</td><td>' + json[i][6] + '</td><td>' + json[i][8] + '</td><td>' + json[i][9] + '</td></tr>');
+                for (var i = 0; i < data.length; i++) {
+                    $('#table tr:last').after('<tr><td><img src="img/'+ data[i].pathImage + '" width="120" height="80" alt="car"></td><td>' + data[i].mark + '</td><td>' + data[i].model +'</td><td>' + data[i].transmission +'</td><td>' + data[i].bodyType +'</td><td>' + data[i].yearIssue +'</td><td>' + data[i].price + '</td><td>' + data[i]['isSold'] + '</td><td><button  type="submit" class="btn btn-primary btn btn-default" onclick="isSold(' + data[i]['id'] + ')">Car sold</button></td>></tr>');
                 }
             }
     })
@@ -195,10 +193,11 @@ function newAd(mark, model, trans, body, year, price, login, pathImage) {
         model: model,
         transmission: trans,
         bodyType: body,
-        yearIssue: year,
         price: price,
+        yearIssue: year,
         author: login,
         pathImage: pathImage
+
     };
 }
 

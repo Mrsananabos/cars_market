@@ -8,12 +8,12 @@ public class FormCarSale {
     private String yearIssue;
     private String price;
     private String pathImage;
-    private String user;
+    private String author;
 
     public FormCarSale() {
     }
 
-    public FormCarSale(String mark, String model, String transmission, String bodyType, String yearIssue, String price, String pathImage, String user) {
+    public FormCarSale(String mark, String model, String transmission, String bodyType, String yearIssue, String price, String pathImage, String author) {
         this.mark = mark;
         this.model = model;
         this.transmission = transmission;
@@ -21,7 +21,7 @@ public class FormCarSale {
         this.yearIssue = yearIssue;
         this.price = price;
         this.pathImage = pathImage;
-        this.user = user;
+        this.author = author;
     }
 
     public void setMark(String mark) {
@@ -52,16 +52,29 @@ public class FormCarSale {
         this.pathImage = pathImage;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public String getUser() {
-        return user;
+    public String getAuthor() {
+        return author;
     }
 
     public Car getCar() {
         return new Car(mark, model, transmission, bodyType, Integer.valueOf(yearIssue), Integer.valueOf(price), pathImage, null);
     }
 
+    @Override
+    public String toString() {
+        return "FormCarSale{" +
+                "mark='" + mark + '\'' +
+                ", model='" + model + '\'' +
+                ", transmission='" + transmission + '\'' +
+                ", bodyType='" + bodyType + '\'' +
+                ", yearIssue='" + yearIssue + '\'' +
+                ", price='" + price + '\'' +
+                ", pathImage='" + pathImage + '\'' +
+                ", author='" + author + '\'' +
+                '}';
+    }
 }

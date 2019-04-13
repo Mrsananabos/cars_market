@@ -43,16 +43,16 @@ public class HiberStorage implements Storage {
         }
     }
 
-//    @Override
-//    public List getCars() {
-//        return tx(session -> session.createQuery("SELECT c.mark, c.model, c.transmission, c.bodyType, c.yearIssue, c.price, " +
-//                "c.pathImage, u.login, c.isSold, c.id from Car c join fetch User u on c.user.id = u.id").list());
-//    }
-
     @Override
     public List getCars() {
-        return tx(session -> session.createQuery("FROM Car").list());
+        return tx(session -> session.createQuery("SELECT c.mark, c.model, c.transmission, c.bodyType, c.yearIssue, c.price, " +
+                "c.pathImage, u.login, c.isSold, c.id from Car c join fetch User u on c.user.id = u.id").list());
     }
+
+//    @Override
+//    public List getCars() {
+//        return tx(session -> session.createQuery("FROM Car").list());
+//    }
 
     @Override
     public List getMarks() {
@@ -90,18 +90,18 @@ public class HiberStorage implements Storage {
         });
     }
 
-    @Override
-    public Car addCarToUser(Car car, String login) {
-        return tx(session -> {
-            User user = this.findUserByLogin(login);
-            System.out.println("Машина добавляется к юзеру " + user.getLogin());
-            user.getCars().add(car);
-            System.out.println("Машины юзера " + user.getCars());
-            session.save(user);
-            session.save(car);
-            return car;
-        });
-    }
+//    @Override
+//    public Car addCarToUser(Car car, String login) {
+//        return tx(session -> {
+//            User user = this.findUserByLogin(login);
+//            System.out.println("Машина добавляется к юзеру " + user.getLogin());
+//            user.getCars().add(car);
+//            System.out.println("Машины юзера " + user.getCars());
+//            session.save(user);
+//            session.save(car);
+//            return car;
+//        });
+//    }
 
     @Override
     public User addUser(User user) {
@@ -112,21 +112,24 @@ public class HiberStorage implements Storage {
     }
 
     @Override
+    public Car addCarToUser(User user, Car car) {
+        return tx(session -> {
+            car.setUser(user);
+           session.save(car);
+            return car;
+        });
+    }
+
+    @Override
     public User findUserByLogin(String login) {
         return tx(session -> {
-            Query query = session.createQuery("FROM User where login = \'" + login + "\'");
+            Query query = session.createQuery("FROM User where login = :userName");
+            query.setParameter("userName", login);
             return (User) query.uniqueResult();
         });
     }
 
-//    @Override
-//    public Car addCarToUser(User user, Car car) {
-//        user.getCars().add(car);
-//        return tx(session -> {
-//            session.saveOrUpdate(user);
-//            return car;
-//        });
-//    }
+
 //
 //    public static void main(String[] args) {
 //        HiberStorage hiberStorage = HiberStorage.getInstance();

@@ -1,5 +1,8 @@
 package ru.job4j.carMarket.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.annotations.Expose;
+
 public class Car {
     private int id;
     private String mark;
@@ -10,12 +13,13 @@ public class Car {
     private int price;
     private String pathImage;
     private boolean isSold;
-    private String author;
+    @JsonIgnore
+    private User user;
 
     public Car() {
     }
 
-    public Car(String mark, String model, String transmission, String bodyType, int yearIssue, int price, String pathImage, String author) {
+    public Car(String mark, String model, String transmission, String bodyType, int yearIssue, int price, String pathImage, User user) {
         this.mark = mark;
         this.model = model;
         this.transmission = transmission;
@@ -24,7 +28,7 @@ public class Car {
         this.price = price;
         this.pathImage = pathImage;
         this.isSold = false;
-        this.author = author;
+        this.user = user;
     }
 
     public int getId() {
@@ -99,12 +103,12 @@ public class Car {
         this.isSold = sold;
     }
 
-    public String getAuthor() {
-        return author;
+    public User getUser() {
+        return user;
     }
 
-    public void setAuthor(String user) {
-        this.author = user;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -136,7 +140,7 @@ public class Car {
         result = 31 * result + price;
         result = 31 * result + pathImage.hashCode();
         result = 31 * result + (isSold ? 1 : 0);
-        result = 31 * result + author.hashCode();
+        result = 31 * result + user.hashCode();
         return result;
     }
 
@@ -152,7 +156,7 @@ public class Car {
                 ", price=" + price +
                 ", pathImage='" + pathImage + '\'' +
                 ", sold=" + isSold +
-                ", user=" + author +
+                ", user=" + user.getLogin() +
                 '}';
     }
 }

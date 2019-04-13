@@ -1,7 +1,10 @@
 package ru.job4j.carMarket.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.apache.log4j.Logger;
+import ru.job4j.carMarket.model.entity.Car;
 import ru.job4j.carMarket.model.service.ValidateService;
 
 import javax.servlet.http.HttpServlet;
@@ -19,13 +22,17 @@ public class CarsItemController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html; charset=windows-1251");
         try {
+//            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
             String key = req.getParameter("data");
             System.out.println("login: " + key);
-            List result = ValidateService.getInstance().findCarsByKey(key);
-            String json = new Gson().toJson(result);
-            System.out.println("json: " + json);
+            List<Car> result = ValidateService.getInstance().findCarsByKey(key);
+            System.out.println("result from an \n" + result);
+//            String json = gson.toJson(result);
+//            System.out.println("json: " + json);
             PrintWriter writer = new PrintWriter(resp.getOutputStream());
-            writer.append(json);
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.writeValue(writer, result);
+//            writer.append(json);
             writer.flush();
         } catch (Exception e) {
            LOGGER.error(e.getMessage(), e);

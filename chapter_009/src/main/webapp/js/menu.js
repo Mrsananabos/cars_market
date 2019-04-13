@@ -58,7 +58,7 @@ function goToUser() {
 
 function logoBox(login) {
     var btnText = 'Enter profile';
-    if (login == "null") {
+    if (login == undefined) {
         login = 'guest';
         btnText = 'Sign in or create an account';
     } else {
