@@ -55,7 +55,6 @@ function createNewProf(login, password) {
             } else {
                 alert('Sorry, login is already taken')
             }
-
         }
     });
 }
@@ -75,7 +74,6 @@ function goToProfile(login, password) {
             } else {
                 alert('Invalid data')
             }
-
         }
     });
 }

@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class UploadController extends HttpServlet {
+    private String pathURL = "image/";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,7 +42,6 @@ public class UploadController extends HttpServlet {
                     fileName = fileItem.getName();
                     String path = pathToImg + File.separator + fileName;
                     File file = new File(path);
-                    System.out.println(file.getAbsolutePath());
                     fileItem.write(file);
                     status = "1";
                 }
@@ -50,8 +50,8 @@ public class UploadController extends HttpServlet {
             e.printStackTrace();
         }
         String answer = new JSONObject()
-                .put("status", status).put("url", fileName).toString();
-        System.out.println(answer);
+                .put("status", status)
+                .put("url", pathURL + fileName).toString();
         PrintWriter out = resp.getWriter();
         out.print(answer);
     }

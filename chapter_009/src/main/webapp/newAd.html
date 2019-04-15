@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>Car market</title>
-    <meta charset="utf-8">
+    <meta charset="windows-1251">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -29,29 +29,30 @@
             </div>
         </td>
         <td>
-            <p class="login">
-            </p>
+            <h3><p class="login">
+            </p></h3>
             <p class="btf">
                 <button type="button" class="btn btn-primary btn btn-default" id="back">Back menu</button>
+            </p>
+            <p class="logout">
             </p>
         </td>
     </tr>
 </table>
-<div id="success"></div>
-<div class="row">
-    <div class="col-sm-3">
-        <label>Mark:</label>
-        <select class="selectpicker form-control" id="mark">
-            <option value="zero"></option>
-        </select>
-    </div>
-    <div class="col-sm-3">
-        <label>Model:</label>
-        <select class="selectpicker form-control" id="model">
-            <option value="zero"></option>
-        </select>
-    </div>
-    <div class="form-group">
+<form class="form-horizontal" id="form_id">
+    <div class="row">
+        <div class="col-sm-3">
+            <label>Mark:</label>
+            <select class="selectpicker form-control" id="mark">
+                <option value="zero"></option>
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <label>Model:</label>
+            <select class="selectpicker form-control" id="model">
+                <option value="zero"></option>
+            </select>
+        </div>
         <div class="col-sm-3">
             <label>Transmission:</label>
             <select class="selectpicker form-control" id="trans">
@@ -59,42 +60,33 @@
             </select>
         </div>
     </div>
-</div>
-<div class="row2">
-    <div class="form-group">
+    <div class="row">
         <div class="col-sm-3">
             <label>Body type:</label>
             <select class="selectpicker form-control" id="body">
                 <option value="zero"></option>
             </select>
         </div>
-    </div>
-    <div class="form-group">
         <div class="col-sm-3">
             <label>Year of issue:</label>
             <input type="number" value="2018" class="form-control" id="year" style="color: darkblue">
         </div>
-    </div>
-    <div class="form-group">
         <div class="col-sm-3">
             <label>Price(RUB):</label>
             <input type="number" step="1000" min="0" class="form-control" id="price" style="color: darkblue">
         </div>
     </div>
-</div>
-<div class="form-group">
-    <form id="sampleUploadFrm" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <input type="file" class="form-control-file" id="myFile">
-            <input type="button" class="button" value="upload" id="upload">
+    <div class="row">
+            <div class="col-sm-3">
+                <label>Photo:</label>
+                <input type="file" class="form-control-file" id="myFile">
+                <input type="button" class="button" value="upload" id="upload">
+            </div>
+            <div class="bt">
+                <button type="button" class="btn btn-primary btn btn-default" id="ad">Create new ad</button>
+            </div>
         </div>
-    </form>
-</div>
-<div class="form-group">
-    <div class="bt">
-        <button type="button" class="btn btn-primary btn btn-default" id="ad">Create new ad</button>
-    </div>
-</div>
+</form>
 <div class="main">
     <table class="table table-striped" id='table'>
         <thead>
@@ -110,11 +102,7 @@
             <th>Action</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-        <tr id="tr">
-        </tr>
-        </tr>
+        <tbody class="cars">
         </tbody>
     </table>
 </div>

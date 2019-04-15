@@ -1,7 +1,6 @@
 package ru.job4j.carMarket.controller;
 
 import org.json.JSONObject;
-import ru.job4j.carMarket.model.dao.HiberStorage;
 import ru.job4j.carMarket.model.entity.User;
 import ru.job4j.carMarket.model.service.ValidateService;
 
@@ -26,9 +25,7 @@ public class AuthorizationController extends HttpServlet {
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        System.out.println(login + "\n" + password);
         User user = ValidateService.getInstance().findUserByLogin(login);
-        System.out.println("password finded user: " + user.getPassword());
         if (user != null && user.getPassword().equals(password)) {
             rsl = "1";
             session.setAttribute("login", login);

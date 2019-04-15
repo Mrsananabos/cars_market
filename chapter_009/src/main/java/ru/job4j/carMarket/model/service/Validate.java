@@ -13,11 +13,13 @@ public interface Validate {
 
     List findPartsCarByKey(String key);
 
-    List<Model> findModelsByMark(String idMark);
+    List<Model> findModelsByMark(String id);
 
     Car addCarToUser(FormCarSale formCar);
 
     User findUserByLogin(String login);
+
+    void soldCar(String id);
 
     boolean addUser(String login, String password);
 }

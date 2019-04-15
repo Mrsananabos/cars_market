@@ -1,9 +1,6 @@
 package ru.job4j.carMarket.controller;
 
 import org.json.JSONObject;
-import ru.job4j.carMarket.model.dao.HiberStorage;
-import ru.job4j.carMarket.model.entity.User;
-import ru.job4j.carMarket.model.service.Validate;
 import ru.job4j.carMarket.model.service.ValidateService;
 
 import javax.servlet.ServletException;
@@ -22,7 +19,6 @@ public class AuthenticController extends HttpServlet {
         String login = "null";
         HttpSession session = req.getSession();
         login = (String) session.getAttribute("login");
-        System.out.println("К сессии привязан: " + login);
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         String answer = new JSONObject()
                 .put("login", login).toString();

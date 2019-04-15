@@ -23,27 +23,9 @@ $(function () {
         window.location.href = "/market";
     });
 });
-//
-// function getCars(login) {
-//     // $("td").remove();
-//     $.ajax({
-//         url: "./cars",
-//         method: "get",
-//         dataType: "json",
-//         data:  {data: login},
-//         complete:
-//             function (data) {
-//                 var json = JSON.parse(data.responseText);
-//                 for (var i = 0; i < json.length; i++) {
-//                     // alert('<td><img src="img/'+ json[i][7] + '" width="120" height="80" alt="car"></td>');
-//                     $('#table tr:last').after('<tr><td><img src="img/'+ json[i][7] + '" width="120" height="80" alt="car"></td><td>' + json[i][1] + '</td><td>' + json[i][2] +'</td><td>' + json[i][3] +'</td><td>' + json[i][4] +'</td><td>' + json[i][5] +'</td><td>' + json[i][6] + '</td><td>' + json[i][8] + '</td><td>' + json[i][9] + '</td><td><button type="button" class="btn btn-primary btn btn-default" onclick="sold(' + json[i][0] + ')">Car sold</button></td></tr>');
-//                 }
-//             }
-//     })
-// }
 
 function getCars() {
-    // $("td").remove();
+    $(".cars").empty();
     $.ajax({
         url: "./cars",
         method: "get",
@@ -51,15 +33,16 @@ function getCars() {
         data:  {data: login},
         success:
             function (data) {
+                var img = document.createElement("img");
                 for (var i = 0; i < data.length; i++) {
-                    $('#table tr:last').after('<tr><td><img src="img/'+ data[i].pathImage + '" width="120" height="80" alt="car"></td><td>' + data[i].mark + '</td><td>' + data[i].model +'</td><td>' + data[i].transmission +'</td><td>' + data[i].bodyType +'</td><td>' + data[i].yearIssue +'</td><td>' + data[i].price + '</td><td>' + data[i]['isSold'] + '</td><td><button  type="submit" class="btn btn-primary btn btn-default" onclick="isSold(' + data[i]['id'] + ')">Car sold</button></td>></tr>');
+                    img.setAttribute("width", 200);
+                    img.setAttribute("height", 150);
+                    img.setAttribute("src", data[i].pathImage);
+                    $('.cars').append(img);
+                    $('.cars').append('<tr><td><img src="'+ data[i].pathImage + '" width="200" height="150" class="img-fluid" alt="car"></td><td>' + data[i].mark + '</td><td>' + data[i].model +'</td><td>' + data[i].transmission +'</td><td>' + data[i].bodyType +'</td><td>' + data[i].yearIssue +'</td><td>' + data[i].price + '</td><td>' + data[i]['isSold'] + '</td><td><button class="btn btn-primary btn btn-default" onclick="isSold(' + data[i]['id'] + ')">Car sold</button></td>></tr>');
                 }
             }
     })
-}
-
-function sold(id) {
-    alert(id);
 }
 
 function getLogin() {
@@ -75,11 +58,24 @@ function getLogin() {
     });
 }
 
-function logoBox(login) {
+function  logoBox(login) {
     if (login == "null") {
         window.location.href = "/authoriz";
     }
     $('p.login').html('Hello, ' + login);
+    $('.logout').append('<button type="button" class="btn btn-primary btn btn-default" onclick="logout()">Logout</button>');
+}
+
+function logout() {
+    $.ajax({
+        type: "post",
+        url: "./logout",
+        dataType: "json",
+        data:  {logout: 'logout'},
+        complete: function (data) {
+            window.location.href = "/market";
+        }
+    });
 }
 
 $(function () {
@@ -128,8 +124,9 @@ function sendTo(carAd) {
         url: "./ad",
         dataType: "json",
         data: JSON.stringify(carAd) ,
-        success: function () {
+        complete: function () {
             $('#success').text("The ad has been added successfully");
+            getCars(login);
         }
     });
 }
@@ -144,9 +141,19 @@ function createAd() {
     var photo = $('#photo').val();
     if (validate(mark, model, trans, body, year, price, login, pathImage)) {
         var carAd = newAd(mark, model, trans, body, year, price, login, pathImage);
+        cleanFields();
         sendTo(carAd);
-        getCars(login);
     }
+}
+
+function cleanFields() {
+    $('#mark').val('');
+    $('#model').val('');
+    $('#trans').val('');
+    $('#body').val('');
+    $('#year').val('');
+    $('#price').val('');
+    $('#photo').val('');
 }
 
 
@@ -269,5 +276,18 @@ function loadBodyType() {
                     $('#body').find('option:last').after('<option value=' + json[i]['id'] + '>' + json[i]['name'] + '</option>');
                 }
             }
-    })
+    });
+}
+
+function isSold(id) {
+    $.ajax({
+        url: "./sold",
+        method: "post",
+        data: {id: id},
+        dataType: "json",
+        complete:
+            function () {
+                getCars(login);
+            }
+    });
 }

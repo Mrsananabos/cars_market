@@ -1,8 +1,6 @@
 package ru.job4j.carMarket.model.dao;
 
-import ru.job4j.carMarket.model.entity.Car;
-import ru.job4j.carMarket.model.entity.Mark;
-import ru.job4j.carMarket.model.entity.User;
+import ru.job4j.carMarket.model.entity.*;
 
 import java.util.List;
 
@@ -10,20 +8,20 @@ public interface Storage {
 
     List<Car> getCars();
 
-    List getMarks();
+    List<Mark> getMarks();
 
-    List findModelsByMark(int id);
+    List<Model> findModelsByMark(int id);
 
-    List getTransmission();
+    List<Transmission> getTransmission();
 
-    List getBodyType();
-
-    List findCarsByLogin(String login);
+    List<BodyType> getBodyType();
 
     Car addCarToUser(User user, Car car);
 
     User addUser(User user);
 
     User findUserByLogin(String login);
+
+    void soldCar(int id);
 
 }

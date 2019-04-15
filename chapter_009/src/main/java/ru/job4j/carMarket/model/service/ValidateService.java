@@ -100,20 +100,6 @@ public class ValidateService implements Validate {
     }
 
     @Override
-    public User findUserByLogin(String login) {
-        User result = null;
-        if (isValid(login)) {
-            result = storage.findUserByLogin(login);
-            if (result == null) {
-                LOGGER.info("User with login(" + login + ") is not found");
-            }
-        } else {
-            LOGGER.info("login is not valid");
-        }
-        return result;
-    }
-
-    @Override
     public boolean addUser(String login, String password) {
         boolean result = false;
         if (isValid(login) && isValid(password)) {
@@ -133,6 +119,30 @@ public class ValidateService implements Validate {
         }
         System.out.println(result);
         return result;
+    }
+
+    @Override
+    public User findUserByLogin(String login) {
+        User result = null;
+        if (isValid(login)) {
+            result = storage.findUserByLogin(login);
+            if (result == null) {
+                LOGGER.info("User with login(" + login + ") is not found");
+            }
+        } else {
+            LOGGER.info("login is not valid");
+        }
+        return result;
+    }
+
+    @Override
+    public void soldCar(String id) {
+        if (isValid(id)) {
+            int idCar = Integer.valueOf(id);
+            storage.soldCar(idCar);
+        } else {
+            LOGGER.info("Car's id is not valid");
+        }
     }
 
     private boolean isValid(String value) {
