@@ -27,9 +27,7 @@ public class ValidateService implements Validate {
                 result = storage.getCars();
             } else {
                 User user = storage.findUserByLogin(key);
-                System.out.println(user);
                 result = user.getCars();
-                System.out.println(result);
             }
             if (result == null) {
                 LOGGER.info("Cars with key(" + key + ") are not found");
@@ -66,7 +64,6 @@ public class ValidateService implements Validate {
         } else {
             LOGGER.info("Key is not valid");
         }
-        System.out.println(result);
         return result;
     }
 
@@ -103,7 +100,6 @@ public class ValidateService implements Validate {
     public boolean addUser(String login, String password) {
         boolean result = false;
         if (isValid(login) && isValid(password)) {
-            System.out.println(login + password);
             User user = storage.findUserByLogin(login);
             if (user == null) {
                 User newUser = new User();
@@ -117,7 +113,6 @@ public class ValidateService implements Validate {
         } else {
             LOGGER.info("Data of user are not valid");
         }
-        System.out.println(result);
         return result;
     }
 

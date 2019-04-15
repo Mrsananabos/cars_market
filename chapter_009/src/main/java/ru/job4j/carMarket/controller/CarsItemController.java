@@ -21,9 +21,7 @@ public class CarsItemController extends HttpServlet {
         resp.setContentType("text/html; charset=windows-1251");
         try {
             String key = req.getParameter("data");
-            System.out.println("login: " + key);
             List<Car> result = ValidateService.getInstance().findCarsByKey(key);
-            System.out.println("result from an \n" + result);
             PrintWriter writer = new PrintWriter(resp.getOutputStream());
             ObjectMapper mapper = new ObjectMapper();
             mapper.writeValue(writer, result);

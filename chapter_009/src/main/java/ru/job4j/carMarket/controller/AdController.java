@@ -33,7 +33,6 @@ public class AdController extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Car from front: \n" + formCar);
         ValidateService.getInstance().addCarToUser(formCar);
     }
 }

@@ -35,11 +35,7 @@ function getCars() {
             function (data) {
                 var img = document.createElement("img");
                 for (var i = 0; i < data.length; i++) {
-                    img.setAttribute("width", 200);
-                    img.setAttribute("height", 150);
-                    img.setAttribute("src", data[i].pathImage);
-                    $('.cars').append(img);
-                    $('.cars').append('<tr><td><img src="'+ data[i].pathImage + '" width="200" height="150" class="img-fluid" alt="car"></td><td>' + data[i].mark + '</td><td>' + data[i].model +'</td><td>' + data[i].transmission +'</td><td>' + data[i].bodyType +'</td><td>' + data[i].yearIssue +'</td><td>' + data[i].price + '</td><td>' + data[i]['isSold'] + '</td><td><button class="btn btn-primary btn btn-default" onclick="isSold(' + data[i]['id'] + ')">Car sold</button></td>></tr>');
+                    $('.cars').append('<tr><td><img src="image/'+ data[i].pathImage + '" width="200" height="150" alt="car"></td><td>' + data[i].mark + '</td><td>' + data[i].model +'</td><td>' + data[i].transmission +'</td><td>' + data[i].bodyType +'</td><td>' + data[i].yearIssue +'</td><td>' + data[i].price + '</td><td>' + data[i]['isSold'] + '</td><td><button class="btn btn-primary btn btn-default" onclick="isSold(' + data[i]['id'] + ')">Car sold</button></td>></tr>');
                 }
             }
     })

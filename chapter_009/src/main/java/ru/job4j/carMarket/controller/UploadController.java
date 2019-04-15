@@ -35,9 +35,9 @@ public class UploadController extends HttpServlet {
         ServletFileUpload upload = new ServletFileUpload(factory);
         try {
             List fileItems = upload.parseRequest(req);
-            Iterator iteraror = fileItems.iterator();
-            while (iteraror.hasNext()) {
-                FileItem fileItem = (FileItem) iteraror.next();
+            Iterator iterator = fileItems.iterator();
+            while (iterator.hasNext()) {
+                FileItem fileItem = (FileItem) iterator.next();
                 if (!(fileItem).isFormField()) {
                     fileName = fileItem.getName();
                     String path = pathToImg + File.separator + fileName;

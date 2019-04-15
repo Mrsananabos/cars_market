@@ -16,7 +16,6 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         if (request.getRequestURI().contains("/ad")) {
-            System.out.println("ad");
             HttpSession session = request.getSession();
             if (session.getAttribute("login") == null) {
                 ((HttpServletResponse) resp).sendRedirect(String.format("%s/authoriz", request.getContextPath()));
