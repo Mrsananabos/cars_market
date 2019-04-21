@@ -19,3 +19,4 @@ The results found are stored in a database.
 #### chapter_007. Input-Output. Socket.
 - Mini-project: File manager. Movement between directories, loading and creating files in them.
 #### chapter_009. Hibernate.
+- Mini-project: car market. Back-end: Servlet+Hibernate. Front-end: HTML+CSS+JS.
