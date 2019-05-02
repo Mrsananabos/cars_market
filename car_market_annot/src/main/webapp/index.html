@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ToDoList</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</head>
+<br>
+</br></br>
+<div class="container">
+    <form>
+        <div class="input-group input-group-lg">
+            <input type="text" class="form-control" placeholder="Enter new item" id="desc">
+            <div class="input-group-btn">
+                <button class="btn btn-success">Add</button>
+            </div>
+        </div>
+    </form>
+
+    <br>
+</div>
+
+<div class="container">
+    <h3 style="text-align: center">The Table of items</h3>
+    <div class="checkbox">
+        <label><input type="checkbox" id="notdone" align="right">Show items not done</label>
+    </div>
+    <table class="table table-striped" id='table'>
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>description</th>
+            <th>created</th>
+            <th>done</th>
+            <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <tr id="tr">
+        </tr>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

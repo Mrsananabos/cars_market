@@ -1,0 +1,27 @@
+.form-horizontal {
+    padding: .2cm;
+}
+.row {
+    padding: 6px;
+}
+
+.article {
+    align: center;
+    font-family: "Courier New", fantasy;
+    font-weight: 700;
+}
+
+.inf {
+    outline: 2px solid #64AEE8; /* Чёрная рамка */
+    width: 100%;
+}
+
+.login {
+    font-family: "Courier New", fantasy;
+}
+.main {
+    margin: 2%;
+}
+.msg {
+    margin-left: 1cm;
+}
