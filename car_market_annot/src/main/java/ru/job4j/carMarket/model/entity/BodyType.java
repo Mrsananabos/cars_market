@@ -9,8 +9,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class BodyType {
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id")
     private int id;
+
     @Column(name = "name")
     private String name;
 

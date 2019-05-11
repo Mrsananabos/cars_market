@@ -235,9 +235,8 @@ function loadModels(mark) {
                 select.empty();
                 select.append("<option value=\"zero\"></option>");
                 var json = JSON.parse(data.responseText);
-                var models = json[0]['models'];
-                for (var i = 0; i < models.length; i++) {
-                    $('#model').find('option:last').after('<option value=' + models[i]['id'] + '>' + models[i]['name'] + '</option>');
+                for (var i = 0; i < json.length; i++) {
+                    $('#model').find('option:last').after('<option value=' + json[i]['id'] + '>' + json[i]['name'] + '</option>');
                 }
             }
     })

@@ -1,25 +1,3 @@
---  CREATE TABLE car_marks (
---    id SERIAL PRIMARY KEY,
---    name VARCHAR(50) NOT NULL);
---
---  create table car_models(
---    id			SERIAL PRIMARY KEY,
---    name		VARCHAR(50) NOT NULL,
---    mark_id integer not null REFERENCES car_marks (id));
---
---  CREATE TABLE transmission (id SERIAL PRIMARY KEY, name VARCHAR(50) NOT NULL);
---
---  CREATE TABLE body_type (id SERIAL PRIMARY KEY,name VARCHAR(50) NOT NULL);
-
--- insert into car_marks(name) values ('Honda', 'honda1');
--- insert into car_marks(name) values ('Honda', 'honda2');
--- insert into car_marks(name) values ('Honda', 'honda3');
--- insert into car_marks(name) values ('KIA', 'kia1');
--- insert into car_marks(name) values ('KIA', 'kia2');
--- insert into car_marks(name) values ('KIA', 'kia3');
--- insert into car_marks(name, models) values ('BMW', 'bmw1');
--- insert into car_marks(name, models) values ('BMW', 'bmw2');
--- insert into car_marks(name, models) values ('BMW', 'bmw3');
 
 
  insert into car_marks(name) values ('Honda');

@@ -10,13 +10,15 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class User {
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id")
     private int id;
+
     @Column(name = "login")
     private String login;
+
     @Column(name = "password")
     private String password;
-    @OneToMany(mappedBy = "usr", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Car> cars;
 
     public User() {

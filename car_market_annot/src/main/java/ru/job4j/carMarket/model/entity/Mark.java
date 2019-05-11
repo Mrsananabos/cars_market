@@ -1,19 +1,24 @@
 package ru.job4j.carMarket.model.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "mark")
+@Table(name = "car_marks")
 public class Mark {
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id")
     private int id;
+
     @Column(name = "name")
     private String name;
+
+    @Transient
     @OneToMany(mappedBy = "mark", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Model> models;
 
@@ -49,12 +54,4 @@ public class Mark {
         this.models = models;
     }
 
-    @Override
-    public String toString() {
-        return "Mark{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", models=" + models +
-                '}';
-    }
 }

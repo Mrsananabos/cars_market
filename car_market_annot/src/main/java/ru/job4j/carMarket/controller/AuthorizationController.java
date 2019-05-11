@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class AuthorizationController extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/enter.html").forward(req, resp);

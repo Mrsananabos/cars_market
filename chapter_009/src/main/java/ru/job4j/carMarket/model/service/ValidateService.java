@@ -14,6 +14,8 @@ public class ValidateService implements Validate {
     private static final Logger LOGGER = Logger.getLogger(ValidateService.class);
     private final Storage storage = HiberStorage.getInstance();
 
+    private ValidateService() {
+    }
 
     public static Validate getInstance() {
         return INSTANCE;

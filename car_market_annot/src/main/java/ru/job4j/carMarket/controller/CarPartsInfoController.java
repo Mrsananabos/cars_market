@@ -1,5 +1,6 @@
 package ru.job4j.carMarket.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import ru.job4j.carMarket.model.service.Validate;
 import ru.job4j.carMarket.model.service.ValidateService;
@@ -18,9 +19,7 @@ public class CarPartsInfoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=windows-1251");
-        Gson gson = new Gson();
         List result;
-        String json;
         String part = req.getParameter("part");
         if (part.equals("model")) {
             String idMark = req.getParameter("mark");
@@ -28,9 +27,9 @@ public class CarPartsInfoController extends HttpServlet {
         } else {
             result = service.findPartsCarByKey(part);
         }
-        json = gson.toJson(result);
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        writer.append(json);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValue(writer, result);
         writer.flush();
     }
 

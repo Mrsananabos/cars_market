@@ -1,43 +1,53 @@
 package ru.job4j.carMarket.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
+
 @Entity
 @Table(name = "car")
 public class Car {
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id")
-    private int id;
+    private long id;
+
     @Column(name = "mark")
     private String mark;
+
     @Column(name = "model")
     private String model;
+
     @Column(name = "transmission")
     private String transmission;
+
     @Column(name = "body_type")
     private String bodyType;
+
     @Column(name = "year_issue")
     private int yearIssue;
+
     @Column(name = "price")
     private int price;
-    @Column(name = "pathImage")
+
+    @Column(name = "path_image")
     private String pathImage;
+
     @Column(name = "is_sold")
     private boolean isSold;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private User owner;
 
     public Car() {
     }
 
-    public Car(String mark, String model, String transmission, String bodyType, int yearIssue, int price, String pathImage, User user) {
+    public Car(String mark, String model, String transmission, String bodyType, int yearIssue, int price, String pathImage, User owner) {
         this.mark = mark;
         this.model = model;
         this.transmission = transmission;
@@ -46,14 +56,14 @@ public class Car {
         this.price = price;
         this.pathImage = pathImage;
         this.isSold = false;
-        this.user = user;
+        this.owner = owner;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -121,12 +131,12 @@ public class Car {
         this.isSold = sold;
     }
 
-    public User getUser() {
-        return user;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setOwner(User user) {
+        this.owner = user;
     }
 
     @Override
@@ -149,7 +159,7 @@ public class Car {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + mark.hashCode();
         result = 31 * result + model.hashCode();
         result = 31 * result + transmission.hashCode();
@@ -158,23 +168,8 @@ public class Car {
         result = 31 * result + price;
         result = 31 * result + pathImage.hashCode();
         result = 31 * result + (isSold ? 1 : 0);
-        result = 31 * result + user.hashCode();
+        result = 31 * result + owner.hashCode();
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", mark='" + mark + '\'' +
-                ", model='" + model + '\'' +
-                ", transmission='" + transmission + '\'' +
-                ", bodyType='" + bodyType + '\'' +
-                ", yearIssue=" + yearIssue +
-                ", price=" + price +
-                ", pathImage='" + pathImage + '\'' +
-                ", sold=" + isSold +
-                ", user=" + user.getLogin() +
-                '}';
-    }
 }
