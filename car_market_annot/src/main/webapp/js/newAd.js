@@ -206,9 +206,8 @@ function newAd(mark, model, trans, body, year, price, login, pathImage) {
 
 function loadMarks() {
     $.ajax({
-        url: "./parts",
+        url: "./mark",
         method: "get",
-        data: {part: 'mark'},
         dataType: "json",
         complete:
             function (data) {
@@ -222,10 +221,9 @@ function loadMarks() {
 
 function loadModels(mark) {
     $.ajax({
-        url: "./parts",
+        url: "./model",
         method: "get",
         data: {
-            part: 'model',
             mark: mark
         },
         dataType: "json",
@@ -244,9 +242,8 @@ function loadModels(mark) {
 
 function loadTransmission() {
     $.ajax({
-        url: "./parts",
+        url: "./trans",
         method: "get",
-        data: {part: 'trans'},
         dataType: "json",
         complete:
             function (data) {
@@ -260,9 +257,8 @@ function loadTransmission() {
 
 function loadBodyType() {
     $.ajax({
-        url: "./parts",
+        url: "./body",
         method: "get",
-        data: {part: 'body'},
         dataType: "json",
         complete:
             function (data) {

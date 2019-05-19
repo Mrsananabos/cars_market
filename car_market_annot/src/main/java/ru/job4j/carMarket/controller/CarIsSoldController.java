@@ -1,6 +1,6 @@
 package ru.job4j.carMarket.controller;
 
-import ru.job4j.carMarket.model.service.ValidateServiceImpl;
+import ru.job4j.carMarket.model.service.impl.CarValidateImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +16,6 @@ public class CarIsSoldController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ValidateServiceImpl.getInstance().soldCar(req.getParameter("id"));
+        CarValidateImpl.getInstance().soldCarById(req.getParameter("id"));
     }
 }

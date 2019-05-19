@@ -2,7 +2,7 @@ package ru.job4j.carMarket.controller;
 
 import org.json.JSONObject;
 import ru.job4j.carMarket.model.entity.User;
-import ru.job4j.carMarket.model.service.ValidateServiceImpl;
+import ru.job4j.carMarket.model.service.impl.UserValidateImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +26,7 @@ public class AuthorizationController extends HttpServlet {
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        User user = ValidateServiceImpl.getInstance().findUserByLogin(login);
+        User user = UserValidateImpl.getInstance().findUserByLogin(login);
         if (user != null && user.getPassword().equals(password)) {
             rsl = "1";
             session.setAttribute("login", login);

@@ -8,21 +8,25 @@ import ru.job4j.carMarket.model.service.UserValidate;
 public class UserValidateImpl implements UserValidate {
     private static final UserValidate INSTANCE = new UserValidateImpl();
     private static final Logger LOGGER = Logger.getLogger(UserValidateImpl.class);
+    private static final UserDaoImpl DAO = UserDaoImpl.getInstance();
 
     public static UserValidate getInstance() {
         return INSTANCE;
+    }
+
+    private UserValidateImpl() {
     }
 
     @Override
     public User addUser(String login, String password) {
         User result = null;
         if (isValid(login) && isValid(password)) {
-            User user = UserDaoImpl.getInstance().findUserByLogin(login);
+            User user = DAO.findUserByLogin(login);
             if (user == null) {
                 User newUser = new User();
                 newUser.setLogin(login);
                 newUser.setPassword(password);
-                UserDaoImpl.getInstance().addUser(newUser);
+                DAO.addUser(newUser);
                 result = newUser;
             } else {
                 LOGGER.info("User with login(" + login + ") is already exists");
@@ -37,7 +41,7 @@ public class UserValidateImpl implements UserValidate {
     public User findUserByLogin(String login) {
         User result = null;
         if (isValid(login)) {
-            result = UserDaoImpl.getInstance().findUserByLogin(login);
+            result = DAO.findUserByLogin(login);
             if (result == null) {
                 LOGGER.info("User with login(" + login + ") is not found");
             }

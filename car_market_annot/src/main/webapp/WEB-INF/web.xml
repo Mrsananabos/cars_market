@@ -33,12 +33,39 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>CarPartsInfoController</servlet-name>
-        <servlet-class>ru.job4j.carMarket.controller.CarPartsInfoController</servlet-class>
+        <servlet-name>MarkController</servlet-name>
+        <servlet-class>ru.job4j.carMarket.controller.MarkController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>CarPartsInfoController</servlet-name>
-        <url-pattern>/parts</url-pattern>
+        <servlet-name>MarkController</servlet-name>
+        <url-pattern>/mark</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ModelController</servlet-name>
+        <servlet-class>ru.job4j.carMarket.controller.ModelController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ModelController</servlet-name>
+        <url-pattern>/model</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TransmissionController</servlet-name>
+        <servlet-class>ru.job4j.carMarket.controller.TransmissionController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TransmissionController</servlet-name>
+        <url-pattern>/trans</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BodyTypeController</servlet-name>
+        <servlet-class>ru.job4j.carMarket.controller.BodyTypeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BodyTypeController</servlet-name>
+        <url-pattern>/body</url-pattern>
     </servlet-mapping>
 
     <servlet>

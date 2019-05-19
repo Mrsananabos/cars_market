@@ -18,6 +18,9 @@ public class CarValidateImpl implements CarValidate {
         return INSTANCE;
     }
 
+    private CarValidateImpl() {
+    }
+
     @Override
     public List<Car> findCarsByKey(String key) {
         List<Car> result = null;

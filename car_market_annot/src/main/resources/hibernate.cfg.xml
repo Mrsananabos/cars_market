@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/lod</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.username">postgres</property>
-        <property name="connection.password">admin</property>
+        <property name="connection.password">a</property>
         <property name="dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
@@ -15,15 +15,6 @@
         <mapping class="ru.job4j.carMarket.model.entity.User"/>
         <mapping class="ru.job4j.carMarket.model.entity.Model"/>
         <mapping class="ru.job4j.carMarket.model.entity.Mark"/>
-
-
-        <!--<mapping resource="ru/job4j/carMarket/model/entity/C"/>-->
-        <!--<mapping resource="ru/job4j/carMarket/entity/User.hbm.xml"/>-->
-        <!--<mapping resource="ru/job4j/carMarket/entity/Mark.hbm.xml"/>-->
-        <!--<mapping resource="ru/job4j/carMarket/entity/Model.hbm.xml"/>-->
-        <!--<mapping resource="ru/job4j/carMarket/entity/Transmission.hbm.xml"/>-->
-        <!--<mapping resource="ru/job4j/carMarket/entity/BodyType.hbm.xml"/>-->
-
 
     </session-factory>
 </hibernate-configuration>
