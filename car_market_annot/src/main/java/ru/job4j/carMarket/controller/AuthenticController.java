@@ -1,7 +1,8 @@
 package ru.job4j.carMarket.controller;
 
 import org.json.JSONObject;
-import ru.job4j.carMarket.model.service.ValidateService;
+import ru.job4j.carMarket.model.entity.User;
+import ru.job4j.carMarket.model.service.ValidateServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,8 +34,8 @@ public class AuthenticController extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         String answer = "0";
-        boolean result = ValidateService.getInstance().addUser(login, password);
-        if (result) {
+        User result = ValidateServiceImpl.getInstance().addUser(login, password);
+        if (result != null) {
             session.setAttribute("login", login);
             answer = "1";
         }

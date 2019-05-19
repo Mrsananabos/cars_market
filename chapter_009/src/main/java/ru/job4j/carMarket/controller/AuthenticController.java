@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 public class AuthenticController extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html; charset=windows-1251");
         String login = "null";
         HttpSession session = req.getSession();
@@ -27,7 +27,7 @@ public class AuthenticController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         String login = req.getParameter("login");

@@ -9,17 +9,14 @@ import java.util.List;
 
 public interface Validate {
 
-    List<Car> findCarsByKey(String key);
+
+
 
     List findPartsCarByKey(String key);
 
     List<Model> findModelsByMark(String id);
 
-    Car addCarToUser(FormCarSale formCar);
 
-    User findUserByLogin(String login);
 
-    void soldCar(String id);
 
-    boolean addUser(String login, String password);
 }

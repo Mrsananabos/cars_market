@@ -3,7 +3,7 @@ package ru.job4j.carMarket.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import ru.job4j.carMarket.model.entity.Car;
-import ru.job4j.carMarket.model.service.ValidateService;
+import ru.job4j.carMarket.model.service.ValidateServiceImpl;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +21,7 @@ public class CarsItemController extends HttpServlet {
         resp.setContentType("text/html; charset=windows-1251");
         try {
             String key = req.getParameter("data");
-            List<Car> result = ValidateService.getInstance().findCarsByKey(key);
+            List<Car> result = ValidateServiceImpl.getInstance().findCarsByKey(key);
             PrintWriter writer = new PrintWriter(resp.getOutputStream());
             ObjectMapper mapper = new ObjectMapper();
             mapper.writeValue(writer, result);

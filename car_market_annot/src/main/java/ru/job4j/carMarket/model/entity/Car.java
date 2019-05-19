@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
-import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -13,7 +12,7 @@ public class Car {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private long id;
+    private int id;
 
     @Column(name = "mark")
     private String mark;
@@ -59,11 +58,11 @@ public class Car {
         this.owner = owner;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

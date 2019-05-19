@@ -2,7 +2,7 @@ package ru.job4j.carMarket.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.job4j.carMarket.model.entity.FormCarSale;
-import ru.job4j.carMarket.model.service.ValidateService;
+import ru.job4j.carMarket.model.service.ValidateServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +33,7 @@ public class AdController extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ValidateService.getInstance().addCarToUser(formCar);
+        ValidateServiceImpl.getInstance().addCarToUser(formCar);
     }
 }
 

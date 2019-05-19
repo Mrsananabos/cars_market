@@ -8,11 +8,11 @@ import ru.job4j.carMarket.model.entity.User;
 
 import java.util.List;
 
-public class ValidateService implements Validate {
-    private static final Validate INSTANCE = new ValidateService();
-    private static final Logger LOGGER = Logger.getLogger(ValidateService.class);
+public class ValidateServiceImpl implements Validate {
+    private static final Validate INSTANCE = new ValidateServiceImpl();
+    private static final Logger LOGGER = Logger.getLogger(ValidateServiceImpl.class);
 
-    private ValidateService() {
+    private ValidateServiceImpl() {
     }
 
     public static Validate getInstance() {
@@ -81,55 +81,7 @@ public class ValidateService implements Validate {
         return result;
     }
 
-    @Override
-    public Car addCarToUser(FormCarSale formCar) {
-        if (formCar != null) {
-            if (isValid(formCar.getAuthor())) {
-                User user = UserDaoImpl.getInstance().findUserByLogin(formCar.getAuthor());
-                CarDaoImpl.getInstance().addCarToUser(user, formCar.getCar());
-            } else {
-                LOGGER.info("Car does't have author");
-            }
-        } else {
-            LOGGER.info("Car is empty");
-        }
-        return null;
-    }
 
-    @Override
-    public boolean addUser(String login, String password) {
-        System.out.println(login + "\n" + password);
-        boolean result = false;
-        if (isValid(login) && isValid(password)) {
-            User user = UserDaoImpl.getInstance().findUserByLogin(login);
-            if (user == null) {
-                User newUser = new User();
-                newUser.setLogin(login);
-                newUser.setPassword(password);
-                UserDaoImpl.getInstance().addUser(newUser);
-                result = true;
-            } else {
-                LOGGER.info("User with login(" + login + ") is already exists");
-            }
-        } else {
-            LOGGER.info("Data of user are not valid");
-        }
-        return result;
-    }
-
-    @Override
-    public User findUserByLogin(String login) {
-        User result = null;
-        if (isValid(login)) {
-            result = UserDaoImpl.getInstance().findUserByLogin(login);
-            if (result == null) {
-                LOGGER.info("User with login(" + login + ") is not found");
-            }
-        } else {
-            LOGGER.info("login is not valid");
-        }
-        return result;
-    }
 
     @Override
     public void soldCar(String id) {

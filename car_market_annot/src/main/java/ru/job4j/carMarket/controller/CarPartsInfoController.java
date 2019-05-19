@@ -1,9 +1,8 @@
 package ru.job4j.carMarket.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import ru.job4j.carMarket.model.service.Validate;
-import ru.job4j.carMarket.model.service.ValidateService;
+import ru.job4j.carMarket.model.service.ValidateServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +13,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 public class CarPartsInfoController extends HttpServlet {
-    private final Validate service = ValidateService.getInstance();
+    private final Validate service = ValidateServiceImpl.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
