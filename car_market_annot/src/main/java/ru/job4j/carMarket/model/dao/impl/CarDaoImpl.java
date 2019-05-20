@@ -9,6 +9,8 @@ import java.util.List;
 
 public class CarDaoImpl implements CarDao {
     private static final CarDaoImpl INSTANCE = new CarDaoImpl();
+    private static final String GET_CAR_WITH_OWNERS = "SELECT c.mark, c.model, c.transmission, c.bodyType, c.yearIssue, c.price, c.pathImage, u.login, c.isSold, " +
+            "c.id from Car c join fetch User u on c.owner.id = u.id ORDER BY c.id";
 
     private CarDaoImpl() {
     }
@@ -19,8 +21,7 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public List<Car> getCars() {
-        return HiberUtil.getInstance().tx(session -> session.createQuery("SELECT c.mark, c.model, c.transmission, c.bodyType, c.yearIssue, c.price, " +
-                "c.pathImage, u.login, c.isSold, c.id from Car c join fetch User u on c.owner.id = u.id ORDER BY c.id").list());
+        return HiberUtil.getInstance().tx(session -> session.createQuery(GET_CAR_WITH_OWNERS).list());
     }
 
     @Override

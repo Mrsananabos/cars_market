@@ -8,6 +8,8 @@ import java.util.List;
 
 public class BodyTypeDaoImpl implements CommonCarPartDao<BodyType> {
     private static final BodyTypeDaoImpl INSTANCE = new BodyTypeDaoImpl();
+    private static final String GET_BODY_TYPE = "FROM BodyType";
+
 
     private BodyTypeDaoImpl() {
     }
@@ -18,7 +20,7 @@ public class BodyTypeDaoImpl implements CommonCarPartDao<BodyType> {
 
     @Override
     public List<BodyType> getAll() {
-        return HiberUtil.getInstance().tx(session -> session.createQuery("FROM BodyType").list());
+        return HiberUtil.getInstance().tx(session -> session.createQuery(GET_BODY_TYPE).list());
     }
 
 }

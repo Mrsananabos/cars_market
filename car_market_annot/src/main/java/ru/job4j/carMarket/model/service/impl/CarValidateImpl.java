@@ -24,7 +24,7 @@ public class CarValidateImpl implements CarValidate {
     @Override
     public List<Car> findCarsByKey(String key) {
         List<Car> result = null;
-        if (isValid(key)) {
+        if (isNotBlank(key)) {
             if ("all".equals(key)) {
                 result = CarDaoImpl.getInstance().getCars();
             } else {
@@ -43,7 +43,7 @@ public class CarValidateImpl implements CarValidate {
     @Override
     public Car addCarToUser(FormCarSale formCar) {
         if (formCar != null) {
-            if (isValid(formCar.getAuthor())) {
+            if (isNotBlank(formCar.getAuthor())) {
                 User user = UserDaoImpl.getInstance().findUserByLogin(formCar.getAuthor());
                 CarDaoImpl.getInstance().addCarToUser(user, formCar.getCar());
             } else {
@@ -57,15 +57,15 @@ public class CarValidateImpl implements CarValidate {
 
     @Override
     public void soldCarById(String id) {
-        if (isValid(id)) {
-            int idCar = Integer.valueOf(id);
+        if (isNotBlank(id)) {
+            int idCar = Integer.parseInt(id);
             CarDaoImpl.getInstance().soldCar(idCar);
         } else {
             LOGGER.info("Car's id is not valid");
         }
     }
 
-    private boolean isValid(String value) {
+    public static boolean isNotBlank(String value) {
         return ((value != null) && (!value.isEmpty()));
     }
 

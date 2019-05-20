@@ -8,6 +8,7 @@ import java.util.List;
 
 public class MarkDaoImpl implements CommonCarPartDao<Mark> {
     private static final MarkDaoImpl INSTANCE = new MarkDaoImpl();
+    private static final String GET_MARK = "FROM Mark";
 
     private MarkDaoImpl() {
     }
@@ -18,7 +19,7 @@ public class MarkDaoImpl implements CommonCarPartDao<Mark> {
 
     @Override
     public List<Mark> getAll() {
-        return HiberUtil.getInstance().tx(session -> session.createQuery("FROM Mark").list());
+        return HiberUtil.getInstance().tx(session -> session.createQuery(GET_MARK).list());
     }
 
 }

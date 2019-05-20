@@ -7,6 +7,8 @@ import ru.job4j.carMarket.model.entity.User;
 
 public class UserDaoImpl implements UserDao {
     private static final UserDaoImpl INSTANCE = new UserDaoImpl();
+    private static final String FIND_USERNAME_BY_LOGIN = "FROM User where login = :userName";
+    private static final String USERNAME = "userName";
 
     private UserDaoImpl() {
     }
@@ -26,8 +28,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findUserByLogin(String login) {
         return HiberUtil.getInstance().tx(session -> {
-            Query query = session.createQuery("FROM User where login = :userName");
-            query.setParameter("userName", login);
+            Query query = session.createQuery(FIND_USERNAME_BY_LOGIN);
+            query.setParameter(USERNAME, login);
             return (User) query.uniqueResult();
         });
     }

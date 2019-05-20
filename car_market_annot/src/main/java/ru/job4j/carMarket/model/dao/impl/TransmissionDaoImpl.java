@@ -8,6 +8,7 @@ import java.util.List;
 
 public class TransmissionDaoImpl implements CommonCarPartDao<Transmission> {
     private static final TransmissionDaoImpl INSTANCE = new TransmissionDaoImpl();
+    private static final String GET_TRANS = "FROM Transmission";
 
     private TransmissionDaoImpl() {
     }
@@ -18,7 +19,7 @@ public class TransmissionDaoImpl implements CommonCarPartDao<Transmission> {
 
     @Override
     public List<Transmission> getAll() {
-        return HiberUtil.getInstance().tx(session -> session.createQuery("FROM Transmission").list());
+        return HiberUtil.getInstance().tx(session -> session.createQuery(GET_TRANS).list());
     }
 
 }

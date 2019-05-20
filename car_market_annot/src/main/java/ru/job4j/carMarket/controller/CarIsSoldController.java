@@ -2,20 +2,15 @@ package ru.job4j.carMarket.controller;
 
 import ru.job4j.carMarket.model.service.impl.CarValidateImpl;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 public class CarIsSoldController extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
-    }
+    private static final String ID = "id";
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CarValidateImpl.getInstance().soldCarById(req.getParameter("id"));
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        CarValidateImpl.getInstance().soldCarById(req.getParameter(ID));
     }
 }

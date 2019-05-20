@@ -12,15 +12,19 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import static ru.job4j.carMarket.controller.AuthenticController.CONTENT_TYPE;
+
 public class CarsItemController extends HttpServlet {
+
     private static final Logger LOGGER = Logger.getLogger(CarsItemController.class);
+    private static final String DATA = "data";
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setContentType("text/html; charset=windows-1251");
+        resp.setContentType(CONTENT_TYPE);
         try {
-            String key = req.getParameter("data");
+            String key = req.getParameter(DATA);
             List<Car> result = CarValidateImpl.getInstance().findCarsByKey(key);
             PrintWriter writer = new PrintWriter(resp.getOutputStream());
             ObjectMapper mapper = new ObjectMapper();

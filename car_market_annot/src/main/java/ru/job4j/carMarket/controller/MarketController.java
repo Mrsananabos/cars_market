@@ -7,10 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class MarketController extends HttpServlet {
+    private static final String HTML_ENTER = "/menu.html";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/menu.html").forward(req, resp);
+        req.getRequestDispatcher(HTML_ENTER).forward(req, resp);
     }
 
 

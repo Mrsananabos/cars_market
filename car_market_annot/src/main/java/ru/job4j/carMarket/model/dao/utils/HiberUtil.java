@@ -37,7 +37,7 @@ public class HiberUtil {
                 // Create SessionFactory
                 session = metadata.getSessionFactoryBuilder().build();
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error(e.getMessage(), e);
                 if (registry != null) {
                     StandardServiceRegistryBuilder.destroy(registry);
                 }
@@ -63,9 +63,4 @@ public class HiberUtil {
         }
     }
 
-    public static void shutdown() {
-        if (registry != null) {
-            StandardServiceRegistryBuilder.destroy(registry);
-        }
-    }
 }

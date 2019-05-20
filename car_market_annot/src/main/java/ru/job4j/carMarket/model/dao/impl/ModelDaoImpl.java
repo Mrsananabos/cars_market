@@ -8,6 +8,7 @@ import java.util.List;
 
 public class ModelDaoImpl implements ModelDao {
     private static final ModelDaoImpl INSTANCE = new ModelDaoImpl();
+    private static final String FIND_MODEL_BY_ID = "FROM Model m where  m.mark.id = ";
 
     private ModelDaoImpl() {
     }
@@ -19,7 +20,7 @@ public class ModelDaoImpl implements ModelDao {
     @Override
     public List<Model> findModelsByMark(int id) {
         return HiberUtil.getInstance().tx(session -> {
-            List rsl = session.createQuery("FROM Model m where  m.mark.id = " + id).list();
+            List rsl = session.createQuery(FIND_MODEL_BY_ID + id).list();
             return rsl;
         });
     }

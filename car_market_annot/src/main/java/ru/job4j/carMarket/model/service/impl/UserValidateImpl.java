@@ -5,6 +5,8 @@ import ru.job4j.carMarket.model.dao.impl.UserDaoImpl;
 import ru.job4j.carMarket.model.entity.User;
 import ru.job4j.carMarket.model.service.UserValidate;
 
+import static ru.job4j.carMarket.model.service.impl.CarValidateImpl.isNotBlank;
+
 public class UserValidateImpl implements UserValidate {
     private static final UserValidate INSTANCE = new UserValidateImpl();
     private static final Logger LOGGER = Logger.getLogger(UserValidateImpl.class);
@@ -20,7 +22,7 @@ public class UserValidateImpl implements UserValidate {
     @Override
     public User addUser(String login, String password) {
         User result = null;
-        if (isValid(login) && isValid(password)) {
+        if (isNotBlank(login) && isNotBlank(password)) {
             User user = DAO.findUserByLogin(login);
             if (user == null) {
                 User newUser = new User();
@@ -40,7 +42,7 @@ public class UserValidateImpl implements UserValidate {
     @Override
     public User findUserByLogin(String login) {
         User result = null;
-        if (isValid(login)) {
+        if (isNotBlank(login)) {
             result = DAO.findUserByLogin(login);
             if (result == null) {
                 LOGGER.info("User with login(" + login + ") is not found");
@@ -51,7 +53,4 @@ public class UserValidateImpl implements UserValidate {
         return result;
     }
 
-    private boolean isValid(String value) {
-        return ((value != null) && (!value.isEmpty()));
-    }
 }
